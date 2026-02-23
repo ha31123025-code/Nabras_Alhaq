@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alkhair - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Back Button */
+.back-nav {
+    padding: 10px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-red);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+}
+
+.card h3 {
+    color: var(--main-blue);
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="Nebras alhaq-25.png" class="logo" alt="Alkhair Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">ALKHAIR</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">Food products of the best quality</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+
+        <div class="card">
+            <img src="ALKHAIR/Picture2.jpg" alt="Olive Oil 1L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight1L">1L</p>
+            <p class="price" data-i18n="price9000">9,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="ALKHAIR/photo_14_2025-12-23_23-24-34.png" alt="Olive Oil 4L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight4L">4L</p>
+            <p class="price" data-i18n="price34500">34,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="ALKHAIR/Picture3.jpg" alt="Olive Oil 0.5L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight05L">0.5L</p>
+            <p class="price" data-i18n="price5500">5,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="ALKHAIR/2.png" alt="Sunflower Oil 1L">
+            <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
+            <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
+            <p data-i18n="weight1L">1L</p>
+            <p class="price" data-i18n="price3500">3,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="ALKHAIR/Picture1.jpg" alt="Sunflower Oil 4L">
+            <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
+            <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
+            <p data-i18n="weight4L">4L</p>
+            <p class="price" data-i18n="price12000">12,000 I.D</p>
+        </div>
+        
+        <div class="card">
+            <img src="ALKHAIR/4.png" alt="Vegetable Ghee 1kg">
+            <h3 data-i18n="ghee">Pure vegetable ghee</h3>
+            <p data-i18n="gheeDesc">100% vegetable ghee... an authentic and healthy taste for every meal</p>
+            <p data-i18n="weight1kg">1kg</p>
+            <p class="price" data-i18n="price5500">5,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="ALKHAIR/4.png" alt="Vegetable Ghee 2kg">
+            <h3 data-i18n="ghee">Pure vegetable ghee</h3>
+            <p data-i18n="gheeDesc">100% vegetable ghee... an authentic and healthy taste for every meal</p>
+            <p data-i18n="weight2kg">2kg</p>
+            <p class="price" data-i18n="price10000">10,000 I.D</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "ALKHAIR",
+            brandSlogan: "Food products of the best quality",
+            ourProducts: "Our Products",
+            
+            oliveOil: "Olive oil",
+            oliveDesc: "Premium olive oil... the secret to a healthy and rich taste in your kitchen.",
+            
+            sunflowerOil: "Sunflower oil",
+            sunflowerDesc: "Natural health in every drop – pure sunflower oil.",
+            
+            ghee: "Pure vegetable ghee",
+            gheeDesc: "100% vegetable ghee... an authentic and healthy taste for every meal.",
+            
+            weight05L: "0.5L",
+            weight1L: "1L",
+            weight4L: "4L",
+            weight1kg: "1kg",
+            weight2kg: "2kg",
+            
+            price3500: "3,500 I.D",
+            price5500: "5,500 I.D",
+            price9000: "9,000 I.D",
+            price10000: "10,000 I.D",
+            price12000: "12,000 I.D",
+            price34500: "34,500 I.D",
+
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "الخير",
+            brandSlogan: "منتجات غذائية بأفضل جودة",
+            ourProducts: "منتجاتنا",
+            
+            oliveOil: "زيت زيتون",
+            oliveDesc: "زيت زيتون فاخر... السر لطعم غني وصحي في مطبخك.",
+            
+            sunflowerOil: "زيت دوار الشمس",
+            sunflowerDesc: "صحة طبيعية في كل قطرة - زيت دوار شمس نقي.",
+            
+            ghee: "سمن نباتي نقي",
+            gheeDesc: "سمن نباتي 100%... طعم أصيل وصحي لكل وجبة.",
+            
+            weight05L: "0.5 لتر",
+            weight1L: "1 لتر",
+            weight4L: "4 لتر",
+            weight1kg: "1 كيلو",
+            weight2kg: "2 كيلو",
+            
+            price3500: "3,500 دينار عراقي",
+            price5500: "5,500 دينار عراقي",
+            price9000: "9,000 دينار عراقي",
+            price10000: "10,000 دينار عراقي",
+            price12000: "12,000 دينار عراقي",
+            price34500: "34,500 دينار عراقي",
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "ئەلخێر",
+            brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی",
+            ourProducts: "بەرهەمەکانمان",
+            
+            oliveOil: "زەیتی زەیتوون",
+            oliveDesc: "زەیتی زەیتوونی نایاب... نهێنی تامی دەوڵەمەند و تەندروست لە چێشتخانەکەتدا.",
+            
+            sunflowerOil: "زەیتی گوڵەبەڕۆژە",
+            sunflowerDesc: "تەندروستی سروشتی لە هەموو دڵۆپێکدا – زەیتی گوڵەبەڕۆژەی پاک.",
+            
+            ghee: "ڕۆنی ڕووەکی پاک",
+            gheeDesc: "ڕۆنی ڕووەکی 100%... تامێکی ڕەسەن و تەندروست بۆ هەموو ژەمێک.",
+            
+            weight05L: "0.5 لیتر",
+            weight1L: "1 لیتر",
+            weight4L: "4 لیتر",
+            weight1kg: "1 کيلۆگرام",
+            weight2kg: "2 کيلۆگرام",
+            
+            price3500: "3,500 دیناری عێراقی",
+            price5500: "5,500 دیناری عێراقی",
+            price9000: "9,000 دیناری عێراقی",
+            price10000: "10,000 دیناری عێراقی",
+            price12000: "12,000 دیناری عێراقی",
+            price34500: "34,500 دیناری عێراقی",
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+    function setLanguage(lang) {
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Change Direction
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // Save Language choice
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // Read language choice from memory
+    const savedLang = localStorage.getItem('siteLang') || 'en';
+    setLanguage(savedLang);
+</script>
+
+</body>
+</html>
