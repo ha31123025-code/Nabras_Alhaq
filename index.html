@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +14,30 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #f4f6f9, #e8edf2);
-    direction: rtl;
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
 }
 
 /* Header */
@@ -74,7 +95,6 @@ body {
     background: white;
 }
 
-
 .card h3 {
     color: var(--main-blue);
 }
@@ -128,85 +148,179 @@ body {
 
 <body>
 
-<!-- Logo -->
-<div class="header">
-    <img src="nebras  LOGO.jpg" class="logo">
-    <h2 style="color: var(--main-blue);">NEBRAS ALHAQ</h2>
-    <p style="color: var(--main-red);">The Fastest Distribution</p>
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
 </div>
 
-<!-- Agencies -->
+<div class="header">
+    <img src="nebras  LOGO.jpg" class="logo" alt="Nebras Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="companyName">NEBRAS ALHAQ</h2>
+    <p style="color: var(--main-red);" data-i18n="companySlogan">The Fastest Distribution</p>
+</div>
+
 <div class="section">
-    <h2>Our agencies</h2>
+    <h2 data-i18n="ourAgencies">Our agencies</h2>
 
     <div class="agencies">
+        <a href="lio.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="Logo Lio English.png" alt="Lio">
+                <h3 data-i18n="lio">LIO</h3>
+                <p data-i18n="madeInSyria">Proudly made in Syria</p>
+                <p data-i18n="foodSpec">Specializing in the production of high-quality food products</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <img src="Logo Lio English.png">
-            <h3>LIO </h3>
-            <p>Proudly made in Syria  </p>
-            <p>Specializing in the production of high-quality food products  </p>
-        </div>
+        <a href="ALREEF.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="Nebras alhaq-16.png" alt="Alreef">
+                <h3 data-i18n="alreef">ALREEF</h3>
+                <p data-i18n="madeInSyria">Proudly made in Syria</p>
+                <p data-i18n="foodSpec">Specializing in the production of high-quality food products</p>
+            </div>
+        </a>
+        
+        <a href="ALKHAIR.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="Nebras alhaq-25.png" alt="Alkhair">
+                <h3 data-i18n="alkhair">ALKHAIR</h3>
+                <p data-i18n="madeInSyria">Proudly made in Syria</p>
+                <p data-i18n="foodSpec">Specializing in the production of high-quality food products</p>
+            </div>
+        </a>
+       
+        <a href="DORTO.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="logo Dorto E.png" alt="Dorto">
+                <h3 data-i18n="dorto">DORTO</h3>
+                <p data-i18n="germanLic">Erami manufactured under license from Germany</p>
+                <p data-i18n="cleanSpec">It manufactures the best types of cleaning materials.</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <img src="Nebras alhaq-16.png">
-            <h3> ALREEF </h3>
-            <p> Proudly made in Syria</p>
-            <p>Specializing in the production of high-quality food products</p>
-        </div>
-
-        <div class="card">
-            <img src="Nebras alhaq-25.png">
-            <h3>ALKHAIR</h3>
-            <p>Proudly made in Syria</p>
-            <p>Specializing in the production of high-quality food products</p>
-        </div>
-
-        <div class="card">
-            <img src="logo Dorto E.png">
-            <h3>DORTO </h3>
-            <p> Erami manufactured under license from Germany</p>
-            <p>It manufactures the best types of cleaning materials.  </p>
-        </div>
-
-        <div class="card">
-            <img src="Bufalo-1.png">
-            <h3>Bufalo </h3>
-            <p> Syrian industry is licensed from German companies</p>
-            <p>  It manufactures the best types of cleaning materials.</p>
-        </div>
-
+        <a href="Bufalo.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="Bufalo-1.png" alt="Bufalo">
+                <h3 data-i18n="bufalo">Bufalo</h3>
+                <p data-i18n="syrianGermanLic">Syrian industry is licensed from German companies</p>
+                <p data-i18n="cleanSpec">It manufactures the best types of cleaning materials.</p>
+            </div>
+        </a>
     </div>
 </div>
 
-<!-- Contact -->
 <div class="contact">
-    <h2>Contact us </h2>
-    <a href="https://wa.me/9647511224225" target="_blank">💬 WhatsApp 07511224225</a>
-
-
-    <a href="mailto:nabrasalhaq42@gmail.com">✉ Contact us</a>
-
-    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank">📷 Instagram</a>
-
-   <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank">📘 Facebook</a>
-
-   <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
-   target="_blank"
-   style="display:inline-block;
-          background:#000000;
-          color:white;
-          padding:10px 20px;
-          border-radius:8px;
-          text-decoration:none;">
-📍 موقع الشركة
-</a>
-
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
 </div>
 
-<div class="footer">
+<div class="footer" data-i18n="footer">
     © 2026 Nebras Alhaq - All Rights Reserved
 </div>
+
+<script>
+    const translations = {
+        en: {
+            companyName: "NEBRAS ALHAQ",
+            companySlogan: "The Fastest Distribution",
+            ourAgencies: "Our agencies",
+            lio: "LIO",
+            alreef: "ALREEF",
+            alkhair: "ALKHAIR",
+            dorto: "DORTO",
+            bufalo: "Bufalo",
+            madeInSyria: "Proudly made in Syria",
+            foodSpec: "Specializing in the production of high-quality food products",
+            germanLic: "Erami manufactured under license from Germany",
+            cleanSpec: "It manufactures the best types of cleaning materials.",
+            syrianGermanLic: "Syrian industry is licensed from German companies",
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            companyName: "نبراس الحق",
+            companySlogan: "التوزيع الأسرع",
+            ourAgencies: "وكالاتنا",
+            lio: "ليو",
+            alreef: "الريف",
+            alkhair: "الخير",
+            dorto: "دورتو",
+            bufalo: "بوفالو",
+            madeInSyria: "صُنع في سوريا بفخر",
+            foodSpec: "متخصصون في إنتاج منتجات غذائية عالية الجودة",
+            germanLic: "صناعة ايراني بترخيص من ألمانيا",
+            cleanSpec: "تصنع أفضل أنواع مواد التنظيف.",
+            syrianGermanLic: "صناعة سورية بترخيص من شركات ألمانية",
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            companyName: "نبراس الحق",
+            companySlogan: "خێراترین دابەشکردن",
+            ourAgencies: "بریکارەکانمان",
+            lio: "لیۆ",
+            alreef: "ئەلڕیف",
+            alkhair: "ئەلخێر",
+            dorto: "دۆرتۆ",
+            bufalo: "بوفالۆ",
+            madeInSyria: "بە شانازییەوە لە سوریا دروستکراوە",
+            foodSpec: "پسپۆڕ لە بەرهەمهێنانی بەرهەمی خۆراکی کوالێتی بەرز",
+            germanLic: "دروستکراوی ئیرامی بە مۆڵەتی ئەڵمانیا",
+            cleanSpec: "باشترین جۆرەکانی مادەی پاککەرەوە دروست دەکات.",
+            syrianGermanLic: "پیشەسازی سووری بە مۆڵەتی کۆمپانیا ئەڵمانییەکان",
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+    function setLanguage(lang) {
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.innerText = translations[lang][key];
+        });
+
+        // Change Direction (RTL for Arabic/Kurdish, LTR for English)
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+    }
+
+    // Set default language on load
+    setLanguage('en');
+</script>
 
 </body>
 </html>

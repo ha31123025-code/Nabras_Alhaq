@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alreef - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Back Button */
+.back-nav {
+    padding: 10px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-red);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+}
+
+.card h3 {
+    color: var(--main-blue);
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="Nebras alhaq-16.png" class="logo" alt="Alreef Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">ALREEF</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">Food products of the best quality</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+
+        <div class="card">
+            <img src="AlREEF/photo_43_2025-12-23_23-25-30.jpg" alt="Olive oil 1L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight1L">1L</p>
+            <p class="price" data-i18n="price9000">9,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_45_2025-12-23_23-25-30.jpg" alt="Olive oil 4L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight4L">4L</p>
+            <p class="price" data-i18n="price34500">34,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_46_2025-12-23_23-25-30.jpg" alt="Olive oil 0.5L">
+            <h3 data-i18n="oliveOil">Olive oil</h3>
+            <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
+            <p data-i18n="weight05L">0.5L</p>
+            <p class="price" data-i18n="price5500">5,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_51_2025-12-23_23-25-30.jpg" alt="Sunflower oil 4L">
+            <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
+            <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
+            <p data-i18n="weight4L">4L</p>
+            <p class="price" data-i18n="price12000">12,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_47_2025-12-23_23-25-30.jpg" alt="Sunflower oil 8L">
+            <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
+            <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
+            <p data-i18n="weight8L">8L</p>
+            <p class="price" data-i18n="price24000">24,000 I.D</p>
+        </div>
+        
+        <div class="card">
+            <img src="AlREEF/photo_48_2025-12-23_23-25-30.jpg" alt="Sunflower oil 18L">
+            <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
+            <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
+            <p data-i18n="weight18L">18L</p>
+            <p class="price" data-i18n="price52500">52,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_57_2025-12-23_23-25-30.jpg" alt="Pure vegetable ghee 1kg">
+            <h3 data-i18n="ghee">Pure vegetable ghee</h3>
+            <p data-i18n="gheeDesc">100% vegetable ghee... an authentic and healthy taste for every meal</p>
+            <p data-i18n="weight1kg">1kg</p>
+            <p class="price" data-i18n="price5500">5,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_19_2025-12-23_23-25-30.jpg" alt="Fig jam pieces">
+            <h3 data-i18n="figJam">Fig jam pieces</h3>
+            <p data-i18n="figJamDesc">Natural fig pieces... an unforgettable taste.</p>
+            <p data-i18n="weight430g">430g</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+        </div>
+        
+        <div class="card">
+            <img src="AlREEF/photo_20_2025-12-23_23-25-30.jpg" alt="Strawberry jam pieces">
+            <h3 data-i18n="strawberryJam">Strawberry jam pieces</h3>
+            <p data-i18n="strawberryJamDesc">Strawberry jam rich in natural pieces... an unforgettable taste.</p>
+            <p data-i18n="weight430g">430g</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_31_2025-12-23_23-25-30.jpg" alt="Apricot jam pieces">
+            <h3 data-i18n="apricotJam">Apricot jam pieces</h3>
+            <p data-i18n="apricotJamDesc">Enjoy the taste of apricots just as they are, from nature to your table.</p>
+            <p data-i18n="weight430g">430g</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="AlREEF/photo_27_2025-12-23_23-25-30.jpg" alt="Pomegranate molasses">
+            <h3 data-i18n="pomegranateMolasses">Pomegranate molasses</h3>
+            <p data-i18n="pomegranateDesc">Drops from nature... the authentic taste of pomegranate in every meal.</p>
+            <p data-i18n="weight250ml">250ml</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "ALREEF",
+            brandSlogan: "Food products of the best quality",
+            ourProducts: "Our Products",
+            
+            oliveOil: "Olive oil",
+            oliveDesc: "Premium olive oil... the secret to a healthy and rich taste in your kitchen.",
+            
+            sunflowerOil: "Sunflower oil",
+            sunflowerDesc: "Natural health in every drop – pure sunflower oil.",
+            
+            ghee: "Pure vegetable ghee",
+            gheeDesc: "100% vegetable ghee... an authentic and healthy taste for every meal.",
+            
+            figJam: "Fig jam pieces",
+            figJamDesc: "Natural fig pieces... an unforgettable taste.",
+            
+            strawberryJam: "Strawberry jam pieces",
+            strawberryJamDesc: "Strawberry jam rich in natural pieces... an unforgettable taste.",
+            
+            apricotJam: "Apricot jam pieces",
+            apricotJamDesc: "Enjoy the taste of apricots just as they are, from nature to your table.",
+            
+            pomegranateMolasses: "Pomegranate molasses",
+            pomegranateDesc: "Drops from nature... the authentic taste of pomegranate in every meal.",
+
+            weight05L: "0.5L",
+            weight1L: "1L",
+            weight4L: "4L",
+            weight8L: "8L",
+            weight18L: "18L",
+            weight1kg: "1kg",
+            weight430g: "430g",
+            weight250ml: "250ml",
+            
+            price3000: "3,000 I.D",
+            price5500: "5,500 I.D",
+            price9000: "9,000 I.D",
+            price12000: "12,000 I.D",
+            price24000: "24,000 I.D",
+            price34500: "34,500 I.D",
+            price52500: "52,500 I.D",
+
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "الريف",
+            brandSlogan: "منتجات غذائية بأفضل جودة",
+            ourProducts: "منتجاتنا",
+            
+            oliveOil: "زيت زيتون",
+            oliveDesc: "زيت زيتون فاخر... السر لطعم غني وصحي في مطبخك.",
+            
+            sunflowerOil: "زيت دوار الشمس",
+            sunflowerDesc: "صحة طبيعية في كل قطرة - زيت دوار الشمس النقي.",
+            
+            ghee: "سمن نباتي نقي",
+            gheeDesc: "سمن نباتي 100%... طعم أصيل وصحي لكل وجبة.",
+            
+            figJam: "مربى التين قطع",
+            figJamDesc: "قطع تين طبيعية... طعم لا ينسى.",
+            
+            strawberryJam: "مربى الفراولة قطع",
+            strawberryJamDesc: "مربى فراولة غني بقطع الفاكهة الطبيعية... طعم لا ينسى.",
+            
+            apricotJam: "مربى المشمش قطع",
+            apricotJamDesc: "استمتع بطعم المشمش كما هو، من الطبيعة إلى مائدتك.",
+            
+            pomegranateMolasses: "دبس رمان",
+            pomegranateDesc: "قطرات من الطبيعة... طعم الرمان الأصيل في كل وجبة.",
+
+            weight05L: "0.5 لتر",
+            weight1L: "1 لتر",
+            weight4L: "4 لتر",
+            weight8L: "8 لتر",
+            weight18L: "18 لتر",
+            weight1kg: "1 كيلو",
+            weight430g: "430 غرام",
+            weight250ml: "250 مل",
+            
+            price3000: "3,000 دينار عراقي",
+            price5500: "5,500 دينار عراقي",
+            price9000: "9,000 دينار عراقي",
+            price12000: "12,000 دينار عراقي",
+            price24000: "24,000 دينار عراقي",
+            price34500: "34,500 دينار عراقي",
+            price52500: "52,500 دينار عراقي",
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "ئەلڕیف",
+            brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی",
+            ourProducts: "بەرهەمەکانمان",
+            
+            oliveOil: "زەیتی زەیتوون",
+            oliveDesc: "زەیتی زەیتوونی نایاب... نهێنی تامی دەوڵەمەند و تەندروست لە چێشتخانەکەتدا.",
+            
+            sunflowerOil: "زەیتی گوڵەبەڕۆژە",
+            sunflowerDesc: "تەندروستی سروشتی لە هەموو دڵۆپێکدا – زەیتی گوڵەبەڕۆژەی پاک.",
+            
+            ghee: "ڕۆنی ڕووەکی پاک",
+            gheeDesc: "ڕۆنی ڕووەکی 100%... تامێکی ڕەسەن و تەندروست بۆ هەموو ژەمێک.",
+            
+            figJam: "مرەبای هەنجیر بە پارچە",
+            figJamDesc: "پارچە هەنجیری سروشتی... تامێک کە لەبیر ناکرێت.",
+            
+            strawberryJam: "مرەبای شلک بە پارچە",
+            strawberryJamDesc: "مرەبای شلک دەوڵەمەند بە پارچەی سروشتی... تامێک کە لەبیر ناکرێت.",
+            
+            apricotJam: "مرەبای قەیسی بە پارچە",
+            apricotJamDesc: "چێژ لە تامی قەیسی وەربگرە وەک خۆی، لە سروشتەوە بۆ سەر مێزەکەت.",
+            
+            pomegranateMolasses: "ڕوبە هەنار",
+            pomegranateDesc: "دڵۆپێک لە سروشتەوە... تامی ڕەسەنی هەنار لە هەموو ژەمێکدا.",
+
+            weight05L: "0.5 لیتر",
+            weight1L: "1 لیتر",
+            weight4L: "4 لیتر",
+            weight8L: "8 لیتر",
+            weight18L: "18 لیتر",
+            weight1kg: "1 کيلۆگرام",
+            weight430g: "430 گرام",
+            weight250ml: "250 مللیلیتر",
+            
+            price3000: "3,000 دیناری عێراقی",
+            price5500: "5,500 دیناری عێراقی",
+            price9000: "9,000 دیناری عێراقی",
+            price12000: "12,000 دیناری عێراقی",
+            price24000: "24,000 دیناری عێراقی",
+            price34500: "34,500 دیناری عێراقی",
+            price52500: "52,500 دیناری عێراقی",
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+    function setLanguage(lang) {
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Change Direction
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // Save Language choice
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // Read language choice from memory
+    const savedLang = localStorage.getItem('siteLang') || 'en';
+    setLanguage(savedLang);
+</script>
+
+</body>
+</html>

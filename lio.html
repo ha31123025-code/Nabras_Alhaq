@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lio - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Back Button */
+.back-nav {
+    padding: 15px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-blue);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+}
+
+.card h3 {
+    color: var(--main-blue);
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+</style>
+</head>
+
+<body>
+    <div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="Logo Lio English.png" class="logo" alt="Lio Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">Lio</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">Food products of the best quality</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+
+        <div class="card">
+            <img src="Lio/معجون طماطة.jpg" alt="Tomato Paste">
+            <h3 data-i18n="tomatoTitle">Tomato paste</h3>
+            <p data-i18n="tomatoDesc">Stronger color… better taste… more amazing result.</p>
+            <p data-i18n="tomatoWeight">710g + 12% free</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Sweet Crushed Pepper 635 .png" alt="Sweet Crushed Pepper">
+            <h3 data-i18n="sweetPepperTitle">Sweet Crushed Pepper</h3>
+            <p data-i18n="sweetPepperDesc">Beautiful color. more delicious taste.</p>
+            <p data-i18n="weight635">635g</p>
+            <p class="price" data-i18n="price3250">3,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Crushed Red Hot Pepper 635g.jpg" alt="Crushed Red Hot Pepper">
+            <h3 data-i18n="hotPepperTitle">Crushed Red Hot Pepper</h3>
+            <p data-i18n="hotPepperDesc">Concentrated flavor and spicy power elevate every meal to a professional level.</p>
+            <p data-i18n="weight635">635g</p>
+            <p class="price" data-i18n="price3500">3,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Mullberry Jam 400g.png" alt="Mulberry Jam">
+            <h3 data-i18n="jamTitle">Mulberry Jam</h3>
+            <p data-i18n="jamDesc">Natural sweetness… rich color and flavor.</p>
+            <p data-i18n="weight430">430g</p>
+            <p class="price" data-i18n="price3250">3,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/sweet corn 645g.jpg" alt="Sweet Corn">
+            <h3 data-i18n="cornTitle">Sweet Corn</h3>
+            <p data-i18n="cornDesc">Each bean is full of natural taste and sweet flavor.</p>
+            <p data-i18n="weight645">645g</p>
+            <p class="price" data-i18n="price2500">2,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/`vm3;dg,.jpg" alt="Sweet Corn 3kg">
+            <h3 data-i18n="cornTitle">Sweet Corn</h3>
+            <p data-i18n="cornDesc">Each bean is full of natural taste and sweet flavor.</p>
+            <p data-i18n="weight3kg">3kg</p>
+            <p class="price" data-i18n="price7500">7,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/pomegranate – 525 g.jpeg.jpg" alt="Pomegranate Molasses">
+            <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
+            <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
+            <p data-i18n="weight525">525g</p>
+            <p class="price" data-i18n="price3750">3,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Pomegranate Molasses 710g.png" alt="Pomegranate Molasses">
+            <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
+            <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
+            <p data-i18n="weight710">710g</p>
+            <p class="price" data-i18n="price4750">4,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Pomegranate Molasses725 (2).png" alt="Pomegranate Molasses">
+            <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
+            <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
+            <p data-i18n="weight725">725g</p>
+            <p class="price" data-i18n="price5750">5,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Ground Coffee without cardamom 200g.png" alt="Ground Coffee without cardamom">
+            <h3 data-i18n="coffeeNoCardamom">Ground Coffee without cardamom</h3>
+            <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
+            <p data-i18n="weight200">200g</p>
+            <p class="price" data-i18n="price5000">5,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Ground Coffee with cardamom 200g.png" alt="Ground Coffee with cardamom">
+            <h3 data-i18n="coffeeCardamom">Ground Coffee with cardamom</h3>
+            <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
+            <p data-i18n="weight200">200g</p>
+            <p class="price" data-i18n="price5750">5,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Lio/Ground Coffee with extra cardamom 200g.png" alt="Ground Coffee with extra cardamom">
+            <h3 data-i18n="coffeeExtraCardamom">Ground Coffee with extra cardamom</h3>
+            <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
+            <p data-i18n="weight200">200g</p>
+            <p class="price" data-i18n="price6000">6,000 I.D</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "Lio",
+            brandSlogan: "Food products of the best quality",
+            ourProducts: "Our Products",
+            
+            tomatoTitle: "Tomato Paste",
+            tomatoDesc: "Stronger color… better taste… more amazing result.",
+            tomatoWeight: "710g + 12% free",
+            
+            sweetPepperTitle: "Sweet Crushed Pepper",
+            sweetPepperDesc: "Beautiful color. more delicious taste.",
+            
+            hotPepperTitle: "Crushed Red Hot Pepper",
+            hotPepperDesc: "Concentrated flavor and spicy power elevate every meal to a professional level.",
+            
+            jamTitle: "Mulberry Jam",
+            jamDesc: "Natural sweetness… rich color and flavor.",
+            
+            cornTitle: "Sweet Corn",
+            cornDesc: "Each bean is full of natural taste and sweet flavor.",
+            
+            molassesTitle: "Pomegranate Molasses",
+            molassesDesc: "Authentic taste and rich texture that whets the appetite.",
+            
+            coffeeNoCardamom: "Ground Coffee without cardamom",
+            coffeeCardamom: "Ground Coffee with cardamom",
+            coffeeExtraCardamom: "Ground Coffee with extra cardamom",
+            coffeeDesc: "An attractive aroma and an authentic taste that will satisfy all coffee lovers.",
+            
+            weight200: "200g",
+            weight430: "430g",
+            weight525: "525g",
+            weight635: "635g",
+            weight645: "645g",
+            weight710: "710g",
+            weight725: "725g",
+            weight3kg: "3kg",
+            
+            price2500: "2,500 I.D",
+            price3000: "3,000 I.D",
+            price3250: "3,250 I.D",
+            price3500: "3,500 I.D",
+            price3750: "3,750 I.D",
+            price4750: "4,750 I.D",
+            price5000: "5,000 I.D",
+            price5750: "5,750 I.D",
+            price6000: "6,000 I.D",
+            price7500: "7,500 I.D",
+
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "ليو",
+            brandSlogan: "منتجات غذائية بأفضل جودة",
+            ourProducts: "منتجاتنا",
+            
+            tomatoTitle: "معجون طماطم",
+            tomatoDesc: "لون أقوى... طعم أفضل... نتيجة أروع.",
+            tomatoWeight: "710 غرام + 12% مجاناً",
+            
+            sweetPepperTitle:"فلفل حلو مطحون",
+            sweetPepperDesc: "لون جميل وطعم ألذ.",
+            
+            hotPepperTitle: "فلفل  حار مطحون",
+            hotPepperDesc: "نكهة مركزة وقوة حارة ترتقي بكل وجبة لمستوى احترافي.",
+            
+            jamTitle: "مربى التوت",
+            jamDesc: "حلاوة طبيعية... لون ونكهة غنية.",
+            
+            cornTitle: "ذرة حلوة",
+            cornDesc: "كل حبة مليئة بالطعم الطبيعي والنكهة الحلوة.",
+            
+            molassesTitle: "دبس رمان",
+            molassesDesc: "طعم أصيل وقوام غني يفتح الشهية.",
+            
+            coffeeNoCardamom: "قهوة مطحونة بدون هيل",
+            coffeeCardamom: "قهوة مطحونة مع هيل",
+            coffeeExtraCardamom: "قهوة مطحونة مع هيل إضافي",
+            coffeeDesc: "رائحة جذابة وطعم أصيل يرضي جميع عشاق القهوة.",
+            
+            weight200: "200 غرام",
+            weight430: "430 غرام",
+            weight525: "525 غرام",
+            weight635: "635 غرام",
+            weight645: "645 غرام",
+            weight710: "710 غرام",
+            weight725: "725 غرام",
+            weight3kg: "3 كيلو",
+            
+            price2500: "2,500 دينار عراقي",
+            price3000: "3,000 دينار عراقي",
+            price3250: "3,250 دينار عراقي",
+            price3500: "3,500 دينار عراقي",
+            price3750: "3,750 دينار عراقي",
+            price4750: "4,750 دينار عراقي",
+            price5000: "5,000 دينار عراقي",
+            price5750: "5,750 دينار عراقي",
+            price6000: "6,000 دينار عراقي",
+            price7500: "7,500 دينار عراقي",
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "لیۆ",
+            brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی",
+            ourProducts: "بەرهەمەکانمان",
+            
+            tomatoTitle: "دۆشاوی تەماتە",
+            tomatoDesc: "ڕەنگێکی تۆختر... تامێکی باشتر... ئەنجامێکی سەرسوڕهێنەرتر.",
+            tomatoWeight: "710 گرام + 12% بێبەرامبەر",
+            
+            sweetPepperTitle: "بیبەری شیرینی هاڕڕاو",
+            sweetPepperDesc: "ڕەنگێکی جوان. تامێکی خۆشتر.",
+            
+            hotPepperTitle: "بیبەری سووری تیژی هاڕڕاو",
+            hotPepperDesc: "تامێکی چڕ و هێزێکی تیژ کە هەموو ژەمێک بەرز دەکاتەوە بۆ ئاستێکی پیشەگەرانە.",
+            
+            jamTitle: "مرەبای توو",
+            jamDesc: "شیرینییەکی سروشتی... ڕەنگ و تامێکی دەوڵەمەند.",
+            
+            cornTitle: "گەنمەشامی شیرین",
+            cornDesc: "هەر دەنکێک پڕە لە تامی سروشتی و تامی شیرین.",
+            
+            molassesTitle: "ڕوبە هەنار",
+            molassesDesc: "تامێکی ڕەسەن و پێکهاتەیەکی دەوڵەمەند کە ئارەزووی خواردن دەکاتەوە.",
+            
+            coffeeNoCardamom: "قاوەی هاڕڕاو بێ هێل",
+            coffeeCardamom: "قاوەی هاڕڕاو بە هێل",
+            coffeeExtraCardamom: "قاوەی هاڕڕاو بە هێلی زیادە",
+            coffeeDesc: "بۆنێکی سەرنجڕاکێش و تامێکی ڕەسەن کە هەموو ئاشقانی قاوە ڕازی دەکات.",
+            
+            weight200: "200 گرام",
+            weight430: "430 گرام",
+            weight525: "525 گرام",
+            weight635: "635 گرام",
+            weight645: "645 گرام",
+            weight710: "710 گرام",
+            weight725: "725 گرام",
+            weight3kg: "3 کيلۆگرام",
+            
+            price2500: "2,500 دیناری عێراقی",
+            price3000: "3,000 دیناری عێراقی",
+            price3250: "3,250 دیناری عێراقی",
+            price3500: "3,500 دیناری عێراقی",
+            price3750: "3,750 دیناری عێراقی",
+            price4750: "4,750 دیناری عێراقی",
+            price5000: "5,000 دیناری عێراقی",
+            price5750: "5,750 دیناری عێراقی",
+            price6000: "6,000 دیناری عێراقی",
+            price7500: "7,500 دیناری عێراقی",
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+   function setLanguage(lang) {
+        // 1. تغيير النصوص
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // 2. تغيير الاتجاه
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // 3. حفظ اللغة الجديدة في الذاكرة لكي تنتقل للرئيسية!
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // قراءة اللغة المحفوظة عند فتح الصفحة
+    const savedLang = localStorage.getItem('siteLang') || 'en';
+    setLanguage(savedLang);
+</script>
+
+</body>
+</html>

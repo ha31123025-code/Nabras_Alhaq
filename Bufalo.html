@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bufalo - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Back Button */
+.back-nav {
+    padding: 10px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-red);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+}
+
+.card h3 {
+    color: var(--main-blue);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="Bufalo-1.png" class="logo" alt="Bufalo Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">Bufalo</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">German-standard cleaning products</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+
+        <div class="card">
+            <img src="Bufalo/photo_39_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w665">665g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_41_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishPine">Pine dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w665">665g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_36_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishLavender">Lavender dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w665">665g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_13_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishRefresh">Refreshing dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w665">665g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="">
+            <h3 data-i18n="dishJouri">Jouri dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w665">665g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_40_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w1100">1100g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="">
+            <h3 data-i18n="dishPine">Pine dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w1100">1100g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_37_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="dishLavender">Lavender dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w1100">1100g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="">
+            <h3 data-i18n="dishRefresh">Refreshing dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w1100">1100g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="">
+            <h3 data-i18n="dishJouri">Jouri dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
+            <p data-i18n="w1100">1100g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_10_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
+            <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_11_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
+            <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_12_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
+            <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
+            <p data-i18n="w400">400g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/Picture7.jpg">
+            <h3 data-i18n="moistRose">Moisturizing rose liquid hand soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Picture3.jpg">
+            <h3 data-i18n="moistJouri">Jouri Moisturizing Liquid Hand Soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Picture2.jpg">
+            <h3 data-i18n="moistPine">Moisturizing pine liquid hand soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Picture4.jpg">
+            <h3 data-i18n="moistPome">Moisturizing pomegranate liquid hand soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Picture5.jpg">
+            <h3 data-i18n="moistAvo">Moisturizing avocado liquid hand soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Picture6.jpg">
+            <h3 data-i18n="moistRefresh">Refreshing moisturizing liquid hand soap</h3>
+            <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_45_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapPine">Pine hand soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_44_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapRefresh">Refreshing hand soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_43_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapPome">Pomegranate hand soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_46_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapSea">Sea Breeze Hand Soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_48_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapAvo">Avocado hand soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_47_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="soapJouri">Jouri hand soap</h3>
+            <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
+            <p data-i18n="w125">125g*6</p>
+            <p class="price" data-i18n="p4000">4,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_33_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_34_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Bufalo catalog final 28_08_2025-2.png">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_35_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launWhite">White clothes washing liquid</h3>
+            <p data-i18n="launWhiteDesc">Bring back the original brilliance of your whites</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_32_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launBlack">Black laundry liquid</h3>
+            <p data-i18n="launBlackDesc">Black stays bold. Ultimate protection for your dark favorites</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_3_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w3L">3L</p>
+            <p class="price" data-i18n="p10500">10,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_4_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w3L">3L</p>
+            <p class="price" data-i18n="p10500">10,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_1_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launColor">Colored laundry liquid</h3>
+            <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
+            <p data-i18n="w3L">3L</p>
+            <p class="price" data-i18n="p10500">10,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_5_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launWhite">White clothes washing liquid</h3>
+            <p data-i18n="launWhiteDesc">Bring back the original brilliance of your whites</p>
+            <p data-i18n="w3L">3L</p>
+            <p class="price" data-i18n="p10500">10,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_2_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="launBlack">Black laundry liquid</h3>
+            <p data-i18n="launBlackDesc">Black stays bold. Ultimate protection for your dark favorites</p>
+            <p data-i18n="w3L">3L</p>
+            <p class="price" data-i18n="p10500">10,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_7_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
+            <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
+            <p data-i18n="w2KG">2KG</p>
+            <p class="price" data-i18n="p5500">5,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_8_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
+            <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
+            <p data-i18n="w2KG">2KG</p>
+            <p class="price" data-i18n="p5500">5,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Bufalo catalog final 28_08_2025-5.png">
+            <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
+            <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
+            <p data-i18n="w3_5KG">3.5KG+0.5free</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Bufalo catalog final 28_08_2025-3.png">
+            <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
+            <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
+            <p data-i18n="w3_5KG">3.5KG+0.5free</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/Bufalo catalog final 28_08_2025-3.png">
+            <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
+            <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
+            <p data-i18n="w3_5KG">3.5KG+0.5free</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_30_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="multiLavender">Lavender Multi-Purpose Cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w750L">750 ml</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_29_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="multiPine">Pine all-purpose cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w750L">750 ml</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_31_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="multiRefresh">Refreshing multi-purpose cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w750L">750 ml</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_28_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="multiOrchid">Orchid Multi-Purpose Cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w750L">750 ml</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        
+        <div class="card">
+            <img src="Bufalo/4.png">
+            <h3 data-i18n="multiLavender">Lavender Multi-Purpose Cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w1500L">1.5 L</p>
+            <p class="price" data-i18n="p3750">3,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/5.png">
+            <h3 data-i18n="multiWhite">White mercury multi-purpose cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w1500L">1.5 L</p>
+            <p class="price" data-i18n="p3750">3,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/6.png">
+            <h3 data-i18n="multiJouri">Jouri Multi-Purpose Cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w1500L">1.5 L</p>
+            <p class="price" data-i18n="p3750">3,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/منظف متعدد استعمالات.png">
+            <h3 data-i18n="multiOrchid">Orchid Multi-Purpose Cleaner</h3>
+            <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
+            <p data-i18n="w1500L">1.5 L</p>
+            <p class="price" data-i18n="p3750">3,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_14_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="greaseRemover">Grease remover</h3>
+            <p data-i18n="greaseDesc">No more scrubbing! Spray, wipe, and watch the grease disappear</p>
+            <p data-i18n="w750ML">750 ml</p>
+            <p class="price" data-i18n="p2250">2,250 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_15_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
+            <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_16_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
+            <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_17_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
+            <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+        </div>
+        <div class="card">
+            <img src="Bufalo/photo_18_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="glassPolish">Carbex Glass Polish</h3>
+            <p data-i18n="glassDesc">More than a cleaner—a professional polish for a flawless finish</p>
+            <p data-i18n="w750ML">750 ml</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_6_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="babyWipes">Baby wipes for sensitive bodies</h3>
+            <p data-i18n="wipesDesc">Superior protection for sensitive skin. Say goodbye to irritation</p>
+            <p data-i18n="w72pc">72pc</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="Bufalo/photo_19_2025-12-23_23-24-34.jpg">
+            <h3 data-i18n="shoePolish">Black shoe polish</h3>
+            <p data-i18n="shoeDesc">Let your steps speak for you. A mirror-like shine in one touch</p>
+            <p></p>
+            <p class="price" data-i18n="p750">750 I.D</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "Bufalo",
+            brandSlogan: "German-standard cleaning products",
+            ourProducts: "Our Products",
+
+            // Dishwashing
+            dishLemon: "Lemon dishwashing liquid",
+            dishPine: "Pine dishwashing liquid",
+            dishLavender: "Lavender dishwashing liquid",
+            dishRefresh: "Refreshing dishwashing liquid",
+            dishJouri: "Jouri dishwashing liquid",
+            dishDesc: "Goodbye gloves! Sparkling clean dishes and super soft skin.",
+
+            // Hand Soaps (Liquid & Bar)
+            vitolSoap: "Vitol Foaming Liquid Hand Soap",
+            vitolDesc: "Silky softness in every Vitol foam.. for hydrated, fresh skin",
+            moistRose: "Moisturizing rose liquid hand soap",
+            moistJouri: "Jouri Moisturizing Liquid Hand Soap",
+            moistPine: "Moisturizing pine liquid hand soap",
+            moistPome: "Moisturizing pomegranate liquid hand soap",
+            moistAvo: "Moisturizing avocado liquid hand soap",
+            moistRefresh: "Refreshing moisturizing liquid hand soap",
+            moistDesc: "More than just a wash—a hydration boost in every drop",
+            
+            soapPine: "Pine hand soap",
+            soapRefresh: "Refreshing hand soap",
+            soapPome: "Pomegranate hand soap",
+            soapSea: "Sea Breeze Hand Soap",
+            soapAvo: "Avocado hand soap",
+            soapJouri: "Jouri hand soap",
+            soapDesc: "Wash away impurities, lock in the glow",
+
+            // Laundry
+            launColor: "Colored laundry liquid",
+            launColorDesc: "Let your colors speak for you. Keep them bright wash after wash",
+            launWhite: "White clothes washing liquid",
+            launWhiteDesc: "Bring back the original brilliance of your whites",
+            launBlack: "Black laundry liquid",
+            launBlackDesc: "Black stays bold. Ultimate protection for your dark favorites",
+            
+            powderColor: "Colored automatic laundry detergent powder",
+            powderDesc: "Vivid colors. Smart clean",
+
+            // Multi-Purpose & Special
+            multiLavender: "Lavender Multi-Purpose Cleaner",
+            multiPine: "Pine all-purpose cleaner",
+            multiRefresh: "Refreshing multi-purpose cleaner",
+            multiOrchid: "Orchid Multi-Purpose Cleaner",
+            multiWhite: "White mercury multi-purpose cleaner",
+            multiJouri: "Jouri Multi-Purpose Cleaner",
+            multiDesc: "Mighty cleaning power, from the kitchen to the living room",
+
+            greaseRemover: "Grease remover",
+            greaseDesc: "No more scrubbing! Spray, wipe, and watch the grease disappear",
+            creamClean: "Cleanner Cream Exfoliating and Polishing",
+            creamCleanDesc: "Brilliant shine, zero scratches. The secret is in the micro-polishing particles",
+            glassPolish: "Carbex Glass Polish",
+            glassDesc: "More than a cleaner—a professional polish for a flawless finish",
+
+            babyWipes: "Baby wipes for sensitive bodies",
+            wipesDesc: "Superior protection for sensitive skin. Say goodbye to irritation",
+
+            shoePolish: "Black shoe polish",
+            shoeDesc: "Let your steps speak for you. A mirror-like shine in one touch",
+
+            // Weights
+            w400: "400g",
+            w450: "450g",
+            w665: "665g",
+            w750: "750g",
+            w1100: "1100g",
+            w125: "125g * 6",
+            w1L: "1 L",
+            w3L: "3 L",
+            w2KG: "2 KG",
+            w3_5KG: "3.5 KG + 0.5 Free",
+            w750ML: "750 ml",
+            w750L: "750 ml",
+            w1500L: "1.5 L",
+            w72pc: "72 pcs",
+
+            // Prices
+            p750: "750 I.D",
+            p1500: "1,500 I.D",
+            p1750: "1,750 I.D",
+            p2000: "2,000 I.D",
+            p2250: "2,250 I.D",
+            p2500: "2,500 I.D",
+            p3500: "3,500 I.D",
+            p3750: "3,750 I.D",
+            p4000: "4,000 I.D",
+            p5500: "5,500 I.D",
+            p9500: "9,500 I.D",
+            p10500: "10,500 I.D",
+
+            // Footer / Nav
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "بوفالو",
+            brandSlogan: "منتجات تنظيف بمعايير ألمانية",
+            ourProducts: "منتجاتنا",
+
+            dishLemon: "سائل غسيل الصحون بالليمون",
+            dishPine: "سائل غسيل الصحون بالصنوبر",
+            dishLavender: "سائل غسيل الصحون باللافندر",
+            dishRefresh: "سائل غسيل الصحون المنعش",
+            dishJouri: "سائل غسيل الصحون بالجوري",
+            dishDesc: "وداعاً للقفازات! أطباق نظيفة لامعة وبشرة فائقة النعومة.",
+
+            vitolSoap: "صابون سائل رغوي لليدين فيتول",
+            vitolDesc: "نعومة حريرية في كل رغوة من فيتول.. لبشرة رطبة ومنعشة.",
+            moistRose: "صابون سائل مرطب لليدين بالورد",
+            moistJouri: "صابون سائل مرطب لليدين بالجوري",
+            moistPine: "صابون سائل مرطب لليدين بالصنوبر",
+            moistPome: "صابون سائل مرطب لليدين بالرمان",
+            moistAvo: "صابون سائل مرطب لليدين بالأفوكادو",
+            moistRefresh: "صابون سائل مرطب ومنعش لليدين",
+            moistDesc: "أكثر من مجرد غسيل—دفعة ترطيب في كل قطرة.",
+            
+            soapPine: "صابون صلب لليدين بالصنوبر",
+            soapRefresh: "صابون صلب لليدين منعش",
+            soapPome: "صابون صلب لليدين بالرمان",
+            soapSea: "صابون صلب لليدين بنسيم البحر",
+            soapAvo: "صابون صلب لليدين بالأفوكادو",
+            soapJouri: "صابون صلب لليدين بالجوري",
+            soapDesc: "اغسل الشوائب، واحتفظ بإشراقة ونعومة بشرتك.",
+
+            launColor: "سائل غسيل الملابس الملونة",
+            launColorDesc: "دع ألوانك تتحدث عنك. حافظ عليها زاهية غسلة بعد غسلة.",
+            launWhite: "سائل غسيل الملابس البيضاء",
+            launWhiteDesc: "أعد اللمعان والبريق الأصلي لملابسك البيضاء.",
+            launBlack: "سائل غسيل الملابس السوداء",
+            launBlackDesc: "الأسود يبقى جريئاً. حماية قصوى لمفضلاتك الداكنة.",
+            
+            powderColor: "مسحوق غسيل أوتوماتيك للملابس الملونة",
+            powderDesc: "ألوان زاهية. تنظيف ذكي وفعال.",
+
+            multiLavender: "منظف متعدد الاستعمالات باللافندر",
+            multiPine: "منظف متعدد الاستعمالات بالصنوبر",
+            multiRefresh: "منظف متعدد الاستعمالات منعش",
+            multiOrchid: "منظف متعدد الاستعمالات بالأوركيد",
+            multiWhite: "منظف متعدد الاستعمالات زئبق أبيض",
+            multiJouri: "منظف متعدد الاستعمالات بالجوري",
+            multiDesc: "قوة تنظيف هائلة، من المطبخ إلى غرفة المعيشة.",
+
+            greaseRemover: "مزيل الدهون",
+            greaseDesc: "لا مزيد من الفرك! رش، امسح، وشاهد الدهون تختفي.",
+            creamClean: "كريم منظف مقشر وملمع",
+            creamCleanDesc: "لمعان رائع، بدون خدوش. السر في جزيئات التلميع الدقيقة.",
+            glassPolish: "ملمع زجاج كاربكس",
+            glassDesc: "أكثر من مجرد منظف—ملمع احترافي لنتيجة خالية من العيوب.",
+
+            babyWipes: "مناديل مبللة للأطفال والأجسام الحساسة",
+            wipesDesc: "حماية فائقة للبشرة الحساسة. قل وداعاً للتهيج.",
+
+            shoePolish: "ملمع أحذية أسود",
+            shoeDesc: "دع خطواتك تتحدث عنك. لمعان كالمرآة بلمسة واحدة.",
+
+            w400: "400 غرام",
+            w450: "450 غرام",
+            w665: "665 غرام",
+            w750: "750 غرام",
+            w1100: "1100 غرام",
+            w125: "125 غرام * 6",
+            w1L: "1 لتر",
+            w3L: "3 لتر",
+            w2KG: "2 كغم",
+            w3_5KG: "3.5 كغم + 0.5 مجاناً",
+            w750ML: "750 مل",
+            w750L: "750 مل",
+            w1500L: "1.5 لتر",
+            w72pc: "72 قطعة",
+
+            p750: "750 دينار عراقي",
+            p1500: "1,500 دينار عراقي",
+            p1750: "1,750 دينار عراقي",
+            p2000: "2,000 دينار عراقي",
+            p2250: "2,250 دينار عراقي",
+            p2500: "2,500 دينار عراقي",
+            p3500: "3,500 دينار عراقي",
+            p3750: "3,750 دينار عراقي",
+            p4000: "4,000 دينار عراقي",
+            p5500: "5,500 دينار عراقي",
+            p9500: "9,500 دينار عراقي",
+            p10500: "10,500 دينار عراقي",
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "بوفالۆ",
+            brandSlogan: "بەرهەمەکانی پاککردنەوە بە پێوەری ئەڵمانی",
+            ourProducts: "بەرهەمەکانمان",
+
+            dishLemon: "شلەی قاپ شتنی لیمۆ",
+            dishPine: "شلەی قاپ شتنی سنەوبەر",
+            dishLavender: "شلەی قاپ شتنی لاڤێندەر",
+            dishRefresh: "شلەی قاپ شتنی تازەگەری",
+            dishJouri: "شلەی قاپ شتنی گوڵی جوری",
+            dishDesc: "ماڵئاوا لە دەستکێش! قاپی خاوێن و بریقەدار و پێستی زۆر نەرم.",
+
+            vitolSoap: "سابوونی شلی کەفاوی دەست ڤیتۆل",
+            vitolDesc: "نەرمی ئاوریشمی لە هەر کەفێکی ڤیتۆلدا.. بۆ پێستێکی شێدار و تازە.",
+            moistRose: "سابوونی شلی شێدارکەرەوەی دەست بە گوڵەباخ",
+            moistJouri: "سابوونی شلی شێدارکەرەوەی دەست بە جوری",
+            moistPine: "سابوونی شلی شێدارکەرەوەی دەست بە سنەوبەر",
+            moistPome: "سابوونی شلی شێدارکەرەوەی دەست بە هەنار",
+            moistAvo: "سابوونی شلی شێدارکەرەوەی دەست بە ئەڤۆکادۆ",
+            moistRefresh: "سابوونی شلی شێدارکەرەوەی دەست بە تازەگەری",
+            moistDesc: "زیاتر لە تەنها شتنێک—بەهێزکەری شێداری لە هەر دڵۆپێکدا.",
+            
+            soapPine: "سابوونی دەست بە سنەوبەر",
+            soapRefresh: "سابوونی دەست بۆ تازەگەری",
+            soapPome: "سابوونی دەست بە هەنار",
+            soapSea: "سابوونی دەست بە شنەبای دەریا",
+            soapAvo: "سابوونی دەست بە ئەڤۆکادۆ",
+            soapJouri: "سابوونی دەست بە گوڵی جوری",
+            soapDesc: "پیسییەکان بشۆ، و درەوشاوەیی پێستت بهێڵەرەوە.",
+
+            launColor: "شلەی شتنی جلی ڕەنگاوڕەنگ",
+            launColorDesc: "با ڕەنگەکانت قسەت بۆ بکەن. بە گەشی بیانپارێزە لە دوای هەر شتنێک.",
+            launWhite: "شلەی شتنی جلی سپی",
+            launWhiteDesc: "درەوشاوەیی ڕەسەن بۆ جلە سپییەکانت بگەڕێنەوە.",
+            launBlack: "شلەی شتنی جلی ڕەش",
+            launBlackDesc: "ڕەشی تۆخ دەمێنێتەوە. پاراستنی تەواو بۆ جلە تاریکە دڵخوازەکانت.",
+            
+            powderColor: "تۆزی شتنی ئۆتۆماتیکی بۆ جلی ڕەنگاوڕەنگ",
+            powderDesc: "ڕەنگی گەش. پاککردنەوەی زیرەک و کاریگەر.",
+
+            multiLavender: "پاککەرەوەی فرە مەبەستی لاڤێندەر",
+            multiPine: "پاککەرەوەی فرە مەبەستی سنەوبەر",
+            multiRefresh: "پاککەرەوەی فرە مەبەستی تازەگەری",
+            multiOrchid: "پاککەرەوەی فرە مەبەستی ئۆرکید",
+            multiWhite: "پاککەرەوەی فرە مەبەستی جیوەی سپی",
+            multiJouri: "پاککەرەوەی فرە مەبەستی جوری",
+            multiDesc: "هێزی پاککردنەوەی مەزن، لە چێشتخانەوە تا ژووری دانیشتن.",
+
+            greaseRemover: "لابەری چەوری",
+            greaseDesc: "فرککردن نەما! بڕشێنە، بسڕە، و ببینە چەورییەکان دیار نامێنن.",
+            creamClean: "کرێمی پاککەرەوەی توێکڵکەر و بریقەدەر",
+            creamCleanDesc: "درەوشاوەیی نایاب، بێ ڕووشان. نهێنییەکە لە گەردیلە وردەکانی تلمیعکردندایە.",
+            glassPolish: "بریقەدەری شووشەی کاربێکس",
+            glassDesc: "زیاتر لە پاککەرەوەیەک—بریقەدەرێکی پیشەگەر بۆ ئەنجامێکی بێ کەموکوڕی.",
+
+            babyWipes: "کلینسی تەڕ بۆ منداڵ و پێستی هەستیار",
+            wipesDesc: "پاراستنی باڵا بۆ پێستی هەستیار. ماڵئاوا لە خورانی پێست بکە.",
+
+            shoePolish: "بۆیەی پێڵاوی ڕەش",
+            shoeDesc: "با هەنگاوەکانت قسەت بۆ بکەن. درەوشاوەیی وەک ئاوێنە بە یەک دەست لێدان.",
+
+            w400: "400 گرام",
+            w450: "450 گرام",
+            w665: "665 گرام",
+            w750: "750 گرام",
+            w1100: "1100 گرام",
+            w125: "125 گرام * 6",
+            w1L: "1 لیتر",
+            w3L: "3 لیتر",
+            w2KG: "2 کیلۆگرام",
+            w3_5KG: "3.5 کیلۆ + 0.5 بەخۆڕایی",
+            w750ML: "750 مل",
+            w750L: "750 مل",
+            w1500L: "1.5 لیتر",
+            w72pc: "72 دانە",
+
+            p750: "750 دیناری عێراقی",
+            p1500: "1,500 دیناری عێراقی",
+            p1750: "1,750 دیناری عێراقی",
+            p2000: "2,000 دیناری عێراقی",
+            p2250: "2,250 دیناری عێراقی",
+            p2500: "2,500 دیناری عێراقی",
+            p3500: "3,500 دیناری عێراقی",
+            p3750: "3,750 دیناری عێراقی",
+            p4000: "4,000 دیناری عێراقی",
+            p5500: "5,500 دیناری عێراقی",
+            p9500: "9,500 دیناری عێراقی",
+            p10500: "10,500 دیناری عێراقی",
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+    function setLanguage(lang) {
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Change Direction
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // Save Language choice
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // Read language choice from memory
+    const savedLang = localStorage.getItem('siteLang') || 'en';
+    setLanguage(savedLang);
+</script>
+
+</body>
+</html>

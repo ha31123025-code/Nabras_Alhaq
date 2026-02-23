@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dorto - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Back Button */
+.back-nav {
+    padding: 10px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-red);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+}
+
+.card h3 {
+    color: var(--main-blue);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="logo Dorto E.png" class="logo" alt="Dorto Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">Dorto</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">German-standard cleaning products</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+        
+        <div class="card">
+            <img src="DORTO/fvjrhg 3750.jpg">
+            <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w3750">3,750g</p>
+            <p class="price" data-i18n="p6000">6,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture2.jpg">
+            <h3 data-i18n="dishApple">Apple dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w3750">3,750g</p>
+            <p class="price" data-i18n="p6000">6,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture3.jpg">
+            <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w3750">3,750g</p>
+            <p class="price" data-i18n="p6000">6,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Picture4.jpg">
+            <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w1000">1,000g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture6.jpg">
+            <h3 data-i18n="dishApple">Apple dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w1000">1,000g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture5.jpg">
+            <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w1000">1,000g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Picture9.jpg">
+            <h3 data-i18n="plusOrange">Plus Dishwashing Liquid Orange</h3>
+            <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture11.jpg">
+            <h3 data-i18n="plusApple">Plus Dishwashing Liquid Apple</h3>
+            <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture10.jpg">
+            <h3 data-i18n="plusLemon">Plus Dishwashing Liquid Lemon</h3>
+            <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
+            <p data-i18n="w750">750g</p>
+            <p class="price" data-i18n="p1500">1,500 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Picture8.jpg">
+            <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w500">500g</p>
+            <p class="price" data-i18n="p1000">1,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture7.jpg">
+            <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
+            <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
+            <p data-i18n="w500">500g</p>
+            <p class="price" data-i18n="p1000">1,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/1-Black Wash (1).png">
+            <h3 data-i18n="blackLaundry">Black laundry liquid</h3>
+            <p data-i18n="blackDesc">Sweeter blacks, softer clothes – effective black laundry detergent.</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3000">3,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/1-Black Wash (1).png">
+            <h3 data-i18n="blackLaundry">Black laundry liquid</h3>
+            <p data-i18n="blackDesc">Sweeter blacks, softer clothes – effective black laundry detergent.</p>
+            <p data-i18n="w27L">2.7L</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/2.7-FLORAL.png">
+            <h3 data-i18n="univLaundry">Universal liquid laundry detergent for colored clothes</h3>
+            <p data-i18n="univDesc">Universal Detergent – To maintain your vibrant colors and perfect cleanliness.</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3000">3,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/2.7-FLORAL.png">
+            <h3 data-i18n="univLaundry">Universal liquid laundry detergent for colored clothes</h3>
+            <p data-i18n="univDesc">Universal Detergent – To maintain your vibrant colors and perfect cleanliness.</p>
+            <p data-i18n="w27L">2.7L</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/2.7-UNIVERSAL.png">
+            <h3 data-i18n="lavenderLaundry">Colored Lavender Laundry Detergent</h3>
+            <p data-i18n="lavenderDesc">Protect your colors with a touch of natural lavender fragrance.</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3000">3,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/2.7-UNIVERSAL.png">
+            <h3 data-i18n="lavenderLaundry">Colored Lavender Laundry Detergent</h3>
+            <p data-i18n="lavenderDesc">Protect your colors with a touch of natural lavender fragrance.</p>
+            <p data-i18n="w27L">2.7L</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/1-CONCENTRATE.png">
+            <h3 data-i18n="concLaundry">Concentrated laundry liquid</h3>
+            <p data-i18n="concDesc">Great results with less – a concentrated and ideal washing liquid.</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p3500">3,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/final-hand wash - مایع لباسشویی دستی - 01.png">
+            <h3 data-i18n="handLaundry">Hand washing liquid</h3>
+            <p data-i18n="handLaundryDesc">Effective and gentle hand wash – long-lasting fresh scent.</p>
+            <p data-i18n="w1L">1L</p>
+            <p class="price" data-i18n="p2750">2,750 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Clear Handwash (2).jpg">
+            <h3 data-i18n="clearUnique">Clear liquid hand soap Unique Feel</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Clear Handwash (3).jpg">
+            <h3 data-i18n="clearVerbena">Clear liquid hand soap Beauty Verbena</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Clear Handwash (4).jpg">
+            <h3 data-i18n="clearDark">Clear liquid hand soap Dark Blue</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Picture20.jpg">
+            <h3 data-i18n="clearUnique">Clear liquid hand soap Unique Feel</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w2700">2,700g</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture21.jpg">
+            <h3 data-i18n="clearVerbena">Clear liquid hand soap Beauty Verbena</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w2700">2,700g</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture22.jpg">
+            <h3 data-i18n="clearDark">Clear liquid hand soap Dark Blue</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w2700">2,700g</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture21.jpg">
+            <h3 data-i18n="clearTutti">Clear liquid hand soap Tutti Frutti</h3>
+            <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
+            <p data-i18n="w2700">2,700g</p>
+            <p class="price" data-i18n="p6250">6,250 I.D</p>
+        </div>
+
+        <div class="card">
+            <img src="DORTO/Creamy Handwash (1).jpg">
+            <h3 data-i18n="creamVerbena">hand soap cream Beauty Verbena</h3>
+            <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Creamy Handwash (2).jpg">
+            <h3 data-i18n="creamBomb">hand soap cream Bomb of Flower</h3>
+            <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Creamy Handwash (3).jpg">
+            <h3 data-i18n="creamElegant">hand soap cream Elegant Bloom</h3>
+            <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Creamy Handwash (4).jpg">
+            <h3 data-i18n="creamPurple">hand soap cream Purple Trauel</h3>
+            <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
+            <p data-i18n="w450">450g</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+        </div>
+        <div class="card">
+            <img src="DORTO/Picture23.jpg">
+            <h3 data-i18n="creamVerbena">hand soap cream Beauty Verbena</h3>
+            <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
+            <p data-i18n="w2700">2,700g</p>
+            <p class="price" data-i18n="p7000">7,000 I.D</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 New Hawler, Directorate of Information Technology.
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "Dorto",
+            brandSlogan: "German-standard cleaning products",
+            ourProducts: "Our Products",
+            
+            // Dishwashing
+            dishOrange: "Orange dishwashing liquid",
+            dishApple: "Apple dishwashing liquid",
+            dishLemon: "Lemon dishwashing liquid",
+            dishDesc: "Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.",
+            plusOrange: "Plus Dishwashing Liquid Orange",
+            plusApple: "Plus Dishwashing Liquid Apple",
+            plusLemon: "Plus Dishwashing Liquid Lemon",
+            plusDesc: "With Plus Orange – fast grease removal and a fresh, natural scent.",
+            
+            // Laundry
+            blackLaundry: "Black laundry liquid",
+            blackDesc: "Sweeter blacks, softer clothes – effective black laundry detergent.",
+            univLaundry: "Universal liquid laundry detergent for colored clothes",
+            univDesc: "Universal Detergent – To maintain your vibrant colors and perfect cleanliness.",
+            lavenderLaundry: "Colored Lavender Laundry Detergent",
+            lavenderDesc: "Protect your colors with a touch of natural lavender fragrance.",
+            concLaundry: "Concentrated laundry liquid",
+            concDesc: "Great results with less – a concentrated and ideal washing liquid.",
+            handLaundry: "Hand washing liquid",
+            handLaundryDesc: "Effective and gentle hand wash – long-lasting fresh scent.",
+            
+            // Hand Soaps (Clear & Creamy)
+            clearUnique: "Clear liquid hand soap Unique Feel",
+            clearVerbena: "Clear liquid hand soap Beauty Verbena",
+            clearDark: "Clear liquid hand soap Dark Blue",
+            clearTutti: "Clear liquid hand soap Tutti Frutti",
+            clearDesc: "A refreshing, gentle, and special handwash every time.",
+            
+            creamVerbena: "hand soap cream Beauty Verbena",
+            creamBomb: "hand soap cream Bomb of Flower",
+            creamElegant: "hand soap cream Elegant Bloom",
+            creamPurple: "hand soap cream Purple Trauel",
+            creamDesc: "Protection, moisturizing, and hygiene... the ideal hand washing cream.",
+
+            // Weights
+            w500: "500g",
+            w750: "750g",
+            w1000: "1,000g",
+            w450: "450g",
+            w2700: "2,700g",
+            w3750: "3,750g",
+            w1L: "1L",
+            w27L: "2.7L",
+            
+            // Prices
+            p1000: "1,000 I.D",
+            p1500: "1,500 I.D",
+            p2000: "2,000 I.D",
+            p2500: "2,500 I.D",
+            p2750: "2,750 I.D",
+            p3000: "3,000 I.D",
+            p3500: "3,500 I.D",
+            p6000: "6,000 I.D",
+            p6250: "6,250 I.D",
+            p7000: "7,000 I.D",
+
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍 New Hawler, Directorate of Information Technology.",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "دورتو",
+            brandSlogan: "منتجات تنظيف بمعايير ألمانية",
+            ourProducts: "منتجاتنا",
+            
+            dishOrange: "سائل غسيل الصحون برتقال",
+            dishApple: "سائل غسيل الصحون تفاح",
+            dishLemon: "سائل غسيل الصحون ليمون",
+            dishDesc: "قوة في إزالة الدهون ونعومة على يديك - سائل غسيل الصحون المثالي.",
+            plusOrange: "سائل غسيل الصحون بلس برتقال",
+            plusApple: "سائل غسيل الصحون بلس تفاح",
+            plusLemon: "سائل غسيل الصحون بلس ليمون",
+            plusDesc: "مع تركيبة بلس - إزالة سريعة للدهون ورائحة طبيعية منعشة.",
+            
+            blackLaundry: "سائل غسيل الملابس السوداء",
+            blackDesc: "سواد أغمق وملابس أنعم - منظف فعال للملابس السوداء.",
+            univLaundry: "سائل غسيل شامل للملابس الملونة",
+            univDesc: "منظف شامل - للحفاظ على ألوانك الزاهية ونظافة مثالية.",
+            lavenderLaundry: "منظف الغسيل الملون باللافندر",
+            lavenderDesc: "احمِ ألوانك مع لمسة من رائحة اللافندر الطبيعية.",
+            concLaundry: "سائل غسيل مركز",
+            concDesc: "نتائج رائعة بكمية أقل - سائل غسيل مركز ومثالي.",
+            handLaundry: "سائل غسيل يدوي",
+            handLaundryDesc: "غسيل يدوي فعال ولطيف - رائحة منعشة تدوم طويلاً.",
+            
+            clearUnique: "صابون سائل شفاف يونيك فيل",
+            clearVerbena: "صابون سائل شفاف بيوتي فيربينا",
+            clearDark: "صابون سائل شفاف دارك بلو",
+            clearTutti: "صابون سائل شفاف توتي فروتي",
+            clearDesc: "غسيل أيادي منعش، لطيف، ومميز في كل مرة.",
+            
+            creamVerbena: "كريم صابون الأيدي بيوتي فيربينا",
+            creamBomb: "كريم صابون الأيدي بومب أوف فلاور",
+            creamElegant: "كريم صابون الأيدي إليجانت بلوم",
+            creamPurple: "كريم صابون الأيدي بيربل ترافيل",
+            creamDesc: "حماية، ترطيب، ونظافة... كريم غسيل الأيدي المثالي.",
+
+            w500: "500 غرام",
+            w750: "750 غرام",
+            w1000: "1,000 غرام",
+            w450: "450 غرام",
+            w2700: "2,700 غرام",
+            w3750: "3,750 غرام",
+            w1L: "1 لتر",
+            w27L: "2.7 لتر",
+            
+            p1000: "1,000 دينار عراقي",
+            p1500: "1,500 دينار عراقي",
+            p2000: "2,000 دينار عراقي",
+            p2500: "2,500 دينار عراقي",
+            p2750: "2,750 دينار عراقي",
+            p3000: "3,000 دينار عراقي",
+            p3500: "3,500 دينار عراقي",
+            p6000: "6,000 دينار عراقي",
+            p6250: "6,250 دينار عراقي",
+            p7000: "7,000 دينار عراقي",
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "دۆرتۆ",
+            brandSlogan: "بەرهەمەکانی پاککردنەوە بە پێوەری ئەڵمانی",
+            ourProducts: "بەرهەمەکانمان",
+            
+            dishOrange: "شلەی قاپ شتنی پرتەقاڵ",
+            dishApple: "شلەی قاپ شتنی سێو",
+            dishLemon: "شلەی قاپ شتنی لیمۆ",
+            dishDesc: "هێزی لابردنی چەوری و نەرمی بۆ دەستەکانت - شلەی قاپ شتنی نموونەیی.",
+            plusOrange: "شلەی قاپ شتنی پڵەس پرتەقاڵ",
+            plusApple: "شلەی قاپ شتنی پڵەس سێو",
+            plusLemon: "شلەی قاپ شتنی پڵەس لیمۆ",
+            plusDesc: "بە پێکهاتەی پڵەس - لابردنی خێرای چەوری و بۆنێکی سروشتی تازە.",
+            
+            blackLaundry: "شلەی شتنی جلوبەرگی ڕەش",
+            blackDesc: "ڕەشی تاریکتر و جلی نەرمتر - پاککەرەوەی کاریگەر بۆ جلی ڕەش.",
+            univLaundry: "شلەی شتنی گشتگیر بۆ جلی ڕەنگاوڕەنگ",
+            univDesc: "پاککەرەوەی گشتگیر - بۆ پاراستنی ڕەنگە گەشەکانت و پاکی نموونەیی.",
+            lavenderLaundry: "پاککەرەوەی جلی ڕەنگاوڕەنگ بە لاڤێندەر",
+            lavenderDesc: "ڕەنگەکانت بپارێزە بە بۆنی سروشتی لاڤێندەر.",
+            concLaundry: "شلەی شتنی خەست",
+            concDesc: "ئەنجامی نایاب بە بڕێکی کەم - شلەی شتنی خەست و نموونەیی.",
+            handLaundry: "شلەی شتنی دەست",
+            handLaundryDesc: "شتنی دەستی کاریگەر و نەرم - بۆنی تازەی درێژخایەن.",
+            
+            clearUnique: "سابوونی شلی ڕوون یونیک فیل",
+            clearVerbena: "سابوونی شلی ڕوون بیوتی ڤێربێنا",
+            clearDark: "سابوونی شلی ڕوون دارک بلو",
+            clearTutti: "سابوونی شلی ڕوون توتی فروتی",
+            clearDesc: "شتنی دەستی تازەگەری، نەرم و تایبەت لە هەموو کاتێکدا.",
+            
+            creamVerbena: "کرێمی سابوونی دەست بیوتی ڤێربێنا",
+            creamBomb: "کرێمی سابوونی دەست بۆمبی گوڵ",
+            creamElegant: "کرێمی سابوونی دەست گوڵی کاڵ",
+            creamPurple: "کرێمی سابوونی دەست مۆری گەشت",
+            creamDesc: "پاراستن، شێدارکردنەوە، و پاکی... کرێمی دەست شتنی نموونەیی.",
+
+            w500: "500 گرام",
+            w750: "750 گرام",
+            w1000: "1,000 گرام",
+            w450: "450 گرام",
+            w2700: "2,700 گرام",
+            w3750: "3,750 گرام",
+            w1L: "1 لیتر",
+            w27L: "2.7 لیتر",
+            
+            p1000: "1,000 دیناری عێراقی",
+            p1500: "1,500 دیناری عێراقی",
+            p2000: "2,000 دیناری عێراقی",
+            p2500: "2,500 دیناری عێراقی",
+            p2750: "2,750 دیناری عێراقی",
+            p3000: "3,000 دیناری عێراقی",
+            p3500: "3,500 دیناری عێراقی",
+            p6000: "6,000 دیناری عێراقی",
+            p6250: "6,250 دیناری عێراقی",
+            p7000: "7,000 دیناری عێراقی",
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+        }
+    };
+
+    function setLanguage(lang) {
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Change Direction
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // Save Language choice
+        localStorage.setItem('siteLang', lang);
+    }
+
+    // Read language choice from memory
+    const savedLang = localStorage.getItem('siteLang') || 'en';
+    setLanguage(savedLang);
+</script>
+
+</body>
+</html>
