@@ -100,6 +100,8 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
     animation: fadeUp 1s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -112,6 +114,7 @@ body {
     height: 160px;
     object-fit: contain;
     background: white;
+    cursor: zoom-in;
 }
 
 .card h3 {
@@ -124,12 +127,204 @@ body {
     font-size: 14px;
     color: #555;
     margin: 8px 0;
+    flex-grow: 1;
 }
 
 .card p.price {
     font-weight: bold;
     color: var(--main-red);
     font-size: 16px;
+}
+
+/* Add to Cart Button */
+.add-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Floating Cart Button */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-btn:hover {
+    background: #ccc;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--main-blue);
+}
+
+.checkout-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #128C7E;
 }
 
 /* Contact */
@@ -171,6 +366,27 @@ body {
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
 }
+
+.image-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001; /* Above cart */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-popup img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: transform 0.3s;
+    cursor: zoom-in;
+}
 </style>
 </head>
 
@@ -196,412 +412,492 @@ body {
     <h2 data-i18n="ourProducts">Our Products</h2>
 
     <div class="agencies">
-
         <div class="card">
-            <img src="photo_39_2025-12-23_23-24-34.jpg">
+            <img src="photo_39_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w665">665g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1320">1,320 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_1', 1320, 'dishLemon', 'w665')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_41_2025-12-23_23-24-34.jpg">
+            <img src="photo_41_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishPine">Pine dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w665">665g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1320">1,320 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_2', 1320, 'dishPine', 'w665')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_36_2025-12-23_23-24-34.jpg">
+            <img src="photo_36_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLavender">Lavender dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w665">665g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1320">1,320 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_3', 1320, 'dishLavender', 'w665')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_13_2025-12-23_23-24-34.jpg">
+            <img src="photo_13_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishRefresh">Refreshing dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w665">665g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1320">1,320 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_4', 1320, 'dishRefresh', 'w665')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="">
+            <img src="" onclick="openImage(this.src)">
             <h3 data-i18n="dishJouri">Jouri dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w665">665g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p13200">1,320 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_5', 1320, 'dishJouri', 'w665')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_40_2025-12-23_23-24-34.jpg">
+            <img src="photo_40_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w1100">1100g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2400">2,400 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_6', 2400, 'dishLemon', 'w1100')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="">
+            <img src="" onclick="openImage(this.src)">
             <h3 data-i18n="dishPine">Pine dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w1100">1100g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2400">2,400 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_7', 2400, 'dishPine', 'w1100')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_37_2025-12-23_23-24-34.jpg">
+            <img src="photo_37_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLavender">Lavender dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w1100">1100g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2400">2,400 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_8', 2400, 'dishLavender', 'w1100')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="">
+            <img src="" onclick="openImage(this.src)">
             <h3 data-i18n="dishRefresh">Refreshing dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w1100">1100g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2400">2,400 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_9', 2400, 'dishRefresh', 'w1100')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="">
+            <img src="" onclick="openImage(this.src)">
             <h3 data-i18n="dishJouri">Jouri dishwashing liquid</h3>
             <p data-i18n="dishDesc">Goodbye gloves! Sparkling clean dishes and super soft skin.</p>
             <p data-i18n="w1100">1100g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2400">2,400 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_10', 2400, 'dishJouri', 'w1100')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_10_2025-12-23_23-24-34.jpg">
+            <img src="photo_10_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
             <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_11', 1750, 'vitolSoap', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_11_2025-12-23_23-24-34.jpg">
+            <img src="photo_11_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
             <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_12', 1750, 'vitolSoap', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_12_2025-12-23_23-24-34.jpg">
+            <img src="photo_12_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="vitolSoap">Vitol Foaming Liquid Hand Soap</h3>
             <p data-i18n="vitolDesc">Silky softness in every Vitol foam.. for hydrated, fresh skin</p>
             <p data-i18n="w400">400g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_13', 1750, 'vitolSoap', 'w400')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Picture122025.jpg">
+            <img src="Picture122025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistRose">Moisturizing rose liquid hand soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_14', 1335, 'moistRose', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture82025.jpg">
+            <img src="Picture82025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistJouri">Jouri Moisturizing Liquid Hand Soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_15', 1335, 'moistJouri', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture72025.jpg">
+            <img src="Picture72025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistPine">Moisturizing pine liquid hand soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_16', 1335, 'moistPine', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture92025.jpg">
+            <img src="Picture92025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistPome">Moisturizing pomegranate liquid hand soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_17', 1335, 'moistPome', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture102025.jpg">
+            <img src="Picture102025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistAvo">Moisturizing avocado liquid hand soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_18', 1335, 'moistAvo', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture112025.jpg">
+            <img src="Picture112025.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="moistRefresh">Refreshing moisturizing liquid hand soap</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_19', 1335, 'moistRefresh', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture62025.jpg">
-            <h3 data-i18n="moistRefresh">Liquid hand soap with a sea breeze scent</h3>
+            <img src="Picture62025.jpg" onclick="openImage(this.src)">
+            <h3 data-i18n="moistSea">Liquid hand soap with a sea breeze scent</h3>
             <p data-i18n="moistDesc">More than just a wash—a hydration boost in every drop</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_20', 1335, 'moistSea', 'w450')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_45_2025-12-23_23-24-34.jpg">
+            <img src="photo_45_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="soapPine">Pine hand soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_21', 3600, 'soapPine', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_44_2025-12-23_23-24-34.jpg">
+            <img src="photo_44_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="soapRefresh">Refreshing hand soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_22', 3600, 'soapRefresh', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_43_2025-12-23_23-24-34.jpg">
+            <img src="photo_43_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="soapPome">Pomegranate hand soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_23', 3600, 'soapPome', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_46_2025-12-23_23-24-34.jpg">
+            <img src="photo_46_2025-12-23_23-24-34.jpg"onclick="openImage(this.src)"> 
             <h3 data-i18n="soapSea">Sea Breeze Hand Soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_24', 3600, 'soapSea', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_48_2025-12-23_23-24-34.jpg">
+            <img src="photo_48_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="soapAvo">Avocado hand soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_25', 3600, 'soapAvo', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_47_2025-12-23_23-24-34.jpg">
+            <img src="photo_47_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="soapJouri">Jouri hand soap</h3>
             <p data-i18n="soapDesc">Wash away impurities, lock in the glow</p>
             <p data-i18n="w125">125g*6</p>
-            <p class="price" data-i18n="p4000">4,000 I.D</p>
+            <p class="price" data-i18n="p3600">3,600 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_26', 3600, 'soapJouri', 'w125')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_33_2025-12-23_23-24-34.jpg">
+            <img src="photo_33_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <p class="price" data-i18n="p3420">3,420 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_27', 3420, 'launColor', 'w1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_34_2025-12-23_23-24-34.jpg">
+            <img src="photo_34_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <p class="price" data-i18n="p3420">3,420 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_28', 3420, 'launColor', 'w1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Bufalo catalog final 28_08_2025-2.png">
+            <img src="Bufalo catalog final 28_08_2025-2.png" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <p class="price" data-i18n="p3420">3,420 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_29', 3420, 'launColor', 'w1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_35_2025-12-23_23-24-34.jpg">
+            <img src="photo_35_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launWhite">White clothes washing liquid</h3>
             <p data-i18n="launWhiteDesc">Bring back the original brilliance of your whites</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <p class="price" data-i18n="p3420">3,420 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_30', 3420, 'launWhite', 'w1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_32_2025-12-23_23-24-34.jpg">
+            <img src="photo_32_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launBlack">Black laundry liquid</h3>
             <p data-i18n="launBlackDesc">Black stays bold. Ultimate protection for your dark favorites</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <p class="price" data-i18n="p3420">3,420 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_31', 3420, 'launBlack', 'w1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_3_2025-12-23_23-24-34.jpg">
+            <img src="photo_3_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w3L">3L</p>
-            <p class="price" data-i18n="p10500">10,500 I.D</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_32', 9500, 'launColor', 'w3L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_4_2025-12-23_23-24-34.jpg">
+            <img src="photo_4_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w3L">3L</p>
-            <p class="price" data-i18n="p10500">10,500 I.D</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_33', 9500, 'launColor', 'w3L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_1_2025-12-23_23-24-34.jpg">
+            <img src="photo_1_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launColor">Colored laundry liquid</h3>
             <p data-i18n="launColorDesc">Let your colors speak for you. Keep them bright wash after wash</p>
             <p data-i18n="w3L">3L</p>
-            <p class="price" data-i18n="p10500">10,500 I.D</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_34', 9500, 'launColor', 'w3L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_5_2025-12-23_23-24-34.jpg">
+            <img src="photo_5_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launWhite">White clothes washing liquid</h3>
             <p data-i18n="launWhiteDesc">Bring back the original brilliance of your whites</p>
             <p data-i18n="w3L">3L</p>
-            <p class="price" data-i18n="p10500">10,500 I.D</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_35', 9500, 'launWhite', 'w3L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_2_2025-12-23_23-24-34.jpg">
+            <img src="photo_2_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="launBlack">Black laundry liquid</h3>
             <p data-i18n="launBlackDesc">Black stays bold. Ultimate protection for your dark favorites</p>
             <p data-i18n="w3L">3L</p>
-            <p class="price" data-i18n="p10500">10,500 I.D</p>
+            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_36', 9500, 'launBlack', 'w3L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_7_2025-12-23_23-24-34.jpg">
+            <img src="photo_7_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
             <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
             <p data-i18n="w2KG">2KG</p>
             <p class="price" data-i18n="p5500">5,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_37', 5500, 'powderColor', 'w2KG')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_8_2025-12-23_23-24-34.jpg">
+            <img src="photo_8_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
             <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
             <p data-i18n="w2KG">2KG</p>
             <p class="price" data-i18n="p5500">5,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_38', 5500, 'powderColor', 'w2KG')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Bufalo catalog final 28_08_2025-5.png">
+            <img src="Bufalo catalog final 28_08_2025-5.png" onclick="openImage(this.src)">
             <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
             <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
             <p data-i18n="w3_5KG">3.5KG+0.5free</p>
-            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <p class="price" data-i18n="p1100">11,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_39', 11000, 'powderColor', 'w3_5KG')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Bufalo catalog final 28_08_2025-3.png">
+            <img src="Bufalo catalog final 28_08_2025-3.png" onclick="openImage(this.src)">
             <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
             <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
             <p data-i18n="w3_5KG">3.5KG+0.5free</p>
-            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <p class="price" data-i18n="p11000">11,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_40', 11000, 'powderColor', 'w3_5KG')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Bufalo catalog final 28_08_2025-3.png">
+            <img src="Bufalo catalog final 28_08_2025-3.png" onclick="openImage(this.src)">
             <h3 data-i18n="powderColor">Colored automatic laundry detergent powder</h3>
             <p data-i18n="powderDesc">Vivid colors. Smart clean</p>
             <p data-i18n="w3_5KG">3.5KG+0.5free</p>
-            <p class="price" data-i18n="p9500">9,500 I.D</p>
+            <p class="price" data-i18n="p11000">11,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_41', 11000, 'powderColor', 'w3_5KG')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_30_2025-12-23_23-24-34.jpg">
+            <img src="photo_30_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="multiLavender">Lavender Multi-Purpose Cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w750L">750 ml</p>
             <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_42', 2000, 'multiLavender', 'w750L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_29_2025-12-23_23-24-34.jpg">
+            <img src="photo_29_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="multiPine">Pine all-purpose cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w750L">750 ml</p>
             <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_43', 2000, 'multiPine', 'w750L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_31_2025-12-23_23-24-34.jpg">
+            <img src="photo_31_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="multiRefresh">Refreshing multi-purpose cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w750L">750 ml</p>
             <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_44', 2000, 'multiRefresh', 'w750L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_28_2025-12-23_23-24-34.jpg">
+            <img src="photo_28_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="multiOrchid">Orchid Multi-Purpose Cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w750L">750 ml</p>
             <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_45', 2000, 'multiOrchid', 'w750L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         
         <div class="card">
-            <img src="4.png">
+            <img src="4.png" onclick="openImage(this.src)">
             <h3 data-i18n="multiLavender">Lavender Multi-Purpose Cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w1500L">1.5 L</p>
-            <p class="price" data-i18n="p3750">3,750 I.D</p>
+            <p class="price" data-i18n="p4100">4,100 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_46', 4100, 'multiLavender', 'w1500L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="5.png">
+            <img src="5.png" onclick="openImage(this.src)">
             <h3 data-i18n="multiWhite">White mercury multi-purpose cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w1500L">1.5 L</p>
-            <p class="price" data-i18n="p3750">3,750 I.D</p>
+            <p class="price" data-i18n="p4100">4,100 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_47', 4100, 'multiWhite', 'w1500L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
             <img src="6.png">
             <h3 data-i18n="multiJouri">Jouri Multi-Purpose Cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w1500L">1.5 L</p>
-            <p class="price" data-i18n="p3750">3,750 I.D</p>
+            <p class="price" data-i18n="p4100">4,100 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_48', 4100, 'multiJouri', 'w1500L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="منظف متعدد استعمالات.png">
+            <img src="منظف متعدد استعمالات.png" onclick="openImage(this.src)">
             <h3 data-i18n="multiOrchid">Orchid Multi-Purpose Cleaner</h3>
             <p data-i18n="multiDesc">Mighty cleaning power, from the kitchen to the living room</p>
             <p data-i18n="w1500L">1.5 L</p>
-            <p class="price" data-i18n="p3750">3,750 I.D</p>
+            <p class="price" data-i18n="p4100">4,100 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_49', 4100, 'multiOrchid', 'w1500L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_14_2025-12-23_23-24-34.jpg">
+            <img src="photo_14_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="greaseRemover">Grease remover</h3>
             <p data-i18n="greaseDesc">No more scrubbing! Spray, wipe, and watch the grease disappear</p>
             <p data-i18n="w750ML">750 ml</p>
-            <p class="price" data-i18n="p2250">2,250 I.D</p>
+            <p class="price" data-i18n="p1925">1,925 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_50', 1925, 'greaseRemover', 'w750ML')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_15_2025-12-23_23-24-34.jpg">
+            <img src="photo_15_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
             <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_51', 1335, 'creamClean', 'w750')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_16_2025-12-23_23-24-34.jpg">
+            <img src="photo_16_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
             <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_52', 1335, 'creamClean', 'w750')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_17_2025-12-23_23-24-34.jpg">
+            <img src="photo_17_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamClean">Cleanner Cream Exfoliating and Polishing</h3>
             <p data-i18n="creamCleanDesc">Brilliant shine, zero scratches. The secret is in the micro-polishing particles</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <p class="price" data-i18n="p1335">1,335 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_53', 1335, 'creamClean', 'w750')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         <div class="card">
-            <img src="photo_18_2025-12-23_23-24-34.jpg">
+            <img src="photo_18_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="glassPolish">Carbex Glass Polish</h3>
             <p data-i18n="glassDesc">More than a cleaner—a professional polish for a flawless finish</p>
             <p data-i18n="w750ML">750 ml</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1250">1,250 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_54', 1250, 'glassPolish', 'w750ML')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_6_2025-12-23_23-24-34.jpg">
+            <img src="photo_6_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="babyWipes">Baby wipes for sensitive bodies</h3>
             <p data-i18n="wipesDesc">Superior protection for sensitive skin. Say goodbye to irritation</p>
             <p data-i18n="w72pc">72pc</p>
-            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <p class="price" data-i18n="p1370">1,370 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_55', 1370, 'babyWipes', 'w72pc')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_19_2025-12-23_23-24-34.jpg">
+            <img src="photo_19_2025-12-23_23-24-34.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="shoePolish">Black shoe polish</h3>
             <p data-i18n="shoeDesc">Let your steps speak for you. A mirror-like shine in one touch</p>
-            <p></p>
-            <p class="price" data-i18n="p750">750 I.D</p>
+            <p data-i18n="w1pc">1 pc</p>
+            <p class="price" data-i18n="p475">475 I.D</p>
+            <button class="add-btn" onclick="addToCart('bufalo_56', 475, 'shoePolish', 'w1pc')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
+    </div>
+</div>
+
+<div class="cart-floating-btn" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3 data-i18n="cartTitle">Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="totalPrice">Total:</span>
+                <span id="cartTotalValue">0 I.D</span>
+            </div>
+            <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+                <span data-i18n="sendWhatsApp">Send Order via WhatsApp</span> 💬
+            </button>
+        </div>
     </div>
 </div>
 
@@ -632,7 +928,6 @@ body {
             brandSlogan: "German-standard cleaning products",
             ourProducts: "Our Products",
 
-            // Dishwashing
             dishLemon: "Lemon dishwashing liquid",
             dishPine: "Pine dishwashing liquid",
             dishLavender: "Lavender dishwashing liquid",
@@ -640,7 +935,6 @@ body {
             dishJouri: "Jouri dishwashing liquid",
             dishDesc: "Goodbye gloves! Sparkling clean dishes and super soft skin.",
 
-            // Hand Soaps (Liquid & Bar)
             vitolSoap: "Vitol Foaming Liquid Hand Soap",
             vitolDesc: "Silky softness in every Vitol foam.. for hydrated, fresh skin",
             moistRose: "Moisturizing rose liquid hand soap",
@@ -649,6 +943,7 @@ body {
             moistPome: "Moisturizing pomegranate liquid hand soap",
             moistAvo: "Moisturizing avocado liquid hand soap",
             moistRefresh: "Refreshing moisturizing liquid hand soap",
+            moistSea: "Liquid hand soap with a sea breeze scent",
             moistDesc: "More than just a wash—a hydration boost in every drop",
             
             soapPine: "Pine hand soap",
@@ -659,7 +954,6 @@ body {
             soapJouri: "Jouri hand soap",
             soapDesc: "Wash away impurities, lock in the glow",
 
-            // Laundry
             launColor: "Colored laundry liquid",
             launColorDesc: "Let your colors speak for you. Keep them bright wash after wash",
             launWhite: "White clothes washing liquid",
@@ -670,7 +964,6 @@ body {
             powderColor: "Colored automatic laundry detergent powder",
             powderDesc: "Vivid colors. Smart clean",
 
-            // Multi-Purpose & Special
             multiLavender: "Lavender Multi-Purpose Cleaner",
             multiPine: "Pine all-purpose cleaner",
             multiRefresh: "Refreshing multi-purpose cleaner",
@@ -692,49 +985,37 @@ body {
             shoePolish: "Black shoe polish",
             shoeDesc: "Let your steps speak for you. A mirror-like shine in one touch",
 
-            // Weights
-            w400: "400g",
-            w450: "450g",
-            w665: "665g",
-            w750: "750g",
-            w1100: "1100g",
-            w125: "125g * 6",
-            w1L: "1 L",
-            w3L: "3 L",
-            w2KG: "2 KG",
-            w3_5KG: "3.5 KG + 0.5 Free",
-            w750ML: "750 ml",
-            w750L: "750 ml",
-            w1500L: "1.5 L",
-            w72pc: "72 pcs",
+            w400: "400g", w450: "450g", w665: "665g", w750: "750g",
+            w1100: "1100g", w125: "125g * 6", w1L: "1 L", w3L: "3 L",
+            w2KG: "2 KG", w3_5KG: "3.5 KG + 0.5 Free", w750ML: "750 ml",
+            w750L: "750 ml", w1500L: "1.5 L", w72pc: "72 pcs", w1pc: "1 pc",
 
-            // Prices
-            p750: "750 I.D",
-            p1500: "1,500 I.D",
-            p1750: "1,750 I.D",
-            p2000: "2,000 I.D",
-            p2250: "2,250 I.D",
-            p2500: "2,500 I.D",
-            p3500: "3,500 I.D",
-            p3750: "3,750 I.D",
-            p4000: "4,000 I.D",
-            p5500: "5,500 I.D",
-            p9500: "9,500 I.D",
-            p10500: "10,500 I.D",
+            p1320: "1,320 I.D", p2400: "2,400 I.D", p1750: "1,750 I.D",
+            p2000: "2,000 I.D", p1335: "1,335 I.D", p5500: "5,500 I.D",
+            p3420: "3,420 I.D", p3600: "3,600 I.D", p4100: "4,100 I.D",
+            p9500: "9,500 I.D", p1250: "1,250 I.D", p11000: "11,000 I.D",
+            p1925: "1,925 I.D", p475: "475 I.D", p1370: "1,370 I.D",
 
-            // Footer / Nav
             contactUs: "Contact us",
             whatsapp: "💬 WhatsApp",
             email: "✉ Contact us",
             instagram: "📷 Instagram",
             facebook: "📘 Facebook",
             address: "📍 New Hawler, Directorate of Information Technology.",
-            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved",
+
+            addToCartBtn: "Add to Cart",
+            cartTitle: "Your Cart",
+            totalPrice: "Total:",
+            sendWhatsApp: "Send Order via WhatsApp",
+            emptyCart: "Your cart is empty.",
+            currency: "I.D",
+            orderGreeting: "Hello, I would like to order:"
         },
         ar: {
             backBtn: "⬅ العودة للرئيسية",
             brandTitle: "بوفالو",
-            brandSlogan: "منتجات تنظيف بمعايير ألمانية",
+            brandSlogan: "منتجات تنظيف بمواصفات ألمانية",
             ourProducts: "منتجاتنا",
 
             dishLemon: "سائل غسيل الصحون بالليمون",
@@ -742,84 +1023,68 @@ body {
             dishLavender: "سائل غسيل الصحون باللافندر",
             dishRefresh: "سائل غسيل الصحون المنعش",
             dishJouri: "سائل غسيل الصحون بالجوري",
-            dishDesc: "وداعاً للقفازات! أطباق نظيفة لامعة وبشرة فائقة النعومة.",
+            dishDesc: "وداعاً للقفازات! أطباق نظيفة ولامعة وبشرة فائقة النعومة.",
 
-            vitolSoap: "صابون سائل رغوي لليدين فيتول",
-            vitolDesc: "نعومة حريرية في كل رغوة من فيتول.. لبشرة رطبة ومنعشة.",
-            moistRose: "صابون سائل مرطب لليدين بالورد",
-            moistJouri: "صابون سائل مرطب لليدين بالجوري",
-            moistPine: "صابون سائل مرطب لليدين بالصنوبر",
-            moistPome: "صابون سائل مرطب لليدين بالرمان",
-            moistAvo: "صابون سائل مرطب لليدين بالأفوكادو",
-            moistRefresh: "صابون سائل مرطب ومنعش لليدين",
-            moistDesc: "أكثر من مجرد غسيل—دفعة ترطيب في كل قطرة.",
+            vitolSoap: "صابون يدين سائل رغوي فيتول",
+            vitolDesc: "نعومة حريرية في كل رغوة.. لبشرة رطبة ومنعشة",
+            moistRose: "صابون يدين سائل مرطب بالورد",
+            moistJouri: "صابون يدين سائل مرطب بالجوري",
+            moistPine: "صابون يدين سائل مرطب بالصنوبر",
+            moistPome: "صابون يدين سائل مرطب بالرمان",
+            moistAvo: "صابون يدين سائل مرطب بالأفوكادو",
+            moistRefresh: "صابون يدين سائل مرطب منعش",
+            moistSea: "صابون يدين سائل برائحة نسيم البحر",
+            moistDesc: "أكثر من مجرد غسيل—ترطيب عميق في كل قطرة",
             
-            soapPine: "صابون صلب لليدين بالصنوبر",
-            soapRefresh: "صابون صلب لليدين منعش",
-            soapPome: "صابون صلب لليدين بالرمان",
-            soapSea: "صابون صلب لليدين بنسيم البحر",
-            soapAvo: "صابون صلب لليدين بالأفوكادو",
-            soapJouri: "صابون صلب لليدين بالجوري",
-            soapDesc: "اغسل الشوائب، واحتفظ بإشراقة ونعومة بشرتك.",
+            soapPine: "صابون يدين بالصنوبر",
+            soapRefresh: "صابون يدين منعش",
+            soapPome: "صابون يدين بالرمان",
+            soapSea: "صابون يدين بنسيم البحر",
+            soapAvo: "صابون يدين بالأفوكادو",
+            soapJouri: "صابون يدين بالجوري",
+            soapDesc: "اغسل الشوائب، واحتفظ بالنضارة",
 
             launColor: "سائل غسيل الملابس الملونة",
-            launColorDesc: "دع ألوانك تتحدث عنك. حافظ عليها زاهية غسلة بعد غسلة.",
+            launColorDesc: "دع ألوانك تتحدث عنك. حافظ عليها زاهية غسلة بعد غسلة",
             launWhite: "سائل غسيل الملابس البيضاء",
-            launWhiteDesc: "أعد اللمعان والبريق الأصلي لملابسك البيضاء.",
+            launWhiteDesc: "أعد البريق الأصلي لملابسك البيضاء",
             launBlack: "سائل غسيل الملابس السوداء",
-            launBlackDesc: "الأسود يبقى جريئاً. حماية قصوى لمفضلاتك الداكنة.",
+            launBlackDesc: "الأسود يبقى جريئاً. حماية قصوى لمفضلاتك الداكنة",
             
             powderColor: "مسحوق غسيل أوتوماتيك للملابس الملونة",
-            powderDesc: "ألوان زاهية. تنظيف ذكي وفعال.",
+            powderDesc: "ألوان زاهية. تنظيف ذكي",
 
             multiLavender: "منظف متعدد الاستعمالات باللافندر",
             multiPine: "منظف متعدد الاستعمالات بالصنوبر",
             multiRefresh: "منظف متعدد الاستعمالات منعش",
             multiOrchid: "منظف متعدد الاستعمالات بالأوركيد",
-            multiWhite: "منظف متعدد الاستعمالات زئبق أبيض",
+            multiWhite: "منظف متعدد الاستعمالات بالزئبق الأبيض",
             multiJouri: "منظف متعدد الاستعمالات بالجوري",
-            multiDesc: "قوة تنظيف هائلة، من المطبخ إلى غرفة المعيشة.",
+            multiDesc: "قوة تنظيف هائلة، من المطبخ إلى غرفة المعيشة",
 
             greaseRemover: "مزيل الدهون",
-            greaseDesc: "لا مزيد من الفرك! رش، امسح، وشاهد الدهون تختفي.",
+            greaseDesc: "لا مزيد من الفرك! رش، امسح، وشاهد الدهون تختفي",
             creamClean: "كريم منظف مقشر وملمع",
-            creamCleanDesc: "لمعان رائع، بدون خدوش. السر في جزيئات التلميع الدقيقة.",
-            glassPolish: "ملمع زجاج كاربكس",
-            glassDesc: "أكثر من مجرد منظف—ملمع احترافي لنتيجة خالية من العيوب.",
+            creamCleanDesc: "لمعان رائع، بدون خدوش. السر في جزيئات التلميع الدقيقة",
+            glassPolish: "ملمع زجاج كاربيكس",
+            glassDesc: "أكثر من مجرد منظف—تلميع احترافي لنتيجة خالية من العيوب",
 
-            babyWipes: "مناديل مبللة للأطفال والأجسام الحساسة",
-            wipesDesc: "حماية فائقة للبشرة الحساسة. قل وداعاً للتهيج.",
+            babyWipes: "مناديل مبللة للأطفال للبشرة الحساسة",
+            wipesDesc: "حماية فائقة للبشرة الحساسة. وداعاً للتهيج",
 
             shoePolish: "ملمع أحذية أسود",
-            shoeDesc: "دع خطواتك تتحدث عنك. لمعان كالمرآة بلمسة واحدة.",
+            shoeDesc: "دع خطواتك تتحدث عنك. لمعان كالمرآة بلمسة واحدة",
 
-            w400: "400 غرام",
-            w450: "450 غرام",
-            w665: "665 غرام",
-            w750: "750 غرام",
-            w1100: "1100 غرام",
-            w125: "125 غرام * 6",
-            w1L: "1 لتر",
-            w3L: "3 لتر",
-            w2KG: "2 كغم",
-            w3_5KG: "3.5 كغم + 0.5 مجاناً",
-            w750ML: "750 مل",
-            w750L: "750 مل",
-            w1500L: "1.5 لتر",
-            w72pc: "72 قطعة",
+            w400: "400 غرام", w450: "450 غرام", w665: "665 غرام", w750: "750 غرام",
+            w1100: "1100 غرام", w125: "125 غرام * 6", w1L: "1 لتر", w3L: "3 لتر",
+            w2KG: "2 كيلو", w3_5KG: "3.5 كيلو + 0.5 مجاناً", w750ML: "750 مل",
+            w750L: "750 مل", w1500L: "1.5 لتر", w72pc: "72 قطعة", w1pc: "علبة واحدة",
 
-            p750: "750 دينار عراقي",
-            p1500: "1,500 دينار عراقي",
-            p1750: "1,750 دينار عراقي",
-            p2000: "2,000 دينار عراقي",
-            p2250: "2,250 دينار عراقي",
-            p2500: "2,500 دينار عراقي",
-            p3500: "3,500 دينار عراقي",
-            p3750: "3,750 دينار عراقي",
-            p4000: "4,000 دينار عراقي",
-            p5500: "5,500 دينار عراقي",
-            p9500: "9,500 دينار عراقي",
-            p10500: "10,500 دينار عراقي",
+             p1320: "1,320 دينار عراقي", p2400: "2,400 دينار عراقي", p1750: "1,750 دينار عراقي",
+            p2000: "2,000 دينار عراقي", p1335: "1,335 دينار عراقي", p5500: "5,500 دينار عراقي",
+            p3420: "3,420 دينار عراقي", p3600: "3,600 دينار عراقي", p4100: "4,100 دينار عراقي",
+            p9500: "9,500 دينار عراقي", p1250: "1,250 دينار عراقي", p11000: "11,000 دينار عراقي",
+            p1925: "1,925 دينار عراقي", p475: "475 دينار عراقي", p1370: "1,370 دينار عراقي",
 
             contactUs: "تواصل معنا",
             whatsapp: "💬 واتساب",
@@ -827,97 +1092,89 @@ body {
             instagram: "📷 إنستغرام",
             facebook: "📘 فيسبوك",
             address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
-            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
+
+            addToCartBtn: "أضف إلى السلة",
+            cartTitle: "سلة المشتريات",
+            totalPrice: "الإجمالي:",
+            sendWhatsApp: "إرسال الطلب عبر واتساب",
+            emptyCart: "السلة فارغة حالياً.",
+            currency: "دينار",
+            orderGreeting: "مرحباً، أود طلب المنتجات التالية:"
         },
         ku: {
             backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
-            brandTitle: "بوفالۆ",
-            brandSlogan: "بەرهەمەکانی پاککردنەوە بە پێوەری ئەڵمانی",
+            brandTitle: "بۆفالۆ",
+            brandSlogan: "بەرهەمەکانی پاککردنەوە بە ستانداردی ئەڵمانی",
             ourProducts: "بەرهەمەکانمان",
 
-            dishLemon: "شلەی قاپ شتنی لیمۆ",
-            dishPine: "شلەی قاپ شتنی سنەوبەر",
-            dishLavender: "شلەی قاپ شتنی لاڤێندەر",
-            dishRefresh: "شلەی قاپ شتنی تازەگەری",
-            dishJouri: "شلەی قاپ شتنی گوڵی جوری",
-            dishDesc: "ماڵئاوا لە دەستکێش! قاپی خاوێن و بریقەدار و پێستی زۆر نەرم.",
+            dishLemon: "شلەی قاپ شۆردنی لیمۆ",
+            dishPine: "شلەی قاپ شۆردنی سنەوبەر",
+            dishLavender: "شلەی قاپ شۆردنی لاڤێندەر",
+            dishRefresh: "شلەی قاپ شۆردنی فرێش",
+            dishJouri: "شلەی قاپ شۆردنی گوڵی جۆری",
+            dishDesc: "ماڵئاوایی لە دەستکێش بکە! قاپی پاک و بریقەدار و پێستی نەرم.",
 
-            vitolSoap: "سابوونی شلی کەفاوی دەست ڤیتۆل",
-            vitolDesc: "نەرمی ئاوریشمی لە هەر کەفێکی ڤیتۆلدا.. بۆ پێستێکی شێدار و تازە.",
-            moistRose: "سابوونی شلی شێدارکەرەوەی دەست بە گوڵەباخ",
-            moistJouri: "سابوونی شلی شێدارکەرەوەی دەست بە جوری",
-            moistPine: "سابوونی شلی شێدارکەرەوەی دەست بە سنەوبەر",
-            moistPome: "سابوونی شلی شێدارکەرەوەی دەست بە هەنار",
-            moistAvo: "سابوونی شلی شێدارکەرەوەی دەست بە ئەڤۆکادۆ",
-            moistRefresh: "سابوونی شلی شێدارکەرەوەی دەست بە تازەگەری",
-            moistDesc: "زیاتر لە تەنها شتنێک—بەهێزکەری شێداری لە هەر دڵۆپێکدا.",
+            vitolSoap: "سابوونی شلەی کەفاوی ڤیتۆل بۆ دەست",
+            vitolDesc: "نەرمی ئاوریشمی لە هەموو کەفێکی ڤیتۆل.. بۆ پێستێکی شێدار و فرێش",
+            moistRose: "سابوونی شلەی شێدارکەرەوەی گوڵ",
+            moistJouri: "سابوونی شلەی شێدارکەرەوەی جۆری",
+            moistPine: "سابوونی شلەی شێدارکەرەوەی سنەوبەر",
+            moistPome: "سابوونی شلەی شێدارکەرەوەی هەنار",
+            moistAvo: "سابوونی شلەی شێدارکەرەوەی ئەڤۆکادۆ",
+            moistRefresh: "سابوونی شلەی شێدارکەرەوەی فرێش",
+            moistSea: "سابوونی شلەی دەست بە بۆنی شنەی دەریا",
+            moistDesc: "زیاترە لە تەنها شوشتن—شێدارکردنەوە لە هەموو دڵۆپێکدا",
             
-            soapPine: "سابوونی دەست بە سنەوبەر",
-            soapRefresh: "سابوونی دەست بۆ تازەگەری",
-            soapPome: "سابوونی دەست بە هەنار",
-            soapSea: "سابوونی دەست بە شنەبای دەریا",
-            soapAvo: "سابوونی دەست بە ئەڤۆکادۆ",
-            soapJouri: "سابوونی دەست بە گوڵی جوری",
-            soapDesc: "پیسییەکان بشۆ، و درەوشاوەیی پێستت بهێڵەرەوە.",
+            soapPine: "سابوونی دەستی سنەوبەر",
+            soapRefresh: "سابوونی دەستی فرێش",
+            soapPome: "سابوونی دەستی هەنار",
+            soapSea: "سابوونی دەستی شنەی دەریا",
+            soapAvo: "سابوونی دەستی ئەڤۆکادۆ",
+            soapJouri: "سابوونی دەستی گوڵی جۆری",
+            soapDesc: "پیسییەکان بشۆ، گەشانەوە بپارێزە",
 
-            launColor: "شلەی شتنی جلی ڕەنگاوڕەنگ",
-            launColorDesc: "با ڕەنگەکانت قسەت بۆ بکەن. بە گەشی بیانپارێزە لە دوای هەر شتنێک.",
-            launWhite: "شلەی شتنی جلی سپی",
-            launWhiteDesc: "درەوشاوەیی ڕەسەن بۆ جلە سپییەکانت بگەڕێنەوە.",
-            launBlack: "شلەی شتنی جلی ڕەش",
-            launBlackDesc: "ڕەشی تۆخ دەمێنێتەوە. پاراستنی تەواو بۆ جلە تاریکە دڵخوازەکانت.",
+            launColor: "شلەی شوشتنی جلی ڕەنگاوڕەنگ",
+            launColorDesc: "با ڕەنگەکانت گوزارشتت لێبکەن. بە گەشی بیانپارێزە",
+            launWhite: "شلەی شوشتنی جلی سپی",
+            launWhiteDesc: "بریقەی ڕەسەنی جلە سپییەکانت بگەڕێنەوە",
+            launBlack: "شلەی شوشتنی جلی ڕەش",
+            launBlackDesc: "ڕەش بە تۆخی دەمێنێتەوە. پاراستنی تەواو بۆ جلە تاریکەکانت",
             
-            powderColor: "تۆزی شتنی ئۆتۆماتیکی بۆ جلی ڕەنگاوڕەنگ",
-            powderDesc: "ڕەنگی گەش. پاککردنەوەی زیرەک و کاریگەر.",
+            powderColor: "تۆزی جل شۆردنی ئۆتۆماتیکی بۆ جلی ڕەنگاوڕەنگ",
+            powderDesc: "ڕەنگی گەش. پاککردنەوەی زیرەک",
 
-            multiLavender: "پاککەرەوەی فرە مەبەستی لاڤێندەر",
-            multiPine: "پاککەرەوەی فرە مەبەستی سنەوبەر",
-            multiRefresh: "پاککەرەوەی فرە مەبەستی تازەگەری",
-            multiOrchid: "پاککەرەوەی فرە مەبەستی ئۆرکید",
-            multiWhite: "پاککەرەوەی فرە مەبەستی جیوەی سپی",
-            multiJouri: "پاککەرەوەی فرە مەبەستی جوری",
-            multiDesc: "هێزی پاککردنەوەی مەزن، لە چێشتخانەوە تا ژووری دانیشتن.",
+            multiLavender: "پاککەرەوەی هەمەچەشنی لاڤێندەر",
+            multiPine: "پاککەرەوەی هەمەچەشنی سنەوبەر",
+            multiRefresh: "پاککەرەوەی هەمەچەشنی فرێش",
+            multiOrchid: "پاککەرەوەی هەمەچەشنی ئۆرکید",
+            multiWhite: "پاککەرەوەی هەمەچەشنی جیوەی سپی",
+            multiJouri: "پاککەرەوەی هەمەچەشنی گوڵی جۆری",
+            multiDesc: "هێزی پاککردنەوەی مەزن، لە چێشتخانەوە بۆ ژووری دانیشتن",
 
             greaseRemover: "لابەری چەوری",
-            greaseDesc: "فرککردن نەما! بڕشێنە، بسڕە، و ببینە چەورییەکان دیار نامێنن.",
-            creamClean: "کرێمی پاککەرەوەی توێکڵکەر و بریقەدەر",
-            creamCleanDesc: "درەوشاوەیی نایاب، بێ ڕووشان. نهێنییەکە لە گەردیلە وردەکانی تلمیعکردندایە.",
-            glassPolish: "بریقەدەری شووشەی کاربێکس",
-            glassDesc: "زیاتر لە پاککەرەوەیەک—بریقەدەرێکی پیشەگەر بۆ ئەنجامێکی بێ کەموکوڕی.",
+            greaseDesc: "پێویست بە لێخستن ناکات! بپرژێنە، بسڕە، و نەماني چەورییەکە ببینە",
+            creamClean: "کرێمی پاککەرەوەی بریقەدارکەر",
+            creamCleanDesc: "بریقەی نایاب، بێ ڕوشان. نهێنییەکە لە تەنۆلکە بچووکەکاندایە",
+            glassPolish: "بریقەدارکەرەوەی شوشەی کاربێکس",
+            glassDesc: "زیاتر لە پاککەرەوەیەک—بریقەدارکەرێکی پڕۆفیشناڵ",
 
-            babyWipes: "کلینسی تەڕ بۆ منداڵ و پێستی هەستیار",
-            wipesDesc: "پاراستنی باڵا بۆ پێستی هەستیار. ماڵئاوا لە خورانی پێست بکە.",
+            babyWipes: "کلێنسی تەڕی منداڵان بۆ پێستی هەستیار",
+            wipesDesc: "پاراستنی باڵا بۆ پێستی هەستیار. ماڵئاوایی لە هەستیاری بکە",
 
-            shoePolish: "بۆیەی پێڵاوی ڕەش",
-            shoeDesc: "با هەنگاوەکانت قسەت بۆ بکەن. درەوشاوەیی وەک ئاوێنە بە یەک دەست لێدان.",
+            shoePolish: "بۆیاخی پێڵاوی ڕەش",
+            shoeDesc: "با هەنگاوەکانت گوزارشتت لێبکەن. بریقەیەک وەک ئاوێنە",
 
-            w400: "400 گرام",
-            w450: "450 گرام",
-            w665: "665 گرام",
-            w750: "750 گرام",
-            w1100: "1100 گرام",
-            w125: "125 گرام * 6",
-            w1L: "1 لیتر",
-            w3L: "3 لیتر",
-            w2KG: "2 کیلۆگرام",
-            w3_5KG: "3.5 کیلۆ + 0.5 بەخۆڕایی",
-            w750ML: "750 مل",
-            w750L: "750 مل",
-            w1500L: "1.5 لیتر",
-            w72pc: "72 دانە",
+            w400: "400 گرام", w450: "450 گرام", w665: "665 گرام", w750: "750 گرام",
+            w1100: "1100 گرام", w125: "125 گرام * 6", w1L: "1 لیتر", w3L: "3 لیتر",
+            w2KG: "2 کيلۆ", w3_5KG: "3.5 کيلۆ + 0.5 بەخۆڕایی", w750ML: "750 مل",
+            w750L: "750 مل", w1500L: "1.5 لیتر", w72pc: "72 پارچە", w1pc: "1 پارچە",
 
-            p750: "750 دیناری عێراقی",
-            p1500: "1,500 دیناری عێراقی",
-            p1750: "1,750 دیناری عێراقی",
-            p2000: "2,000 دیناری عێراقی",
-            p2250: "2,250 دیناری عێراقی",
-            p2500: "2,500 دیناری عێراقی",
-            p3500: "3,500 دیناری عێراقی",
-            p3750: "3,750 دیناری عێراقی",
-            p4000: "4,000 دیناری عێراقی",
-            p5500: "5,500 دیناری عێراقی",
-            p9500: "9,500 دیناری عێراقی",
-            p10500: "10,500 دیناری عێراقی",
+            p1320: "1,320 دیناری عێراقی", p2400: "2,400 دیناری عێراقی", p1750: "1,750 دیناری عێراقی",
+            p2000: "2,000 دیناری عێراقی", p1335: "1,335 دیناری عێراقی", p5500: "5,500 دیناری عێراقی",
+            p3420: "3,420 دیناری عێراقی", p3600: "3,600 دیناری عێراقی", p4100: "4,100 دیناری عێراقی",
+            p9500: "9,500 دیناری عێراقی", p1250: "1,250 دیناری عێراقی", p11000: "11,000 دیناری عێراقی",
+            p1925: "1,925 دیناری عێراقی", p475: "475 دیناری عێراقی", p1370: "1,370 دیناری عێراقی",
 
             contactUs: "پەیوەندیمان پێوە بکە",
             whatsapp: "💬 وەتسئاپ",
@@ -925,21 +1182,31 @@ body {
             instagram: "📷 ئینستاگرام",
             facebook: "📘 فەیسبووک",
             address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
-            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
+
+            addToCartBtn: "زیادکردن بۆ سەبەتە",
+            cartTitle: "سەبەتەکەت",
+            totalPrice: "کۆی گشتی:",
+            sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ",
+            emptyCart: "سەبەتەکەت بەتاڵە.",
+            currency: "دینار",
+            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:"
         }
     };
 
+    let currentLanguage = localStorage.getItem('siteLang') || 'en';
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
     function setLanguage(lang) {
-        // Change text based on dictionary
+        currentLanguage = lang;
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if(translations[lang] && translations[lang][key]) {
+            if(translations[lang][key]) {
                 el.innerHTML = translations[lang][key];
             }
         });
 
-        // Change Direction
         if (lang === 'ar' || lang === 'ku') {
             document.documentElement.setAttribute('dir', 'rtl');
             document.documentElement.setAttribute('lang', lang);
@@ -948,14 +1215,190 @@ body {
             document.documentElement.setAttribute('lang', 'en');
         }
 
-        // Save Language choice
         localStorage.setItem('siteLang', lang);
+        updateCartUI();
     }
 
-    // Read language choice from memory
-    const savedLang = localStorage.getItem('siteLang') || 'en';
-    setLanguage(savedLang);
+    // --- Cart Logic ---
+    function addToCart(id, price, nameKey, weightKey) {
+        // البحث عن الزر الذي تم الضغط عليه لسحب الصورة من نفس الكارت
+        let btn = document.querySelector(`button[onclick*="'${id}'"]`);
+        let imageUrl = "";
+        
+        if (btn) {
+            let card = btn.closest('.card');
+            if (card) {
+                let imgElement = card.querySelector('img');
+                if (imgElement) imageUrl = imgElement.src;
+            }
+        }
+
+        let existingItem = cart.find(item => item.id === id);
+        if(existingItem) {
+            existingItem.qty += 1;
+        } else {
+            // إضافة الصورة إلى السلة
+            cart.push({ id, price, nameKey, weightKey, qty: 1, image: imageUrl });
+        }
+        
+        saveCart();
+        updateCartUI();
+        
+       // حركة الزر الذكية (بدون رسالة مزعجة)
+        if (btn) {
+            let originalText = btn.innerText; // نحفظ نص الزر الأصلي
+            btn.innerText = '✓'; // نغير النص لعلامة صح
+            btn.style.backgroundColor = '#25D366'; // نغير لون الزر للأخضر
+            btn.style.color = 'white';
+            
+            // نرجع الزر لحالته الطبيعية بعد ثانية واحدة (1000 ملي ثانية)
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = ''; 
+            }, 1000);
+        }
+    
+    }
+    function changeQty(id, delta) {
+        let item = cart.find(item => item.id === id);
+        if(item) {
+            item.qty += delta;
+            if(item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalValue = document.getElementById('cartTotalValue');
+        
+        let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCountEl.innerText = totalItems;
+
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
+        } else {
+            cart.forEach(item => {
+                let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+                let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+                let itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+                // سحب الصورة أو تركها فارغة لتجنب الأخطاء
+                let imgSrc = item.image ? item.image : ''; 
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${imgSrc}" alt="${name}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 5px; margin-inline-end: 10px; background: white; border: 1px solid #ddd;">
+                        
+                        <div class="cart-item-info" style="flex-grow: 1;">
+                            <h4>${name} (${weight})</h4>
+                            <p>${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendOrderToWhatsApp() {
+        if(cart.length === 0) {
+            alert(translations[currentLanguage]['emptyCart']);
+            return;
+        }
+
+        let message = translations[currentLanguage]['orderGreeting'] + "\n\n";
+        let total = 0;
+
+        cart.forEach(item => {
+            let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+            let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            message += `▪️ ${item.qty}x ${name} (${weight}) - ${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}\n`;
+        });
+
+        message += `\n*${translations[currentLanguage]['totalPrice']} ${total.toLocaleString()} ${translations[currentLanguage]['currency']}*`;
+
+        const waNumber = "9647511224225";
+        const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(url, '_blank');
+    }
+
+    setLanguage(currentLanguage);
+
 </script>
+
+<script>
+let zoom = 1;
+
+function openImage(src){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+
+    popup.style.display = "flex";
+    img.src = src;
+    zoom = 1;
+    img.style.transform = "scale(1)";
+
+    img.addEventListener("wheel", zoomImage, { passive: false });
+}
+
+function closeImage(){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+    
+    popup.style.display = "none";
+    img.removeEventListener("wheel", zoomImage);
+}
+
+function zoomImage(e){
+    e.preventDefault();
+    if(e.deltaY < 0){
+        zoom += 0.2;
+    }else{
+        zoom -= 0.2;
+    }
+
+    if(zoom < 1) zoom = 1;
+    if(zoom > 3) zoom = 3;
+
+    const img = document.getElementById("popupImg");
+    img.style.transform = "scale(" + zoom + ")";
+}
+</script>
+
+<div class="image-popup" id="imagePopup" onclick="closeImage()">
+    <img id="popupImg">
+</div>
 
 </body>
 </html>
