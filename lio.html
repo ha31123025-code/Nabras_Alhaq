@@ -19,19 +19,41 @@ body {
     transition: direction 0.3s ease;
 }
 
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
 /* Back Button */
 .back-nav {
-    padding: 15px 20px;
+    padding: 10px 20px;
     background: #e8edf2;
 }
 .back-btn {
     text-decoration: none;
-    background: var(--main-blue);
+    background: var(--main-red);
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
     font-weight: bold;
     transition: 0.3s;
+    display: inline-block;
 }
 .back-btn:hover {
     background: var(--main-orange);
@@ -78,6 +100,8 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
     animation: fadeUp 1s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -90,22 +114,216 @@ body {
     height: 160px;
     object-fit: contain;
     background: white;
+    cursor: zoom-in;
 }
 
 .card h3 {
     color: var(--main-blue);
+    margin-bottom: 5px;
 }
 
 .card p {
     font-size: 14px;
     color: #555;
     margin: 8px 0;
+    flex-grow: 1;
 }
 
 .card p.price {
     font-weight: bold;
     color: var(--main-red);
     font-size: 16px;
+}
+
+/* Add to Cart Button */
+.add-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Floating Cart Button */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-btn:hover {
+    background: #ccc;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--main-blue);
+}
+
+.checkout-btn {
+    background: #25D366; /* WhatsApp Green */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #128C7E;
 }
 
 /* Contact */
@@ -147,31 +365,33 @@ body {
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
 }
-/* Language Switcher Styles */
-.lang-switcher {
-    text-align: center;
-    padding: 10px;
-    background: #e8edf2;
+
+.image-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
-.lang-btn {
-    background: var(--main-blue);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    margin: 0 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.lang-btn:hover {
-    background: var(--main-orange);
+
+.image-popup img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: transform 0.3s;
+    cursor: zoom-in;
 }
 </style>
 </head>
 
 <body>
-    <div class="lang-switcher">
+
+<div class="lang-switcher">
     <button class="lang-btn" onclick="setLanguage('en')">English</button>
     <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
     <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
@@ -193,101 +413,138 @@ body {
     <div class="agencies">
 
         <div class="card">
-            <img src="معجون طماطة.jpg" alt="Tomato Paste">
+            <img src="معجون طماطة.jpg" alt="Tomato Paste" onclick="openImage(this.src)">
             <h3 data-i18n="tomatoTitle">Tomato paste</h3>
             <p data-i18n="tomatoDesc">Stronger color… better taste… more amazing result.</p>
             <p data-i18n="tomatoWeight">710g + 12% free</p>
-            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <p class="price" data-i18n="price2850">2,850 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p1', 2850, 'tomatoTitle', 'tomatoWeight')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Sweet Crushed Pepper 635 .png" alt="Sweet Crushed Pepper">
+            <img src="Sweet Crushed Pepper 635 .png" alt="Sweet Crushed Pepper" onclick="openImage(this.src)">
             <h3 data-i18n="sweetPepperTitle">Sweet Crushed Pepper</h3>
             <p data-i18n="sweetPepperDesc">Beautiful color. more delicious taste.</p>
             <p data-i18n="weight635">635g</p>
-            <p class="price" data-i18n="price3250">3,250 I.D</p>
+            <p class="price" data-i18n="price2900">2,900 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p2', 2900, 'sweetPepperTitle', 'weight635')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Crushed Red Hot Pepper 635g.jpg" alt="Crushed Red Hot Pepper">
+            <img src="Crushed Red Hot Pepper 635g.jpg" alt="Crushed Red Hot Pepper" onclick="openImage(this.src)">
             <h3 data-i18n="hotPepperTitle">Crushed Red Hot Pepper</h3>
             <p data-i18n="hotPepperDesc">Concentrated flavor and spicy power elevate every meal to a professional level.</p>
             <p data-i18n="weight635">635g</p>
-            <p class="price" data-i18n="price3500">3,500 I.D</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p3', 3000, 'hotPepperTitle', 'weight635')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Mullberry Jam 400g.png" alt="Mulberry Jam">
+            <img src="Mullberry Jam 400g.png" alt="Mulberry Jam" onclick="openImage(this.src)">
             <h3 data-i18n="jamTitle">Mulberry Jam</h3>
             <p data-i18n="jamDesc">Natural sweetness… rich color and flavor.</p>
             <p data-i18n="weight430">430g</p>
-            <p class="price" data-i18n="price3250">3,250 I.D</p>
+            <p class="price" data-i18n="price2800">2,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p4', 2800, 'jamTitle', 'weight430')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="sweet corn 645g.jpg" alt="Sweet Corn">
+            <img src="sweet corn 645g.jpg" alt="Sweet Corn" onclick="openImage(this.src)">
             <h3 data-i18n="cornTitle">Sweet Corn</h3>
             <p data-i18n="cornDesc">Each bean is full of natural taste and sweet flavor.</p>
             <p data-i18n="weight645">645g</p>
-            <p class="price" data-i18n="price2500">2,500 I.D</p>
+            <p class="price" data-i18n="price2300">2,300 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p5', 2300, 'cornTitle', 'weight645')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="`vm3;dg,.jpg" alt="Sweet Corn 3kg">
+            <img src="`vm3;dg,.jpg" alt="Sweet Corn 3kg" onclick="openImage(this.src)">
             <h3 data-i18n="cornTitle">Sweet Corn</h3>
             <p data-i18n="cornDesc">Each bean is full of natural taste and sweet flavor.</p>
             <p data-i18n="weight3kg">3kg</p>
-            <p class="price" data-i18n="price7500">7,500 I.D</p>
+            <p class="price" data-i18n="price7000">7,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p6', 7000, 'cornTitle', 'weight3kg')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="pomegranate – 525 g.jpeg.jpg" alt="Pomegranate Molasses">
+            <img src="pomegranate – 525 g.jpeg.jpg" alt="Pomegranate Molasses" onclick="openImage(this.src)">
             <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
             <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
             <p data-i18n="weight525">525g</p>
-            <p class="price" data-i18n="price3750">3,750 I.D</p>
+            <p class="price" data-i18n="price3450">3,450 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p7', 3450, 'molassesTitle', 'weight525')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Pomegranate Molasses 710g.png" alt="Pomegranate Molasses">
+            <img src="Pomegranate Molasses 710g.png" alt="Pomegranate Molasses" onclick="openImage(this.src)">
             <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
             <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
             <p data-i18n="weight710">710g</p>
-            <p class="price" data-i18n="price4750">4,750 I.D</p>
+            <p class="price" data-i18n="price4250">4,250 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p8', 4250, 'molassesTitle', 'weight710')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Pomegranate Molasses725 (2).png" alt="Pomegranate Molasses">
+            <img src="Pomegranate Molasses725 (2).png" alt="Pomegranate Molasses" onclick="openImage(this.src)">
             <h3 data-i18n="molassesTitle">Pomegranate Molasses</h3>
             <p data-i18n="molassesDesc">Authentic taste and rich texture that whets the appetite.</p>
             <p data-i18n="weight725">725g</p>
-            <p class="price" data-i18n="price5750">5,750 I.D</p>
+            <p class="price" data-i18n="price5280">5,280 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p9', 5280, 'molassesTitle', 'weight725')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Ground Coffee without cardamom 200g.png" alt="Ground Coffee without cardamom">
+            <img src="Ground Coffee without cardamom 200g.png" alt="Ground Coffee without cardamom" onclick="openImage(this.src)">
             <h3 data-i18n="coffeeNoCardamom">Ground Coffee without cardamom</h3>
             <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
             <p data-i18n="weight200">200g</p>
-            <p class="price" data-i18n="price5000">5,000 I.D</p>
+            <p class="price" data-i18n="price4500">4,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p10', 4500, 'coffeeNoCardamom', 'weight200')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Ground Coffee with cardamom 200g.png" alt="Ground Coffee with cardamom">
+            <img src="Ground Coffee with cardamom 200g.png" alt="Ground Coffee with cardamom" onclick="openImage(this.src)">
             <h3 data-i18n="coffeeCardamom">Ground Coffee with cardamom</h3>
             <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
             <p data-i18n="weight200">200g</p>
-            <p class="price" data-i18n="price5750">5,750 I.D</p>
+            <p class="price" data-i18n="price5250">5,250 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p11', 5250, 'coffeeCardamom', 'weight200')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Ground Coffee with extra cardamom 200g.png" alt="Ground Coffee with extra cardamom">
+            <img src="Ground Coffee with extra cardamom 200g.png" alt="Ground Coffee with extra cardamom" onclick="openImage(this.src)">
             <h3 data-i18n="coffeeExtraCardamom">Ground Coffee with extra cardamom</h3>
             <p data-i18n="coffeeDesc">An attractive aroma and an authentic taste that will satisfy all coffee lovers.</p>
             <p data-i18n="weight200">200g</p>
-            <p class="price" data-i18n="price6000">6,000 I.D</p>
+            <p class="price" data-i18n="price5500">5,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('lio_p12', 5500, 'coffeeExtraCardamom', 'weight200')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
+    </div>
+</div>
+
+<div class="cart-floating-btn" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3 data-i18n="cartTitle">Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="totalPrice">Total:</span>
+                <span id="cartTotalValue">0 I.D</span>
+            </div>
+            <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+                <span data-i18n="sendWhatsApp">Send Order via WhatsApp</span> 💬
+            </button>
+        </div>
     </div>
 </div>
 
@@ -313,183 +570,74 @@ body {
 <script>
     const translations = {
         en: {
-            backBtn: "⬅ Back to Home",
-            brandTitle: "Lio",
-            brandSlogan: "Food products of the best quality",
-            ourProducts: "Our Products",
+            backBtn: "⬅ Back to Home", brandTitle: "Lio", brandSlogan: "Food products of the best quality", ourProducts: "Our Products",
+            tomatoTitle: "Tomato Paste", tomatoDesc: "Stronger color… better taste… more amazing result.", tomatoWeight: "710g + 12% free",
+            sweetPepperTitle: "Sweet Crushed Pepper", sweetPepperDesc: "Beautiful color. more delicious taste.",
+            hotPepperTitle: "Crushed Red Hot Pepper", hotPepperDesc: "Concentrated flavor and spicy power elevate every meal to a professional level.",
+            jamTitle: "Mulberry Jam", jamDesc: "Natural sweetness… rich color and flavor.",
+            cornTitle: "Sweet Corn", cornDesc: "Each bean is full of natural taste and sweet flavor.",
+            molassesTitle: "Pomegranate Molasses", molassesDesc: "Authentic taste and rich texture that whets the appetite.",
+            coffeeNoCardamom: "Ground Coffee without cardamom", coffeeCardamom: "Ground Coffee with cardamom", coffeeExtraCardamom: "Ground Coffee with extra cardamom", coffeeDesc: "An attractive aroma and an authentic taste that will satisfy all coffee lovers.",
+            weight200: "200g", weight430: "430g", weight525: "525g", weight635: "635g", weight645: "645g", weight710: "710g", weight725: "725g", weight3kg: "3kg",
+            price2850: "2,850 I.D", price2900: "3,900 I.D", price3000: "3,000 I.D", price2800: "2,800 I.D", price2300: "2,300 I.D", price7000: "7,000 I.D", price4250: "4,250 I.D", price3450: "3,450 I.D", price5280: "5,280 I.D", price4500: "4,500 I.D",price5250: "5,250 I.D",price5500: "5,500 I.D",
+            contactUs: "Contact us", whatsapp: "💬 WhatsApp", email: "✉ Contact us", instagram: "📷 Instagram", facebook: "📘 Facebook", address: "📍 New Hawler, Directorate of Information Technology.", footer: "© 2026 Nebras Alhaq - All Rights Reserved",
             
-            tomatoTitle: "Tomato Paste",
-            tomatoDesc: "Stronger color… better taste… more amazing result.",
-            tomatoWeight: "710g + 12% free",
+            // Cart Translations
+            addToCartBtn: "Add to Cart", cartTitle: "Your Cart", totalPrice: "Total:", sendWhatsApp: "Send Order via WhatsApp", emptyCart: "Your cart is empty.", currency: "I.D", orderGreeting: "Hello, I would like to order:",
             
-            sweetPepperTitle: "Sweet Crushed Pepper",
-            sweetPepperDesc: "Beautiful color. more delicious taste.",
-            
-            hotPepperTitle: "Crushed Red Hot Pepper",
-            hotPepperDesc: "Concentrated flavor and spicy power elevate every meal to a professional level.",
-            
-            jamTitle: "Mulberry Jam",
-            jamDesc: "Natural sweetness… rich color and flavor.",
-            
-            cornTitle: "Sweet Corn",
-            cornDesc: "Each bean is full of natural taste and sweet flavor.",
-            
-            molassesTitle: "Pomegranate Molasses",
-            molassesDesc: "Authentic taste and rich texture that whets the appetite.",
-            
-            coffeeNoCardamom: "Ground Coffee without cardamom",
-            coffeeCardamom: "Ground Coffee with cardamom",
-            coffeeExtraCardamom: "Ground Coffee with extra cardamom",
-            coffeeDesc: "An attractive aroma and an authentic taste that will satisfy all coffee lovers.",
-            
-            weight200: "200g",
-            weight430: "430g",
-            weight525: "525g",
-            weight635: "635g",
-            weight645: "645g",
-            weight710: "710g",
-            weight725: "725g",
-            weight3kg: "3kg",
-            
-            price2500: "2,500 I.D",
-            price3000: "3,000 I.D",
-            price3250: "3,250 I.D",
-            price3500: "3,500 I.D",
-            price3750: "3,750 I.D",
-            price4750: "4,750 I.D",
-            price5000: "5,000 I.D",
-            price5750: "5,750 I.D",
-            price6000: "6,000 I.D",
-            price7500: "7,500 I.D",
-
-            contactUs: "Contact us",
-            whatsapp: "💬 WhatsApp",
-            email: "✉ Contact us",
-            instagram: "📷 Instagram",
-            facebook: "📘 Facebook",
-            address: "📍 New Hawler, Directorate of Information Technology.",
-            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+            // Alkhair Translations (مهم لكي تظهر منتجات الصفحة الأولى في هذه السلة مترجمة)
+            oliveOil: "Olive oil", sunflowerOil: "Sunflower oil", ghee: "Pure vegetable ghee",
+            weight05L: "0.5L", weight1L: "1L", weight4L: "4L", weight1kg: "1kg", weight2kg: "2kg"
         },
         ar: {
-            backBtn: "⬅ العودة للرئيسية",
-            brandTitle: "ليو",
-            brandSlogan: "منتجات غذائية بأفضل جودة",
-            ourProducts: "منتجاتنا",
+            backBtn: "⬅ العودة للرئيسية", brandTitle: "ليو", brandSlogan: "منتجات غذائية بأفضل جودة", ourProducts: "منتجاتنا",
+            tomatoTitle: "معجون طماطم", tomatoDesc: "لون أقوى... طعم أفضل... نتيجة أروع.", tomatoWeight: "710 غرام + 12% مجاناً",
+            sweetPepperTitle:"فلفل حلو مطحون", sweetPepperDesc: "لون جميل وطعم ألذ.",
+            hotPepperTitle: "فلفل حار مطحون", hotPepperDesc: "نكهة مركزة وقوة حارة ترتقي بكل وجبة لمستوى احترافي.",
+            jamTitle: "مربى التوت", jamDesc: "حلاوة طبيعية... لون ونكهة غنية.",
+            cornTitle: "ذرة حلوة", cornDesc: "كل حبة مليئة بالطعم الطبيعي والنكهة الحلوة.",
+            molassesTitle: "دبس رمان", molassesDesc: "طعم أصيل وقوام غني يفتح الشهية.",
+            coffeeNoCardamom: "قهوة مطحونة بدون هيل", coffeeCardamom: "قهوة مطحونة مع هيل", coffeeExtraCardamom: "قهوة مطحونة مع هيل إضافي", coffeeDesc: "رائحة جذابة وطعم أصيل يرضي جميع عشاق القهوة.",
+            weight200: "200 غرام", weight430: "430 غرام", weight525: "525 غرام", weight635: "635 غرام", weight645: "645 غرام", weight710: "710 غرام", weight725: "725 غرام", weight3kg: "3 كيلو",
+            price2850: "2,850 دينار عراقي", price2900: "3,900 دينار عراقي", price3000: "3,000 دينار عراقي", price2800: "2,800 دينار عراقي", price2300: "2,300 دينار عراقي", price7000: "7,000 دينار عراقي", price4250: "4,250 دينار عراقي", price3450: "3,450 دينار عراقي", price5280: "5,280 دينار عراقي", price4500: "4,500 دينار عراقي",price5250: "5,250 دينار عراقي",price5500: "5,500 دينار عراقي",
+            contactUs: "تواصل معنا", whatsapp: "💬 واتساب", email: "✉ راسلنا عبر الإيميل", instagram: "📷 إنستغرام", facebook: "📘 فيسبوك", address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.", footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
             
-            tomatoTitle: "معجون طماطم",
-            tomatoDesc: "لون أقوى... طعم أفضل... نتيجة أروع.",
-            tomatoWeight: "710 غرام + 12% مجاناً",
+            // Cart Translations
+            addToCartBtn: "أضف إلى السلة", cartTitle: "سلة المشتريات", totalPrice: "الإجمالي:", sendWhatsApp: "إرسال الطلب عبر واتساب", emptyCart: "السلة فارغة حالياً.", currency: "دينار", orderGreeting: "مرحباً، أود طلب المنتجات التالية:",
             
-            sweetPepperTitle:"فلفل حلو مطحون",
-            sweetPepperDesc: "لون جميل وطعم ألذ.",
-            
-            hotPepperTitle: "فلفل  حار مطحون",
-            hotPepperDesc: "نكهة مركزة وقوة حارة ترتقي بكل وجبة لمستوى احترافي.",
-            
-            jamTitle: "مربى التوت",
-            jamDesc: "حلاوة طبيعية... لون ونكهة غنية.",
-            
-            cornTitle: "ذرة حلوة",
-            cornDesc: "كل حبة مليئة بالطعم الطبيعي والنكهة الحلوة.",
-            
-            molassesTitle: "دبس رمان",
-            molassesDesc: "طعم أصيل وقوام غني يفتح الشهية.",
-            
-            coffeeNoCardamom: "قهوة مطحونة بدون هيل",
-            coffeeCardamom: "قهوة مطحونة مع هيل",
-            coffeeExtraCardamom: "قهوة مطحونة مع هيل إضافي",
-            coffeeDesc: "رائحة جذابة وطعم أصيل يرضي جميع عشاق القهوة.",
-            
-            weight200: "200 غرام",
-            weight430: "430 غرام",
-            weight525: "525 غرام",
-            weight635: "635 غرام",
-            weight645: "645 غرام",
-            weight710: "710 غرام",
-            weight725: "725 غرام",
-            weight3kg: "3 كيلو",
-            
-            price2500: "2,500 دينار عراقي",
-            price3000: "3,000 دينار عراقي",
-            price3250: "3,250 دينار عراقي",
-            price3500: "3,500 دينار عراقي",
-            price3750: "3,750 دينار عراقي",
-            price4750: "4,750 دينار عراقي",
-            price5000: "5,000 دينار عراقي",
-            price5750: "5,750 دينار عراقي",
-            price6000: "6,000 دينار عراقي",
-            price7500: "7,500 دينار عراقي",
-
-            contactUs: "تواصل معنا",
-            whatsapp: "💬 واتساب",
-            email: "✉ راسلنا عبر الإيميل",
-            instagram: "📷 إنستغرام",
-            facebook: "📘 فيسبوك",
-            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
-            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+            // Alkhair Translations
+            oliveOil: "زيت زيتون", sunflowerOil: "زيت دوار الشمس", ghee: "سمن نباتي نقي",
+            weight05L: "0.5 لتر", weight1L: "1 لتر", weight4L: "4 لتر", weight1kg: "1 كيلو", weight2kg: "2 كيلو"
         },
         ku: {
-            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
-            brandTitle: "لیۆ",
-            brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی",
-            ourProducts: "بەرهەمەکانمان",
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا", brandTitle: "لیۆ", brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی", ourProducts: "بەرهەمەکانمان",
+            tomatoTitle: "دۆشاوی تەماتە", tomatoDesc: "ڕەنگێکی تۆختر... تامێکی باشتر... ئەنجامێکی سەرسوڕهێنەرتر.", tomatoWeight: "710 گرام + 12% بێبەرامبەر",
+            sweetPepperTitle: "بیبەری شیرینی هاڕڕاو", sweetPepperDesc: "ڕەنگێکی جوان. تامێکی خۆشتر.",
+            hotPepperTitle: "بیبەری سووری تیژی هاڕڕاو", hotPepperDesc: "تامێکی چڕ و هێزێکی تیژ کە هەموو ژەمێک بەرز دەکاتەوە بۆ ئاستێکی پیشەگەرانە.",
+            jamTitle: "مرەبای توو", jamDesc: "شیرینییەکی سروشتی... ڕەنگ و تامێکی دەوڵەمەند.",
+            cornTitle: "گەنمەشامی شیرین", cornDesc: "هەر دەنکێک پڕە لە تامی سروشتی و تامی شیرین.",
+            molassesTitle: "ڕوبە هەنار", molassesDesc: "تامێکی ڕەسەن و پێکهاتەیەکی دەوڵەمەند کە ئارەزووی خواردن دەکاتەوە.",
+            coffeeNoCardamom: "قاوەی هاڕڕاو بێ هێل", coffeeCardamom: "قاوەی هاڕڕاو بە هێل", coffeeExtraCardamom: "قاوەی هاڕڕاو بە هێلی زیادە", coffeeDesc: "بۆنێکی سەرنجڕاکێش و تامێکی ڕەسەن کە هەموو ئاشقانی قاوە ڕازی دەکات.",
+            weight200: "200 گرام", weight430: "430 گرام", weight525: "525 گرام", weight635: "635 گرام", weight645: "645 گرام", weight710: "710 گرام", weight725: "725 گرام", weight3kg: "3 کيلۆگرام",
+             price2850: "2,850 دیناری عێراقی", price2900: "3,900 دیناری عێراقی", price3000: "3,000 دیناری عێراقی", price2800: "2,800 دیناری عێراقی", price2300: "2,300 دیناری عێراقی", price7000: "7,000 دیناری عێراقی", price4250: "4,250 دیناری عێراقی", price3450: "3,450 دیناری عێراقی", price5280: "5,280 دیناری عێراقی", price4500: "4,500 دیناری عێراقی",price5250: "5,250 دیناری عێراقی",price5500: "5,500 دیناری عێراقی",
+            contactUs: "پەیوەندیمان پێوە بکە", whatsapp: "💬 وەتسئاپ", email: "✉ ئیمەیڵمان بۆ بنێرە", instagram: "📷 ئینستاگرام", facebook: "📘 فەیسبووک", address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.", footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
             
-            tomatoTitle: "دۆشاوی تەماتە",
-            tomatoDesc: "ڕەنگێکی تۆختر... تامێکی باشتر... ئەنجامێکی سەرسوڕهێنەرتر.",
-            tomatoWeight: "710 گرام + 12% بێبەرامبەر",
+            // Cart Translations
+            addToCartBtn: "زیادکردن بۆ سەبەتە", cartTitle: "سەبەتەکەت", totalPrice: "کۆی گشتی:", sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ", emptyCart: "سەبەتەکەت بەتاڵە.", currency: "دینار", orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:",
             
-            sweetPepperTitle: "بیبەری شیرینی هاڕڕاو",
-            sweetPepperDesc: "ڕەنگێکی جوان. تامێکی خۆشتر.",
-            
-            hotPepperTitle: "بیبەری سووری تیژی هاڕڕاو",
-            hotPepperDesc: "تامێکی چڕ و هێزێکی تیژ کە هەموو ژەمێک بەرز دەکاتەوە بۆ ئاستێکی پیشەگەرانە.",
-            
-            jamTitle: "مرەبای توو",
-            jamDesc: "شیرینییەکی سروشتی... ڕەنگ و تامێکی دەوڵەمەند.",
-            
-            cornTitle: "گەنمەشامی شیرین",
-            cornDesc: "هەر دەنکێک پڕە لە تامی سروشتی و تامی شیرین.",
-            
-            molassesTitle: "ڕوبە هەنار",
-            molassesDesc: "تامێکی ڕەسەن و پێکهاتەیەکی دەوڵەمەند کە ئارەزووی خواردن دەکاتەوە.",
-            
-            coffeeNoCardamom: "قاوەی هاڕڕاو بێ هێل",
-            coffeeCardamom: "قاوەی هاڕڕاو بە هێل",
-            coffeeExtraCardamom: "قاوەی هاڕڕاو بە هێلی زیادە",
-            coffeeDesc: "بۆنێکی سەرنجڕاکێش و تامێکی ڕەسەن کە هەموو ئاشقانی قاوە ڕازی دەکات.",
-            
-            weight200: "200 گرام",
-            weight430: "430 گرام",
-            weight525: "525 گرام",
-            weight635: "635 گرام",
-            weight645: "645 گرام",
-            weight710: "710 گرام",
-            weight725: "725 گرام",
-            weight3kg: "3 کيلۆگرام",
-            
-            price2500: "2,500 دیناری عێراقی",
-            price3000: "3,000 دیناری عێراقی",
-            price3250: "3,250 دیناری عێراقی",
-            price3500: "3,500 دیناری عێراقی",
-            price3750: "3,750 دیناری عێراقی",
-            price4750: "4,750 دیناری عێراقی",
-            price5000: "5,000 دیناری عێراقی",
-            price5750: "5,750 دیناری عێراقی",
-            price6000: "6,000 دیناری عێراقی",
-            price7500: "7,500 دیناری عێراقی",
-
-            contactUs: "پەیوەندیمان پێوە بکە",
-            whatsapp: "💬 وەتسئاپ",
-            email: "✉ ئیمەیڵمان بۆ بنێرە",
-            instagram: "📷 ئینستاگرام",
-            facebook: "📘 فەیسبووک",
-            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
-            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+            // Alkhair Translations
+            oliveOil: "زەیتی زەیتوون", sunflowerOil: "زەیتی گوڵەبەڕۆژە", ghee: "ڕۆنی ڕووەکی پاک",
+            weight05L: "0.5 لیتر", weight1L: "1 لیتر", weight4L: "4 لیتر", weight1kg: "1 کيلۆگرام", weight2kg: "2 کيلۆگرام"
         }
     };
 
-   function setLanguage(lang) {
-        // 1. تغيير النصوص
+    let currentLanguage = localStorage.getItem('siteLang') || 'en';
+    
+    // سحب البيانات من نفس الذاكرة المشتركة بين الصفحتين
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
+    function setLanguage(lang) {
+        currentLanguage = lang;
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -498,7 +646,6 @@ body {
             }
         });
 
-        // 2. تغيير الاتجاه
         if (lang === 'ar' || lang === 'ku') {
             document.documentElement.setAttribute('dir', 'rtl');
             document.documentElement.setAttribute('lang', lang);
@@ -507,14 +654,188 @@ body {
             document.documentElement.setAttribute('lang', 'en');
         }
 
-        // 3. حفظ اللغة الجديدة في الذاكرة لكي تنتقل للرئيسية!
         localStorage.setItem('siteLang', lang);
+        updateCartUI();
     }
 
-    // قراءة اللغة المحفوظة عند فتح الصفحة
-    const savedLang = localStorage.getItem('siteLang') || 'en';
-    setLanguage(savedLang);
+    // --- Cart System ---
+ function addToCart(id, price, nameKey, weightKey) {
+        // البحث عن الزر الذي تم الضغط عليه لسحب الصورة من نفس الكارت
+        let btn = document.querySelector(`button[onclick*="'${id}'"]`);
+        let imageUrl = "";
+        
+        if (btn) {
+            let card = btn.closest('.card');
+            if (card) {
+                let imgElement = card.querySelector('img');
+                if (imgElement) imageUrl = imgElement.src;
+            }
+        }
+
+        let existingItem = cart.find(item => item.id === id);
+        if(existingItem) {
+            existingItem.qty += 1;
+        } else {
+            // إضافة الصورة إلى السلة
+            cart.push({ id, price, nameKey, weightKey, qty: 1, image: imageUrl });
+        }
+        
+        saveCart();
+        updateCartUI();
+        
+        // حركة الزر الذكية (بدون رسالة مزعجة)
+        if (btn) {
+            let originalText = btn.innerText; // نحفظ نص الزر الأصلي
+            btn.innerText = '✓'; // نغير النص لعلامة صح
+            btn.style.backgroundColor = '#25D366'; // نغير لون الزر للأخضر
+            btn.style.color = 'white';
+            
+            // نرجع الزر لحالته الطبيعية بعد ثانية واحدة (1000 ملي ثانية)
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = ''; 
+            }, 1000);
+        }
+    }
+
+    function changeQty(id, delta) {
+        let item = cart.find(item => item.id === id);
+        if(item) {
+            item.qty += delta;
+            if(item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalValue = document.getElementById('cartTotalValue');
+        
+        let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCountEl.innerText = totalItems;
+
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
+        } else {
+            cart.forEach(item => {
+                let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+                let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+                let itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+               // سحب الصورة أو تركها فارغة لتجنب الأخطاء
+                let imgSrc = item.image ? item.image : ''; 
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${imgSrc}" alt="${name}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 5px; margin-inline-end: 10px; background: white; border: 1px solid #ddd;">
+                        
+                        <div class="cart-item-info" style="flex-grow: 1;">
+                            <h4>${name} (${weight})</h4>
+                            <p>${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendOrderToWhatsApp() {
+        if(cart.length === 0) {
+            alert(translations[currentLanguage]['emptyCart']);
+            return;
+        }
+
+        let message = translations[currentLanguage]['orderGreeting'] + "\n\n";
+        let total = 0;
+
+        cart.forEach(item => {
+            let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+            let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            message += `▪️ ${item.qty}x ${name} (${weight}) - ${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}\n`;
+        });
+
+        message += `\n*${translations[currentLanguage]['totalPrice']} ${total.toLocaleString()} ${translations[currentLanguage]['currency']}*`;
+
+        const waNumber = "9647511224225";
+        const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(url, '_blank');
+    }
+
+    setLanguage(currentLanguage);
+
+    // --- Image Zoom Logic ---
+    let zoom = 1;
+
+    function openImage(src){
+        const popup = document.getElementById("imagePopup");
+        const img = document.getElementById("popupImg");
+
+        popup.style.display = "flex";
+        img.src = src;
+        zoom = 1;
+        img.style.transform = "scale(1)";
+
+        img.addEventListener("wheel", zoomImage, { passive: false });
+    }
+
+    function closeImage(){
+        const popup = document.getElementById("imagePopup");
+        const img = document.getElementById("popupImg");
+        
+        popup.style.display = "none";
+        img.removeEventListener("wheel", zoomImage);
+    }
+
+    function zoomImage(e){
+        e.preventDefault();
+        if(e.deltaY < 0){
+            zoom += 0.2;
+        }else{
+            zoom -= 0.2;
+        }
+
+        if(zoom < 1) zoom = 1;
+        if(zoom > 3) zoom = 3;
+
+        const img = document.getElementById("popupImg");
+        img.style.transform = "scale(" + zoom + ")";
+    }
 </script>
+
+<div class="image-popup" id="imagePopup" onclick="closeImage()">
+    <img id="popupImg">
+</div>
 
 </body>
 </html>
