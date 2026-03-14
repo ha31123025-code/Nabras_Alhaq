@@ -100,6 +100,8 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
     animation: fadeUp 1s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -112,22 +114,216 @@ body {
     height: 160px;
     object-fit: contain;
     background: white;
+    cursor: zoom-in;
 }
 
 .card h3 {
     color: var(--main-blue);
+    margin-bottom: 5px;
 }
 
 .card p {
     font-size: 14px;
     color: #555;
     margin: 8px 0;
+    flex-grow: 1;
 }
 
 .card p.price {
     font-weight: bold;
     color: var(--main-red);
     font-size: 16px;
+}
+
+/* Add to Cart Button */
+.add-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Floating Cart Button */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-btn:hover {
+    background: #ccc;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--main-blue);
+}
+
+.checkout-btn {
+    background: #25D366; /* WhatsApp Green */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #128C7E;
 }
 
 /* Contact */
@@ -169,6 +365,27 @@ body {
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
 }
+
+.image-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001; /* Above cart */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-popup img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: transform 0.3s;
+    cursor: zoom-in;
+}
 </style>
 </head>
 
@@ -194,95 +411,130 @@ body {
     <h2 data-i18n="ourProducts">Our Products</h2>
 
     <div class="agencies">
-
         <div class="card">
-            <img src="photo_43_2025-12-23_23-25-30.jpg" alt="Olive oil 1L">
+            <img src="photo_43_2025-12-23_23-25-30.jpg" alt="Olive oil 1L" onclick="openImage(this.src)">
             <h3 data-i18n="oliveOil">Olive oil</h3>
             <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
             <p data-i18n="weight1L">1L</p>
-            <p class="price" data-i18n="price9000">9,000 I.D</p>
+            <p class="price" data-i18n="price10000">10,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p1', 10000, 'oliveOil', 'weight1L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_45_2025-12-23_23-25-30.jpg" alt="Olive oil 4L">
+            <img src="photo_45_2025-12-23_23-25-30.jpg" alt="Olive oil 4L" onclick="openImage(this.src)">
             <h3 data-i18n="oliveOil">Olive oil</h3>
             <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
             <p data-i18n="weight4L">4L</p>
-            <p class="price" data-i18n="price34500">34,500 I.D</p>
+            <p class="price" data-i18n="price38000">38000 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p2', 38000, 'oliveOil', 'weight4L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_46_2025-12-23_23-25-30.jpg" alt="Olive oil 0.5L">
+            <img src="photo_46_2025-12-23_23-25-30.jpg" alt="Olive oil 0.5L" onclick="openImage(this.src)">
             <h3 data-i18n="oliveOil">Olive oil</h3>
             <p data-i18n="oliveDesc">Premium olive oil... the secret to a healthy and rich taste in your kitchen.</p>
             <p data-i18n="weight05L">0.5L</p>
             <p class="price" data-i18n="price5500">5,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p3', 5500, 'oliveOil', 'weight05L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_51_2025-12-23_23-25-30.jpg" alt="Sunflower oil 4L">
+            <img src="photo_51_2025-12-23_23-25-30.jpg" alt="Sunflower oil 4L" onclick="openImage(this.src)">
             <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
             <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
             <p data-i18n="weight4L">4L</p>
-            <p class="price" data-i18n="price12000">12,000 I.D</p>
+            <p class="price" data-i18n="price12650">12,650 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p4', 12650, 'sunflowerOil', 'weight4L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_47_2025-12-23_23-25-30.jpg" alt="Sunflower oil 8L">
+            <img src="photo_47_2025-12-23_23-25-30.jpg" alt="Sunflower oil 8L" onclick="openImage(this.src)">
             <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
             <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
             <p data-i18n="weight8L">8L</p>
-            <p class="price" data-i18n="price24000">24,000 I.D</p>
+            <p class="price" data-i18n="price26950">26,950 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p5', 26950, 'sunflowerOil', 'weight8L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         
         <div class="card">
-            <img src="photo_48_2025-12-23_23-25-30.jpg" alt="Sunflower oil 18L">
+            <img src="photo_48_2025-12-23_23-25-30.jpg" alt="Sunflower oil 18L" onclick="openImage(this.src)">
             <h3 data-i18n="sunflowerOil">Sunflower oil</h3>
             <p data-i18n="sunflowerDesc">Natural health in every drop – pure sunflower oil.</p>
             <p data-i18n="weight18L">18L</p>
-            <p class="price" data-i18n="price52500">52,500 I.D</p>
+            <p class="price" data-i18n="price52800">52,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p6', 52800, 'sunflowerOil', 'weight18L')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_57_2025-12-23_23-25-30.jpg" alt="Pure vegetable ghee 1kg">
+            <img src="photo_57_2025-12-23_23-25-30.jpg" alt="Pure vegetable ghee 1kg" onclick="openImage(this.src)">
             <h3 data-i18n="ghee">Pure vegetable ghee</h3>
             <p data-i18n="gheeDesc">100% vegetable ghee... an authentic and healthy taste for every meal</p>
             <p data-i18n="weight1kg">1kg</p>
-            <p class="price" data-i18n="price5500">5,500 I.D</p>
+            <p class="price" data-i18n="price5170">5,170 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p7', 5170, 'ghee', 'weight1kg')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_19_2025-12-23_23-25-30.jpg" alt="Fig jam pieces">
+            <img src="photo_19_2025-12-23_23-25-30.jpg" alt="Fig jam pieces" onclick="openImage(this.src)">
             <h3 data-i18n="figJam">Fig jam pieces</h3>
             <p data-i18n="figJamDesc">Natural fig pieces... an unforgettable taste.</p>
             <p data-i18n="weight430g">430g</p>
-            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <p class="price" data-i18n="price2360">2,360 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p8', 2360, 'figJam', 'weight430g')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
         
         <div class="card">
-            <img src="photo_20_2025-12-23_23-25-30.jpg" alt="Strawberry jam pieces">
+            <img src="photo_20_2025-12-23_23-25-30.jpg" alt="Strawberry jam pieces" onclick="openImage(this.src)">
             <h3 data-i18n="strawberryJam">Strawberry jam pieces</h3>
             <p data-i18n="strawberryJamDesc">Strawberry jam rich in natural pieces... an unforgettable taste.</p>
             <p data-i18n="weight430g">430g</p>
-            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <p class="price" data-i18n="price2360">2,360 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p9', 2360, 'strawberryJam', 'weight430g')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_31_2025-12-23_23-25-30.jpg" alt="Apricot jam pieces">
+            <img src="photo_31_2025-12-23_23-25-30.jpg" alt="Apricot jam pieces" onclick="openImage(this.src)">
             <h3 data-i18n="apricotJam">Apricot jam pieces</h3>
             <p data-i18n="apricotJamDesc">Enjoy the taste of apricots just as they are, from nature to your table.</p>
             <p data-i18n="weight430g">430g</p>
-            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <p class="price" data-i18n="price2360">2,360 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p10', 2360, 'apricotJam', 'weight430g')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="photo_27_2025-12-23_23-25-30.jpg" alt="Pomegranate molasses">
+            <img src="photo_27_2025-12-23_23-25-30.jpg" alt="Pomegranate molasses" onclick="openImage(this.src)">
             <h3 data-i18n="pomegranateMolasses">Pomegranate molasses</h3>
             <p data-i18n="pomegranateDesc">Drops from nature... the authentic taste of pomegranate in every meal.</p>
             <p data-i18n="weight250ml">250ml</p>
-            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <p class="price" data-i18n="price2620">2,620 I.D</p>
+            <button class="add-btn" onclick="addToCart('alreef_p11', 2620, 'pomegranateMolasses', 'weight250ml')" data-i18n="addToCartBtn">Add to Cart</button>
         </div>
 
+    </div>
+</div>
+
+<div class="cart-floating-btn" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3 data-i18n="cartTitle">Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="totalPrice">Total:</span>
+                <span id="cartTotalValue">0 I.D</span>
+            </div>
+            <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+                <span data-i18n="sendWhatsApp">Send Order via WhatsApp</span> 💬
+            </button>
+        </div>
     </div>
 </div>
 
@@ -315,22 +567,16 @@ body {
             
             oliveOil: "Olive oil",
             oliveDesc: "Premium olive oil... the secret to a healthy and rich taste in your kitchen.",
-            
             sunflowerOil: "Sunflower oil",
             sunflowerDesc: "Natural health in every drop – pure sunflower oil.",
-            
             ghee: "Pure vegetable ghee",
             gheeDesc: "100% vegetable ghee... an authentic and healthy taste for every meal.",
-            
             figJam: "Fig jam pieces",
             figJamDesc: "Natural fig pieces... an unforgettable taste.",
-            
             strawberryJam: "Strawberry jam pieces",
             strawberryJamDesc: "Strawberry jam rich in natural pieces... an unforgettable taste.",
-            
             apricotJam: "Apricot jam pieces",
             apricotJamDesc: "Enjoy the taste of apricots just as they are, from nature to your table.",
-            
             pomegranateMolasses: "Pomegranate molasses",
             pomegranateDesc: "Drops from nature... the authentic taste of pomegranate in every meal.",
 
@@ -343,13 +589,15 @@ body {
             weight430g: "430g",
             weight250ml: "250ml",
             
-            price3000: "3,000 I.D",
+            price2360: "2,360 I.D",
             price5500: "5,500 I.D",
-            price9000: "9,000 I.D",
-            price12000: "12,000 I.D",
-            price24000: "24,000 I.D",
-            price34500: "34,500 I.D",
-            price52500: "52,500 I.D",
+            price10000: "10,000 I.D",
+            price12650: "12,650 I.D",
+            price24000: "26,950 I.D",
+            price34500: "38,000 I.D",
+            price52500: "52,800 I.D",
+            price2620: "2,620 I.D",
+            price5170: "5,170 I.D",
 
             contactUs: "Contact us",
             whatsapp: "💬 WhatsApp",
@@ -357,7 +605,16 @@ body {
             instagram: "📷 Instagram",
             facebook: "📘 Facebook",
             address: "📍 New Hawler, Directorate of Information Technology.",
-            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved",
+
+            // Cart Translations
+            addToCartBtn: "Add to Cart",
+            cartTitle: "Your Cart",
+            totalPrice: "Total:",
+            sendWhatsApp: "Send Order via WhatsApp",
+            emptyCart: "Your cart is empty.",
+            currency: "I.D",
+            orderGreeting: "Hello, I would like to order:"
         },
         ar: {
             backBtn: "⬅ العودة للرئيسية",
@@ -367,22 +624,16 @@ body {
             
             oliveOil: "زيت زيتون",
             oliveDesc: "زيت زيتون فاخر... السر لطعم غني وصحي في مطبخك.",
-            
             sunflowerOil: "زيت دوار الشمس",
             sunflowerDesc: "صحة طبيعية في كل قطرة - زيت دوار الشمس النقي.",
-            
             ghee: "سمن نباتي نقي",
             gheeDesc: "سمن نباتي 100%... طعم أصيل وصحي لكل وجبة.",
-            
             figJam: "مربى التين قطع",
             figJamDesc: "قطع تين طبيعية... طعم لا ينسى.",
-            
             strawberryJam: "مربى الفراولة قطع",
             strawberryJamDesc: "مربى فراولة غني بقطع الفاكهة الطبيعية... طعم لا ينسى.",
-            
             apricotJam: "مربى المشمش قطع",
             apricotJamDesc: "استمتع بطعم المشمش كما هو، من الطبيعة إلى مائدتك.",
-            
             pomegranateMolasses: "دبس رمان",
             pomegranateDesc: "قطرات من الطبيعة... طعم الرمان الأصيل في كل وجبة.",
 
@@ -395,13 +646,16 @@ body {
             weight430g: "430 غرام",
             weight250ml: "250 مل",
             
-            price3000: "3,000 دينار عراقي",
+            price2360: "2,360 دينار عراقي",
             price5500: "5,500 دينار عراقي",
-            price9000: "9,000 دينار عراقي",
-            price12000: "12,000 دينار عراقي",
-            price24000: "24,000 دينار عراقي",
-            price34500: "34,500 دينار عراقي",
-            price52500: "52,500 دينار عراقي",
+            price10000: "10,000 دينار عراقي",
+            price12650: "12,650 دينار عراقي",
+            price26950: "26,950 دينار عراقي",
+            price38000: "38,000 دينار عراقي",
+            price52800: "52,800 دينار عراقي",
+            price2620: "2,620 دينار عراقي ",
+            price5170: "5,170 دينار عراقي",
+
 
             contactUs: "تواصل معنا",
             whatsapp: "💬 واتساب",
@@ -409,7 +663,16 @@ body {
             instagram: "📷 إنستغرام",
             facebook: "📘 فيسبوك",
             address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
-            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
+
+            // Cart Translations
+            addToCartBtn: "أضف إلى السلة",
+            cartTitle: "سلة المشتريات",
+            totalPrice: "الإجمالي:",
+            sendWhatsApp: "إرسال الطلب عبر واتساب",
+            emptyCart: "السلة فارغة حالياً.",
+            currency: "دينار",
+            orderGreeting: "مرحباً، أود طلب المنتجات التالية:"
         },
         ku: {
             backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
@@ -419,22 +682,16 @@ body {
             
             oliveOil: "زەیتی زەیتوون",
             oliveDesc: "زەیتی زەیتوونی نایاب... نهێنی تامی دەوڵەمەند و تەندروست لە چێشتخانەکەتدا.",
-            
             sunflowerOil: "زەیتی گوڵەبەڕۆژە",
             sunflowerDesc: "تەندروستی سروشتی لە هەموو دڵۆپێکدا – زەیتی گوڵەبەڕۆژەی پاک.",
-            
             ghee: "ڕۆنی ڕووەکی پاک",
             gheeDesc: "ڕۆنی ڕووەکی 100%... تامێکی ڕەسەن و تەندروست بۆ هەموو ژەمێک.",
-            
             figJam: "مرەبای هەنجیر بە پارچە",
             figJamDesc: "پارچە هەنجیری سروشتی... تامێک کە لەبیر ناکرێت.",
-            
             strawberryJam: "مرەبای شلک بە پارچە",
             strawberryJamDesc: "مرەبای شلک دەوڵەمەند بە پارچەی سروشتی... تامێک کە لەبیر ناکرێت.",
-            
             apricotJam: "مرەبای قەیسی بە پارچە",
             apricotJamDesc: "چێژ لە تامی قەیسی وەربگرە وەک خۆی، لە سروشتەوە بۆ سەر مێزەکەت.",
-            
             pomegranateMolasses: "ڕوبە هەنار",
             pomegranateDesc: "دڵۆپێک لە سروشتەوە... تامی ڕەسەنی هەنار لە هەموو ژەمێکدا.",
 
@@ -447,13 +704,16 @@ body {
             weight430g: "430 گرام",
             weight250ml: "250 مللیلیتر",
             
-            price3000: "3,000 دیناری عێراقی",
+            price2360: "2,360 دیناری عێراقی",
             price5500: "5,500 دیناری عێراقی",
-            price9000: "9,000 دیناری عێراقی",
-            price12000: "12,000 دیناری عێراقی",
-            price24000: "24,000 دیناری عێراقی",
-            price34500: "34,500 دیناری عێراقی",
-            price52500: "52,500 دیناری عێراقی",
+            price10000: "10,000 دیناری عێراقی",
+            price12650: "12,650 دیناری عێراقی",
+            price26950: "26,950 دیناری عێراقی",
+            price38000: "38,000 دیناری عێراقی",
+            price52800: "52,800 دیناری عێراقی",
+            price2620: "2,620 دیناری عێراقی",
+            price5170: "5,170 دیناری عێراقي",
+            
 
             contactUs: "پەیوەندیمان پێوە بکە",
             whatsapp: "💬 وەتسئاپ",
@@ -461,11 +721,25 @@ body {
             instagram: "📷 ئینستاگرام",
             facebook: "📘 فەیسبووک",
             address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
-            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
+
+            // Cart Translations
+            addToCartBtn: "زیادکردن بۆ سەبەتە",
+            cartTitle: "سەبەتەکەت",
+            totalPrice: "کۆی گشتی:",
+            sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ",
+            emptyCart: "سەبەتەکەت بەتاڵە.",
+            currency: "دینار",
+            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:"
         }
     };
 
+    let currentLanguage = localStorage.getItem('siteLang') || 'en';
+    // التعديل الأول: ربط الصفحة بالسلة الموحدة nebrasCart
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
     function setLanguage(lang) {
+        currentLanguage = lang;
         // Change text based on dictionary
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
@@ -486,12 +760,201 @@ body {
 
         // Save Language choice
         localStorage.setItem('siteLang', lang);
+        
+        // Refresh cart text language
+        updateCartUI();
     }
 
-    // Read language choice from memory
-    const savedLang = localStorage.getItem('siteLang') || 'en';
-    setLanguage(savedLang);
+    // --- Cart System ---
+    
+    function addToCart(id, price, nameKey, weightKey) {
+        // البحث عن الزر الذي تم الضغط عليه لسحب الصورة من نفس الكارت
+        let btn = document.querySelector(`button[onclick*="'${id}'"]`);
+        let imageUrl = "";
+        
+        if (btn) {
+            let card = btn.closest('.card');
+            if (card) {
+                let imgElement = card.querySelector('img');
+                if (imgElement) imageUrl = imgElement.src;
+            }
+        }
+
+        let existingItem = cart.find(item => item.id === id);
+        if(existingItem) {
+            existingItem.qty += 1;
+        } else {
+            // إضافة الصورة إلى السلة
+            cart.push({ id, price, nameKey, weightKey, qty: 1, image: imageUrl });
+        }
+        
+        saveCart();
+        updateCartUI();
+        
+       // حركة الزر الذكية (بدون رسالة مزعجة)
+        if (btn) {
+            let originalText = btn.innerText; // نحفظ نص الزر الأصلي
+            btn.innerText = '✓'; // نغير النص لعلامة صح
+            btn.style.backgroundColor = '#25D366'; // نغير لون الزر للأخضر
+            btn.style.color = 'white';
+            
+            // نرجع الزر لحالته الطبيعية بعد ثانية واحدة (1000 ملي ثانية)
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = ''; 
+            }, 1000);
+        }
+    
+       
+    }
+
+    function changeQty(id, delta) {
+        let item = cart.find(item => item.id === id);
+        if(item) {
+            item.qty += delta;
+            if(item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        // التعديل الثاني: الحفظ في السلة الموحدة
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalValue = document.getElementById('cartTotalValue');
+        
+        // Update total items count bubble
+        let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCountEl.innerText = totalItems;
+
+        // Render Cart Items
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
+        } else {
+            cart.forEach(item => {
+                // التعديل الثالث: التأكد من قراءة الأسماء بشكل صحيح حتى لو كانت من صفحة أخرى
+                let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+                let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+                let itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+               // سحب الصورة أو تركها فارغة لتجنب الأخطاء
+                let imgSrc = item.image ? item.image : ''; 
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${imgSrc}" alt="${name}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 5px; margin-inline-end: 10px; background: white; border: 1px solid #ddd;">
+                        
+                        <div class="cart-item-info" style="flex-grow: 1;">
+                            <h4>${name} (${weight})</h4>
+                            <p>${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Update Total Price text
+        cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendOrderToWhatsApp() {
+        if(cart.length === 0) {
+            alert(translations[currentLanguage]['emptyCart']);
+            return;
+        }
+
+        let message = translations[currentLanguage]['orderGreeting'] + "\n\n";
+        let total = 0;
+
+        cart.forEach(item => {
+            let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+            let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            message += `▪️ ${item.qty}x ${name} (${weight}) - ${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}\n`;
+        });
+
+        message += `\n*${translations[currentLanguage]['totalPrice']} ${total.toLocaleString()} ${translations[currentLanguage]['currency']}*`;
+
+        const waNumber = "9647511224225";
+        const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(url, '_blank');
+    }
+
+    // Read language choice from memory on load
+    setLanguage(currentLanguage);
+
 </script>
+
+<script>
+let zoom = 1;
+
+function openImage(src){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+
+    popup.style.display = "flex";
+    img.src = src;
+    zoom = 1;
+    img.style.transform = "scale(1)";
+
+    // Add zoom listener here
+    img.addEventListener("wheel", zoomImage, { passive: false });
+}
+
+function closeImage(){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+    
+    popup.style.display = "none";
+    img.removeEventListener("wheel", zoomImage); // Remove listener to avoid duplicates
+}
+
+function zoomImage(e){
+    e.preventDefault();
+    if(e.deltaY < 0){
+        zoom += 0.2;
+    }else{
+        zoom -= 0.2;
+    }
+
+    if(zoom < 1) zoom = 1;
+    if(zoom > 3) zoom = 3;
+
+    const img = document.getElementById("popupImg");
+    img.style.transform = "scale(" + zoom + ")";
+}
+</script>
+
+<div class="image-popup" id="imagePopup" onclick="closeImage()">
+    <img id="popupImg">
+</div>
 
 </body>
 </html>
