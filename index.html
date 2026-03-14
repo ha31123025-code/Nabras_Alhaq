@@ -104,6 +104,178 @@ body {
     color: #555;
 }
 
+/* Floating Cart Button */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-btn:hover {
+    background: #ccc;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--main-blue);
+}
+
+.checkout-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #128C7E;
+}
+
 /* Contact */
 .contact {
     background: var(--main-blue);
@@ -191,7 +363,7 @@ body {
             </div>
         </a>
        
-        <a href="DORTO.HTML" style="text-decoration:none; color:inherit;">
+        <a href="DORTO.html" style="text-decoration:none; color:inherit;">
             <div class="card">
                 <img src="logo Dorto E.png" alt="Dorto">
                 <h3 data-i18n="dorto">DORTO</h3>
@@ -208,6 +380,31 @@ body {
                 <p data-i18n="cleanSpec">It manufactures the best types of cleaning materials.</p>
             </div>
         </a>
+    </div>
+</div>
+
+<div class="cart-floating-btn" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3 data-i18n="cartTitle">Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="totalPrice">Total:</span>
+                <span id="cartTotalValue">0 I.D</span>
+            </div>
+            <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+                <span data-i18n="sendWhatsApp">Send Order via WhatsApp</span> 💬
+            </button>
+        </div>
     </div>
 </div>
 
@@ -252,7 +449,30 @@ body {
             instagram: "📷 Instagram",
             facebook: "📘 Facebook",
             address: "📍 New Hawler, Directorate of Information Technology.",
-            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved",
+
+            // Cart Translations
+            cartTitle: "Your Cart",
+            totalPrice: "Total:",
+            sendWhatsApp: "Send Order via WhatsApp",
+            emptyCart: "Your cart is empty.",
+            currency: "I.D",
+            orderGreeting: "Hello, I would like to order:",
+            
+            // Shared Product Translations for the Global Cart
+            tahini: "Premium Tahini",
+            jam: "Apricot Jam",
+            oliveOil: "Olive oil",
+            sunflowerOil: "Sunflower oil",
+            ghee: "Pure vegetable ghee",
+            
+            weight400g: "400g",
+            weight800g: "800g",
+            weight05L: "0.5L",
+            weight1L: "1L",
+            weight4L: "4L",
+            weight1kg: "1kg",
+            weight2kg: "2kg"
         },
         ar: {
             companyName: "نبراس الحق",
@@ -274,7 +494,30 @@ body {
             instagram: "📷 إنستغرام",
             facebook: "📘 فيسبوك",
             address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
-            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
+
+            // Cart Translations
+            cartTitle: "سلة المشتريات",
+            totalPrice: "الإجمالي:",
+            sendWhatsApp: "إرسال الطلب عبر واتساب",
+            emptyCart: "السلة فارغة حالياً.",
+            currency: "دينار",
+            orderGreeting: "مرحباً، أود طلب المنتجات التالية:",
+            
+            // Shared Product Translations for the Global Cart
+            tahini: "طحينة فاخرة",
+            jam: "مربى المشمش",
+            oliveOil: "زيت زيتون",
+            sunflowerOil: "زيت دوار الشمس",
+            ghee: "سمن نباتي نقي",
+            
+            weight400g: "400 غرام",
+            weight800g: "800 غرام",
+            weight05L: "0.5 لتر",
+            weight1L: "1 لتر",
+            weight4L: "4 لتر",
+            weight1kg: "1 كيلو",
+            weight2kg: "2 كيلو"
         },
         ku: {
             companyName: "نبراس الحق",
@@ -296,19 +539,49 @@ body {
             instagram: "📷 ئینستاگرام",
             facebook: "📘 فەیسبووک",
             address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
-            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
+
+            // Cart Translations
+            cartTitle: "سەبەتەکەت",
+            totalPrice: "کۆی گشتی:",
+            sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ",
+            emptyCart: "سەبەتەکەت بەتاڵە.",
+            currency: "دینار",
+            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:",
+            
+            // Shared Product Translations for the Global Cart
+            tahini: "تەحینی نایاب",
+            jam: "مورەبای قەیسی",
+            oliveOil: "زەیتی زەیتوون",
+            sunflowerOil: "زەیتی گوڵەبەڕۆژە",
+            ghee: "ڕۆنی ڕووەکی پاک",
+            
+            weight400g: "400 گرام",
+            weight800g: "800 گرام",
+            weight05L: "0.5 لیتر",
+            weight1L: "1 لیتر",
+            weight4L: "4 لیتر",
+            weight1kg: "1 کيلۆگرام",
+            weight2kg: "2 کيلۆگرام"
         }
     };
 
+    let currentLanguage = localStorage.getItem('siteLang') || 'en';
+    // Using a unified Global Cart Name
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
     function setLanguage(lang) {
+        currentLanguage = lang;
         // Change text based on dictionary
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
-            el.innerText = translations[lang][key];
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
         });
 
-        // Change Direction (RTL for Arabic/Kurdish, LTR for English)
+        // Change Direction
         if (lang === 'ar' || lang === 'ku') {
             document.documentElement.setAttribute('dir', 'rtl');
             document.documentElement.setAttribute('lang', lang);
@@ -316,12 +589,112 @@ body {
             document.documentElement.setAttribute('dir', 'ltr');
             document.documentElement.setAttribute('lang', 'en');
         }
+
+        // Save Language choice so it persists across pages
+        localStorage.setItem('siteLang', lang);
+        
+        // Refresh cart text language
+        updateCartUI();
+    }
+
+    // --- Cart System ---
+    function changeQty(id, delta) {
+        let item = cart.find(item => item.id === id);
+        if(item) {
+            item.qty += delta;
+            if(item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalValue = document.getElementById('cartTotalValue');
+        
+        // Update total items count bubble
+        let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCountEl.innerText = totalItems;
+
+        // Render Cart Items
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
+        } else {
+            cart.forEach(item => {
+                // If the key is missing (e.g., from a new page), it will say "Unknown" until added to the dictionary
+                let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+                let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+                let itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${name} (${weight})</h4>
+                            <p>${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Update Total Price text
+        cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendOrderToWhatsApp() {
+        if(cart.length === 0) {
+            alert(translations[currentLanguage]['emptyCart']);
+            return;
+        }
+
+        let message = translations[currentLanguage]['orderGreeting'] + "\n\n";
+        let total = 0;
+
+        cart.forEach(item => {
+            let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+            let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            message += `▪️ ${item.qty}x ${name} (${weight}) - ${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}\n`;
+        });
+
+        message += `\n*${translations[currentLanguage]['totalPrice']} ${total.toLocaleString()} ${translations[currentLanguage]['currency']}*`;
+
+        const waNumber = "9647511224225";
+        const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(url, '_blank');
     }
 
     // Set default language on load
-    setLanguage('en');
+    setLanguage(currentLanguage);
+
 </script>
 
 </body>
-
 </html>
