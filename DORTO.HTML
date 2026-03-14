@@ -100,6 +100,8 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
     animation: fadeUp 1s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -112,6 +114,7 @@ body {
     height: 160px;
     object-fit: contain;
     background: white;
+    cursor: pointer;
 }
 
 .card h3 {
@@ -130,6 +133,205 @@ body {
     font-weight: bold;
     color: var(--main-red);
     font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* زر أضف للسلة في الكروت */
+.add-to-cart-btn {
+    margin-top: auto;
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background: var(--main-orange);
+}
+
+/* سلة المشتريات (الزر العائم والنافذة) */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.3s;
+}
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+html[dir="rtl"] .cart-badge {
+    right: auto;
+    left: -5px;
+}
+
+.cart-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 1001;
+    padding: 20px;
+    transition: 0.3s ease;
+    opacity: 0;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+.cart-popup.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding-right: 5px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+.cart-item-info {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+.cart-item-info h4 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+.cart-item-info p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #777;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.cart-item-controls button {
+    background: #eee;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.cart-item-controls button:hover {
+    background: #ddd;
+}
+.remove-btn {
+    color: white;
+    background: var(--main-red) !important;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    text-align: center;
+}
+.cart-total {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main-blue);
+    margin-bottom: 15px;
+}
+.checkout-btn {
+    background: #25D366; /* WhatsApp Green */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.checkout-btn:hover {
+    background: #1ebc5a;
+}
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+}
+.overlay.active {
+    display: block;
 }
 
 /* Contact */
@@ -171,6 +373,26 @@ body {
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
 }
+.image-popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-popup img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: transform 0.3s;
+    cursor: zoom-in;
+}
 </style>
 </head>
 
@@ -196,233 +418,263 @@ body {
     <h2 data-i18n="ourProducts">Our Products</h2>
 
     <div class="agencies">
-        
         <div class="card">
-            <img src="fvjrhg 3750.jpg">
+            <img src="fvjrhg 3750.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w3750">3,750g</p>
-            <p class="price" data-i18n="p6000">6,000 I.D</p>
+            <p class="price" data-i18n="p5500">5,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt1', 'dishOrange', 'w3750', 5500, 'fvjrhg 3750.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture222.jpg">
+            <img src="Picture222.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishApple">Apple dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w3750">3,750g</p>
-            <p class="price" data-i18n="p6000">6,000 I.D</p>
+            <p class="price" data-i18n="p5500">5,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt2', 'dishApple', 'w3750', 5500, 'Picture222.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture312.jpg">
+            <img src="Picture312.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w3750">3,750g</p>
-            <p class="price" data-i18n="p6000">6,000 I.D</p>
+            <p class="price" data-i18n="p5500">5,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt3', 'dishLemon', 'w3750', 5500, 'Picture312.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Picture444.jpg">
+            <img src="Picture444.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w1000">1,000g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1300">1,300 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt4', 'dishOrange', 'w1000', 1300, 'Picture444.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture666.jpg">
+            <img src="Picture666.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishApple">Apple dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w1000">1,000g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1300">1,300 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt5', 'dishApple', 'w1000', 1300, 'Picture666.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture555.jpg">
+            <img src="Picture555.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w1000">1,000g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1300">1,300 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt6', 'dishLemon', 'w1000', 1300, 'Picture555.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Picture999.jpg">
+            <img src="Picture999.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="plusOrange">Plus Dishwashing Liquid Orange</h3>
             <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1350">1,350 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt7', 'plusOrange', 'w750', 1350, 'Picture999.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture1123.jpg">
+            <img src="Picture1123.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="plusApple">Plus Dishwashing Liquid Apple</h3>
             <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1350">1,350 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt8', 'plusApple', 'w750', 1350, 'Picture1123.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture1000.jpg">
+            <img src="Picture1000.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="plusLemon">Plus Dishwashing Liquid Lemon</h3>
             <p data-i18n="plusDesc">With Plus Orange – fast grease removal and a fresh, natural scent.</p>
             <p data-i18n="w750">750g</p>
-            <p class="price" data-i18n="p1500">1,500 I.D</p>
+            <p class="price" data-i18n="p1350">1,350 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt9', 'plusLemon', 'w750', 1350, 'Picture1000.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Picture888.jpg">
+            <img src="Picture888.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishOrange">Orange dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w500">500g</p>
             <p class="price" data-i18n="p1000">1,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt10', 'dishOrange', 'w500', 1000, 'Picture888.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture777.jpg">
+            <img src="Picture777.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="dishLemon">Lemon dishwashing liquid</h3>
             <p data-i18n="dishDesc">Grease-cutting power, gentleness on your hands – the perfect Dishwashing Liquid.</p>
             <p data-i18n="w500">500g</p>
             <p class="price" data-i18n="p1000">1,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt11', 'dishLemon', 'w500', 1000, 'Picture777.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="1-Black Wash (1).png">
+            <img src="1-Black Wash (1).png" onclick="openImage(this.src)">
             <h3 data-i18n="blackLaundry">Black laundry liquid</h3>
             <p data-i18n="blackDesc">Sweeter blacks, softer clothes – effective black laundry detergent.</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3000">3,000 I.D</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt12', 'blackLaundry', 'w1L', 2500, '1-Black Wash (1).png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="1-Black Wash (1).png">
+            <img src="1-Black Wash (1).png" onclick="openImage(this.src)">
             <h3 data-i18n="blackLaundry">Black laundry liquid</h3>
             <p data-i18n="blackDesc">Sweeter blacks, softer clothes – effective black laundry detergent.</p>
             <p data-i18n="w27L">2.7L</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt13', 'blackLaundry', 'w27L', 5750, '1-Black Wash (1).png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="2.7-FLORAL.png">
+            <img src="2.7-FLORAL.png" onclick="openImage(this.src)">
             <h3 data-i18n="univLaundry">Universal liquid laundry detergent for colored clothes</h3>
             <p data-i18n="univDesc">Universal Detergent – To maintain your vibrant colors and perfect cleanliness.</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3000">3,000 I.D</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt14', 'univLaundry', 'w1L', 2500, '2.7-FLORAL.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="2.7-FLORAL.png">
+            <img src="2.7-FLORAL.png" onclick="openImage(this.src)">
             <h3 data-i18n="univLaundry">Universal liquid laundry detergent for colored clothes</h3>
             <p data-i18n="univDesc">Universal Detergent – To maintain your vibrant colors and perfect cleanliness.</p>
             <p data-i18n="w27L">2.7L</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt15', 'univLaundry', 'w27L', 5750, '2.7-FLORAL.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="2.7-UNIVERSAL.png">
+            <img src="2.7-UNIVERSAL.png" onclick="openImage(this.src)">
             <h3 data-i18n="lavenderLaundry">Colored Lavender Laundry Detergent</h3>
             <p data-i18n="lavenderDesc">Protect your colors with a touch of natural lavender fragrance.</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p3000">3,000 I.D</p>
+            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt16', 'lavenderLaundry', 'w1L', 2500, '2.7-UNIVERSAL.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="2.7-UNIVERSAL.png">
+            <img src="2.7-UNIVERSAL.png" onclick="openImage(this.src)">
             <h3 data-i18n="lavenderLaundry">Colored Lavender Laundry Detergent</h3>
             <p data-i18n="lavenderDesc">Protect your colors with a touch of natural lavender fragrance.</p>
             <p data-i18n="w27L">2.7L</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt17', 'lavenderLaundry', 'w27L', 5750, '2.7-UNIVERSAL.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="1-CONCENTRATE.png">
+            <img src="1-CONCENTRATE.png" onclick="openImage(this.src)">
             <h3 data-i18n="concLaundry">Concentrated laundry liquid</h3>
             <p data-i18n="concDesc">Great results with less – a concentrated and ideal washing liquid.</p>
             <p data-i18n="w1L">1L</p>
             <p class="price" data-i18n="p3500">3,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt18', 'concLaundry', 'w1L', 3500, '1-CONCENTRATE.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="final-hand wash - مایع لباسشویی دستی - 01.png">
+            <img src="final-hand wash - مایع لباسشویی دستی - 01.png" onclick="openImage(this.src)">
             <h3 data-i18n="handLaundry">Hand washing liquid</h3>
             <p data-i18n="handLaundryDesc">Effective and gentle hand wash – long-lasting fresh scent.</p>
             <p data-i18n="w1L">1L</p>
-            <p class="price" data-i18n="p2750">2,750 I.D</p>
+            <p class="price" data-i18n="p2250">2,250 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt19', 'handLaundry', 'w1L', 2250, 'final-hand wash - مایع لباسشویی دستی - 01.png')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Clear Handwash (2).jpg">
+            <img src="Clear Handwash (2).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearUnique">Clear liquid hand soap Unique Feel</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt20', 'clearUnique', 'w450', 1750, 'Clear Handwash (2).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Clear Handwash (3).jpg">
+            <img src="Clear Handwash (3).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearVerbena">Clear liquid hand soap Beauty Verbena</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt21', 'clearVerbena', 'w450', 1750, 'Clear Handwash (3).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Clear Handwash (4).jpg">
+            <img src="Clear Handwash (4).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearDark">Clear liquid hand soap Dark Blue</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <p class="price" data-i18n="p1750">1,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt22', 'clearDark', 'w450', 1750, 'Clear Handwash (4).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Picture2000.jpg">
+            <img src="Picture2000.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearUnique">Clear liquid hand soap Unique Feel</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w2700">2,700g</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt23', 'clearUnique', 'w2700', 5750, 'Picture2000.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture2121.jpg">
+            <img src="Picture2121.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearVerbena">Clear liquid hand soap Beauty Verbena</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w2700">2,700g</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p57500">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt24', 'clearVerbena', 'w2700', 5750, 'Picture2121.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture2255.jpg">
+            <img src="Picture2255.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearDark">Clear liquid hand soap Dark Blue</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w2700">2,700g</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt25', 'clearDark', 'w2700', 5750, 'Picture2255.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture5555.jpg">
+            <img src="Picture5555.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="clearTutti">Clear liquid hand soap Tutti Frutti</h3>
             <p data-i18n="clearDesc">A refreshing, gentle, and special handwash every time.</p>
             <p data-i18n="w2700">2,700g</p>
-            <p class="price" data-i18n="p6250">6,250 I.D</p>
+            <p class="price" data-i18n="p5750">5,750 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt26', 'clearTutti', 'w2700', 5750, 'Picture5555.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
         <div class="card">
-            <img src="Creamy Handwash (1).jpg">
+            <img src="Creamy Handwash (1).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamVerbena">hand soap cream Beauty Verbena</h3>
             <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt27', 'creamVerbena', 'w450', 2000, 'Creamy Handwash (1).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Creamy Handwash (2).jpg">
+            <img src="Creamy Handwash (2).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamBomb">hand soap cream Bomb of Flower</h3>
             <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt28', 'creamBomb', 'w450', 2000, 'Creamy Handwash (2).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Creamy Handwash (3).jpg">
+            <img src="Creamy Handwash (3).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamElegant">hand soap cream Elegant Bloom</h3>
             <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt29', 'creamElegant', 'w450', 2000, 'Creamy Handwash (3).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Creamy Handwash (4).jpg">
+            <img src="Creamy Handwash (4).jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamPurple">hand soap cream Purple Trauel</h3>
             <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
             <p data-i18n="w450">450g</p>
-            <p class="price" data-i18n="p2500">2,500 I.D</p>
+            <p class="price" data-i18n="p2000">2,000 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt30', 'creamPurple', 'w450', 2000, 'Creamy Handwash (4).jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
         <div class="card">
-            <img src="Picture235.jpg">
+            <img src="Picture235.jpg" onclick="openImage(this.src)">
             <h3 data-i18n="creamVerbena">hand soap cream Beauty Verbena</h3>
             <p data-i18n="creamDesc">Protection, moisturizing, and hygiene... the ideal hand washing cream.</p>
             <p data-i18n="w2700">2,700g</p>
-            <p class="price" data-i18n="p7000">7,000 I.D</p>
+            <p class="price" data-i18n="p6500">6,500 I.D</p>
+            <button class="add-to-cart-btn" onclick="addToCart('drt31', 'creamVerbena', 'w2700', 6500, 'Picture235.jpg')" data-i18n="addToCartBtn">🛒 Add to Cart</button>
         </div>
 
     </div>
@@ -445,6 +697,32 @@ body {
 
 <div class="footer" data-i18n="footer">
     © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<div class="cart-floating-btn" onclick="toggleCart()">
+    🛒
+    <span class="cart-badge" id="cartBadge">0</span>
+</div>
+
+<div class="overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<div class="cart-popup" id="cartPopup">
+    <div class="cart-header">
+        <h3 data-i18n="cartTitle">🛒 Your Cart</h3>
+        <button class="close-cart" onclick="toggleCart()">✖</button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+        </div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span data-i18n="cartTotal">Total:</span> <span id="cartTotalPrice">0</span> I.D
+        </div>
+        <button class="checkout-btn" onclick="sendOrder()" data-i18n="checkoutBtn">Checkout via WhatsApp</button>
+    </div>
+</div>
+
+<div class="image-popup" id="imagePopup" onclick="closeImage()">
+    <img id="popupImg">
 </div>
 
 <script>
@@ -477,7 +755,7 @@ body {
             handLaundry: "Hand washing liquid",
             handLaundryDesc: "Effective and gentle hand wash – long-lasting fresh scent.",
             
-            // Hand Soaps (Clear & Creamy)
+            // Hand Soaps
             clearUnique: "Clear liquid hand soap Unique Feel",
             clearVerbena: "Clear liquid hand soap Beauty Verbena",
             clearDark: "Clear liquid hand soap Dark Blue",
@@ -501,16 +779,18 @@ body {
             w27L: "2.7L",
             
             // Prices
+            p5500: "5,500 I.D",
+            p1300: "1,300 I.D",
+            p1350: "1,350 I.D",
             p1000: "1,000 I.D",
-            p1500: "1,500 I.D",
-            p2000: "2,000 I.D",
             p2500: "2,500 I.D",
-            p2750: "2,750 I.D",
-            p3000: "3,000 I.D",
+            p5750: "5,750 I.D",
             p3500: "3,500 I.D",
-            p6000: "6,000 I.D",
-            p6250: "6,250 I.D",
-            p7000: "7,000 I.D",
+            p2250: "2,250 I.D",
+            p1750: "1,750 I.D",
+            p5750: "5,750 I.D",
+            p2000: "2,000 I.D",
+            p6500: "6,500 I.D",
 
             contactUs: "Contact us",
             whatsapp: "💬 WhatsApp",
@@ -518,7 +798,14 @@ body {
             instagram: "📷 Instagram",
             facebook: "📘 Facebook",
             address: "📍 New Hawler, Directorate of Information Technology.",
-            footer: "© 2026 Nebras Alhaq - All Rights Reserved"
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved",
+
+            // Cart Translations
+            addToCartBtn: "🛒 Add to Cart",
+            cartTitle: "🛒 Your Cart",
+            cartTotal: "Total:",
+            checkoutBtn: "Checkout via WhatsApp",
+            emptyCartMsg: "Your cart is empty."
         },
         ar: {
             backBtn: "⬅ العودة للرئيسية",
@@ -567,16 +854,19 @@ body {
             w1L: "1 لتر",
             w27L: "2.7 لتر",
             
+            
+            p5500: "5,500 دينار عراقي",
+            p1300: "1,300 دينار عراقي",
+            p1350: "1,350 دينار عراقي",
             p1000: "1,000 دينار عراقي",
-            p1500: "1,500 دينار عراقي",
-            p2000: "2,000 دينار عراقي",
             p2500: "2,500 دينار عراقي",
-            p2750: "2,750 دينار عراقي",
-            p3000: "3,000 دينار عراقي",
+            p5750: "5,750 دينار عراقي",
             p3500: "3,500 دينار عراقي",
-            p6000: "6,000 دينار عراقي",
-            p6250: "6,250 دينار عراقي",
-            p7000: "7,000 دينار عراقي",
+            p2250: "2,250 دينار عراقي",
+            p1750: "1,750 دينار عراقي",
+            p5750: "5,750 دينار عراقي",
+            p2000: "2,000 دينار عراقي",
+            p6500: "6,500 دينار عراقي",
 
             contactUs: "تواصل معنا",
             whatsapp: "💬 واتساب",
@@ -584,7 +874,14 @@ body {
             instagram: "📷 إنستغرام",
             facebook: "📘 فيسبوك",
             address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
-            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة"
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
+
+            // Cart Translations
+            addToCartBtn: "🛒 أضف للسلة",
+            cartTitle: "🛒 سلة المشتريات",
+            cartTotal: "المجموع:",
+            checkoutBtn: "إرسال الطلب عبر واتساب",
+            emptyCartMsg: "السلة فارغة حالياً."
         },
         ku: {
             backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
@@ -633,16 +930,19 @@ body {
             w1L: "1 لیتر",
             w27L: "2.7 لیتر",
             
+            
+            p5500: "5,500 دیناری عێراقی",
+            p1300: "1,300 دیناری عێراقی",
+            p1350: "1,350 دیناری عێراقی",
             p1000: "1,000 دیناری عێراقی",
-            p1500: "1,500 دیناری عێراقی",
-            p2000: "2,000 دیناری عێراقی",
             p2500: "2,500 دیناری عێراقی",
-            p2750: "2,750 دیناری عێراقی",
-            p3000: "3,000 دیناری عێراقی",
+            p5750: "5,750 دیناری عێراقی",
             p3500: "3,500 دیناری عێراقی",
-            p6000: "6,000 دیناری عێراقی",
-            p6250: "6,250 دیناری عێراقی",
-            p7000: "7,000 دیناری عێراقی",
+            p2250: "2,250 دیناری عێراقی",
+            p1750: "1,750 دیناری عێراقی",
+            p5750: "5,750 دیناری عێراقی",
+            p2000: "2,000 دیناری عێراقی",
+            p6500: "6,500 دیناری عێراقی",
 
             contactUs: "پەیوەندیمان پێوە بکە",
             whatsapp: "💬 وەتسئاپ",
@@ -650,12 +950,24 @@ body {
             instagram: "📷 ئینستاگرام",
             facebook: "📘 فەیسبووک",
             address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
-            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون"
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
+
+            // Cart Translations
+            addToCartBtn: "🛒 زیادکردن بۆ سەبەتە",
+            cartTitle: "🛒 سەبەتەکەت",
+            cartTotal: "کۆی گشتی:",
+            checkoutBtn: "داواکردن لە ڕێگەی وەتسئاپ",
+            emptyCartMsg: "سەبەتەکە بەتاڵە."
         }
     };
 
+    let currentLang = localStorage.getItem('siteLang') || 'en';
+    
+    // سلة المشتريات المشتركة
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
     function setLanguage(lang) {
-        // Change text based on dictionary
+        currentLang = lang;
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -664,7 +976,6 @@ body {
             }
         });
 
-        // Change Direction
         if (lang === 'ar' || lang === 'ku') {
             document.documentElement.setAttribute('dir', 'rtl');
             document.documentElement.setAttribute('lang', lang);
@@ -673,14 +984,170 @@ body {
             document.documentElement.setAttribute('lang', 'en');
         }
 
-        // Save Language choice
         localStorage.setItem('siteLang', lang);
+        updateCartUI(); // تحديث واجهة السلة باللغة الجديدة
     }
 
-    // Read language choice from memory
-    const savedLang = localStorage.getItem('siteLang') || 'en';
-    setLanguage(savedLang);
-</script>
+    setLanguage(currentLang);
 
+    // إضافة منتج للسلة
+    function addToCart(id, nameKey, weightKey, price, img) {
+        let existingItem = cart.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.qty += 1;
+        } else {
+            cart.push({ id, nameKey, weightKey, price, img, qty: 1 });
+        }
+        saveCart();
+        updateCartUI();
+        
+        // تأثير حركي بسيط عند الإضافة
+        const btn = document.querySelector(`[onclick*="${id}"]`);
+        if(btn) {
+            let originalText = btn.innerHTML;
+            btn.innerHTML = "✔";
+            btn.style.background = "#25D366";
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = "";
+            }, 1000);
+        }
+    }
+
+    // حفظ السلة
+    function saveCart() {
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    // تحديث واجهة السلة
+    function updateCartUI() {
+        const container = document.getElementById('cartItemsContainer');
+        const badge = document.getElementById('cartBadge');
+        const totalPriceEl = document.getElementById('cartTotalPrice');
+        
+        container.innerHTML = '';
+        let totalQty = 0;
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            container.innerHTML = `<p style="text-align:center; color:#888;">${translations[currentLang].emptyCartMsg}</p>`;
+        } else {
+            cart.forEach((item, index) => {
+                totalQty += item.qty;
+                totalPrice += item.price * item.qty;
+
+                // إذا كان المنتج مضاف من صفحة أخرى، نحاول ترجمته إن وجد أو نتركه باسمه الأصلي
+                let itemName = translations[currentLang][item.nameKey] || item.nameKey;
+                let itemWeight = translations[currentLang][item.weightKey] || item.weightKey;
+
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="product">
+                        <div class="cart-item-info">
+                            <h4>${itemName}</h4>
+                            <p>${itemWeight} - ${item.price.toLocaleString()} I.D</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button onclick="changeQty(${index}, 1)">+</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty(${index}, -1)">-</button>
+                            <button class="remove-btn" onclick="removeItem(${index})">🗑</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        badge.innerText = totalQty;
+        totalPriceEl.innerText = totalPrice.toLocaleString();
+    }
+
+    // تغيير الكمية
+    function changeQty(index, amount) {
+        cart[index].qty += amount;
+        if (cart[index].qty <= 0) {
+            cart.splice(index, 1);
+        }
+        saveCart();
+        updateCartUI();
+    }
+
+    // حذف منتج
+    function removeItem(index) {
+        cart.splice(index, 1);
+        saveCart();
+        updateCartUI();
+    }
+
+    // فتح وإغلاق السلة
+    function toggleCart() {
+        const popup = document.getElementById('cartPopup');
+        const overlay = document.getElementById('cartOverlay');
+        popup.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+
+    // إرسال الطلب عبر واتساب
+    function sendOrder() {
+        if (cart.length === 0) return;
+        
+        let message = "مرحباً، أود طلب المنتجات التالية:\n\n";
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+            let itemName = translations['ar'][item.nameKey] || item.nameKey; // نرسل الطلب بالعربي للواتساب
+            let itemWeight = translations['ar'][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+            
+            message += `${index + 1}. ${itemName} (${itemWeight})\n`;
+            message += `الكمية: ${item.qty} | السعر: ${itemTotal.toLocaleString()} دينار\n`;
+            message += `--------------------------\n`;
+        });
+        
+        message += `\nالمجموع الكلي: ${total.toLocaleString()} دينار عراقي`;
+        
+        const whatsappNumber = "9647511224225";
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        
+        // تفريغ السلة بعد الطلب
+        cart = [];
+        saveCart();
+        updateCartUI();
+        toggleCart();
+    }
+
+    // مزامنة السلة بين الصفحات (Tabs) تلقائياً
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'nebrasCart') {
+            cart = JSON.parse(e.newValue) || [];
+            updateCartUI();
+        }
+    });
+
+    // تكبير الصور (القديم)
+    let zoom = 1;
+    function openImage(src){
+        const popup = document.getElementById("imagePopup");
+        const img = document.getElementById("popupImg");
+        popup.style.display = "flex";
+        img.src = src;
+        zoom = 1;
+        img.style.transform = "scale(1)";
+    }
+    function closeImage(){
+        document.getElementById("imagePopup").style.display = "none";
+    }
+    const popupImg = document.getElementById("popupImg");
+    popupImg.addEventListener("wheel", function(e){
+        e.preventDefault();
+        if(e.deltaY < 0){ zoom += 0.2; } else { zoom -= 0.2; }
+        if(zoom < 1) zoom = 1;
+        if(zoom > 3) zoom = 3;
+        popupImg.style.transform = "scale(" + zoom + ")";
+    });
+
+</script>
 </body>
 </html>
