@@ -57,6 +57,102 @@ body {
     transform: scale(1.05);
 }
 
+/* Slider Section - عروضات */
+.slider-section {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    text-align: center;
+    animation: fadeUp 1s ease;
+}
+
+.slider-section h2 {
+    color: var(--main-orange);
+    margin-bottom: 20px;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 400px; 
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000; 
+    border: 3px solid white;
+    box-shadow: 0 0 40px rgba(255, 77, 0, 0.5), 0 0 60px rgba(15, 76, 110, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+/* أزرار التنقل */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-btn:hover {
+    background: var(--main-orange);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+html[dir="rtl"] .prev { left: auto; right: 15px; transform: translateY(-50%) rotate(180deg); }
+html[dir="rtl"] .next { right: auto; left: 15px; transform: translateY(-50%) rotate(180deg); }
+html[dir="rtl"] .nav-btn:hover { transform: translateY(-50%) rotate(180deg) scale(1.1); }
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* إظهار الصورة/الفيديو بالكامل بدون قص */
+.slide img, .slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    background: #000;
+}
+
+@media (max-width: 600px) {
+    .slider-container {
+        height: 250px; 
+    }
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
 /* Agencies Section */
 .section {
     padding: 50px 20px;
@@ -332,6 +428,48 @@ html[dir="rtl"] .cart-floating-btn {
     <p style="color: var(--main-red);" data-i18n="companySlogan">The Fastest Distribution</p>
 </div>
 
+<div class="slider-section">
+    <h2 data-i18n="specialOffers">Special Offers</h2>
+    <div class="slider-container">
+        
+        <button class="nav-btn prev" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-btn next" onclick="changeSlide(1)">❯</button>
+
+        <div class="slide active">
+            <img src="ChatGPT Image 16 مايو 2026، 11_42_11 م.png" 
+                 data-en="ChatGPT Image 16 مايو 2026، 11_42_11 م.png" 
+                 data-ar="ChatGPT Image 16 مايو 2026، 11_42_11 م.png" 
+                 data-ku="ChatGPT Image 16 مايو 2026، 11_42_11 م.png" 
+                 alt="Offer 1">
+        </div>
+        <div class="slide active">
+            <img src="ChatGPT Image 16 مايو 2026، 11_48_14 م.png" 
+                 data-en="ChatGPT Image 16 مايو 2026، 11_48_14 م.png" 
+                 data-ar="ChatGPT Image 16 مايو 2026، 11_48_14 م.png" 
+                 data-ku="ChatGPT Image 16 مايو 2026، 11_48_14 م.png" 
+                 alt="Offer 4">
+        </div>
+
+        <div class="slide">
+            <video playsinline controls 
+                   src="Dorto [Lavafi] Rooz Dorto.mp4" 
+                   data-en="Dorto [Lavafi] Rooz Dorto.mp4" 
+                   data-ar="Dorto [Lavafi] Rooz Dorto.mp4" 
+                   data-ku="Dorto [Lavafi] Rooz Dorto.mp4">
+            </video>
+        </div>
+
+        <div class="slide">
+            <img src="ChatGPT Image 19 مايو 2026، 11_09_25 م.png" 
+                 data-en="ChatGPT Image 19 مايو 2026، 11_09_25 م.png" 
+                 data-ar="ChatGPT Image 19 مايو 2026، 11_09_25 م.png" 
+                 data-ku="ChatGPT Image 19 مايو 2026، 11_09_25 م.png" 
+                 alt="Offer 3">
+        </div>
+
+    </div>
+</div>
+
 <div class="section">
     <h2 data-i18n="ourAgencies">Our agencies</h2>
 
@@ -345,6 +483,14 @@ html[dir="rtl"] .cart-floating-btn {
             </div>
         </a>
 
+        <a href="ZahrAlbustan.html" style="text-decoration:none; color:inherit;">
+            <div class="card">
+                <img src="لوكو زهرة بستان.png" alt="Zahr Albustan">
+                <h3 data-i18n="Zahr">Zahr Albustan</h3>
+                <p data-i18n="madeInSyria">Proudly made in Syria</p>
+                <p data-i18n="foodSpec">Specializing in the production of high-quality food products</p>
+            </div>
+        </a>
         <a href="ALREEF.html" style="text-decoration:none; color:inherit;">
             <div class="card">
                 <img src="Nebras alhaq-16.png" alt="Alreef">
@@ -363,7 +509,7 @@ html[dir="rtl"] .cart-floating-btn {
             </div>
         </a>
        
-        <a href="DORTO.HTML" style="text-decoration:none; color:inherit;">
+        <a href="DORTO.html" style="text-decoration:none; color:inherit;">
             <div class="card">
                 <img src="logo Dorto E.png" alt="Dorto">
                 <h3 data-i18n="dorto">DORTO</h3>
@@ -415,11 +561,11 @@ html[dir="rtl"] .cart-floating-btn {
     <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
     <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
     
-    <a href="https://maps.app.goo.gl/d9JN2Qm1XC942yRG8" 
+    <a href="https://maps.app.goo.gl/NecoQNVE2qhrLLYXA" 
        target="_blank"
        style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
        data-i18n="address">
-       📍 New Hawler, Directorate of Information Technology.
+       📍Erbil, Mosul Road, Upper Government Warehouses
     </a>
 </div>
 
@@ -430,8 +576,10 @@ html[dir="rtl"] .cart-floating-btn {
 <script>
     const translations = {
         en: {
+            Zahr:"Zahr Albustan",
             companyName: "NEBRAS ALHAQ",
             companySlogan: "The Fastest Distribution",
+            specialOffers: "🔥Our products",
             ourAgencies: "Our agencies",
             lio: "LIO",
             alreef: "ALREEF",
@@ -448,35 +596,21 @@ html[dir="rtl"] .cart-floating-btn {
             email: "✉ Contact us",
             instagram: "📷 Instagram",
             facebook: "📘 Facebook",
-            address: "📍 New Hawler, Directorate of Information Technology.",
+            address: "📍 Erbil, Mosul Road, Upper Government Warehouses",
             footer: "© 2026 Nebras Alhaq - All Rights Reserved",
 
-            // Cart Translations
             cartTitle: "Your Cart",
             totalPrice: "Total:",
             sendWhatsApp: "Send Order via WhatsApp",
             emptyCart: "Your cart is empty.",
             currency: "I.D",
-            orderGreeting: "Hello, I would like to order:",
-            
-            // Shared Product Translations for the Global Cart
-            tahini: "Premium Tahini",
-            jam: "Apricot Jam",
-            oliveOil: "Olive oil",
-            sunflowerOil: "Sunflower oil",
-            ghee: "Pure vegetable ghee",
-            
-            weight400g: "400g",
-            weight800g: "800g",
-            weight05L: "0.5L",
-            weight1L: "1L",
-            weight4L: "4L",
-            weight1kg: "1kg",
-            weight2kg: "2kg"
+            orderGreeting: "Hello, I would like to order:"
         },
         ar: {
+            Zahr:"زهرة البستان",
             companyName: "نبراس الحق",
             companySlogan: "التوزيع الأسرع",
+            specialOffers: "🔥  منتجاتنا",
             ourAgencies: "وكالاتنا",
             lio: "ليو",
             alreef: "الريف",
@@ -493,35 +627,21 @@ html[dir="rtl"] .cart-floating-btn {
             email: "✉ راسلنا عبر الإيميل",
             instagram: "📷 إنستغرام",
             facebook: "📘 فيسبوك",
-            address: "📍 هولير الجديدة، مديرية تكنولوجيا المعلومات.",
+            address: "📍     هولير طريق موصل مخازن علوى الحكومي.",
             footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
 
-            // Cart Translations
             cartTitle: "سلة المشتريات",
             totalPrice: "الإجمالي:",
             sendWhatsApp: "إرسال الطلب عبر واتساب",
             emptyCart: "السلة فارغة حالياً.",
             currency: "دينار",
-            orderGreeting: "مرحباً، أود طلب المنتجات التالية:",
-            
-            // Shared Product Translations for the Global Cart
-            tahini: "طحينة فاخرة",
-            jam: "مربى المشمش",
-            oliveOil: "زيت زيتون",
-            sunflowerOil: "زيت دوار الشمس",
-            ghee: "سمن نباتي نقي",
-            
-            weight400g: "400 غرام",
-            weight800g: "800 غرام",
-            weight05L: "0.5 لتر",
-            weight1L: "1 لتر",
-            weight4L: "4 لتر",
-            weight1kg: "1 كيلو",
-            weight2kg: "2 كيلو"
+            orderGreeting: "مرحباً، أود طلب المنتجات التالية:"
         },
         ku: {
+            Zahr:"زهرة البستان",
             companyName: "نبراس الحق",
             companySlogan: "خێراترین دابەشکردن",
+            specialOffers: "🔥 بەرهەمەکانمان ",
             ourAgencies: "بریکارەکانمان",
             lio: "لیۆ",
             alreef: "ئەلڕیف",
@@ -538,41 +658,25 @@ html[dir="rtl"] .cart-floating-btn {
             email: "✉ ئیمەیڵمان بۆ بنێرە",
             instagram: "📷 ئینستاگرام",
             facebook: "📘 فەیسبووک",
-            address: "📍 هەولێری نوێ، بەڕێوەبەرایەتی تەکنەلۆجیای زانیاری.",
+            address: "📍 هەولێر، جادەی موسڵ، کۆگاکانی حکومەتی سەرەوە",
             footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
 
-            // Cart Translations
             cartTitle: "سەبەتەکەت",
             totalPrice: "کۆی گشتی:",
             sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ",
             emptyCart: "سەبەتەکەت بەتاڵە.",
             currency: "دینار",
-            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:",
-            
-            // Shared Product Translations for the Global Cart
-            tahini: "تەحینی نایاب",
-            jam: "مورەبای قەیسی",
-            oliveOil: "زەیتی زەیتوون",
-            sunflowerOil: "زەیتی گوڵەبەڕۆژە",
-            ghee: "ڕۆنی ڕووەکی پاک",
-            
-            weight400g: "400 گرام",
-            weight800g: "800 گرام",
-            weight05L: "0.5 لیتر",
-            weight1L: "1 لیتر",
-            weight4L: "4 لیتر",
-            weight1kg: "1 کيلۆگرام",
-            weight2kg: "2 کيلۆگرام"
+            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:"
         }
     };
 
     let currentLanguage = localStorage.getItem('siteLang') || 'en';
-    // Using a unified Global Cart Name
     let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
 
     function setLanguage(lang) {
         currentLanguage = lang;
-        // Change text based on dictionary
+        
+        // 1. تغيير النصوص العادية
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -581,7 +685,7 @@ html[dir="rtl"] .cart-floating-btn {
             }
         });
 
-        // Change Direction
+        // 2. تغيير اتجاه الصفحة
         if (lang === 'ar' || lang === 'ku') {
             document.documentElement.setAttribute('dir', 'rtl');
             document.documentElement.setAttribute('lang', lang);
@@ -590,14 +694,26 @@ html[dir="rtl"] .cart-floating-btn {
             document.documentElement.setAttribute('lang', 'en');
         }
 
-        // Save Language choice so it persists across pages
+        // 3. التعديل الجديد: تبديل صور وفيديوهات العروض حسب اللغة!
+        const mediaElements = document.querySelectorAll('[data-en]');
+        mediaElements.forEach(el => {
+            const newSrc = el.getAttribute(`data-${lang}`);
+            
+            if (el.tagName.toLowerCase() === 'img') {
+                el.src = newSrc;
+            } else if (el.tagName.toLowerCase() === 'video') {
+                // نقوم بتحديث مسار الفيديو فقط إذا كان مختلفاً (حتى لا ينقطع الفيديو إذا كان يعمل)
+                if (!el.src.includes(newSrc)) {
+                    el.src = newSrc;
+                    el.load(); // إعادة تحميل الفيديو باللغة الجديدة
+                }
+            }
+        });
+
         localStorage.setItem('siteLang', lang);
-        
-        // Refresh cart text language
         updateCartUI();
     }
 
-    // --- Cart System ---
     function changeQty(id, delta) {
         let item = cart.find(item => item.id === id);
         if(item) {
@@ -619,11 +735,9 @@ html[dir="rtl"] .cart-floating-btn {
         const cartItemsContainer = document.getElementById('cartItemsContainer');
         const cartTotalValue = document.getElementById('cartTotalValue');
         
-        // Update total items count bubble
         let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
         cartCountEl.innerText = totalItems;
 
-        // Render Cart Items
         cartItemsContainer.innerHTML = '';
         let totalPrice = 0;
 
@@ -631,7 +745,6 @@ html[dir="rtl"] .cart-floating-btn {
             cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
         } else {
             cart.forEach(item => {
-                // If the key is missing (e.g., from a new page), it will say "Unknown" until added to the dictionary
                 let name = translations[currentLanguage][item.nameKey] || item.nameKey;
                 let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
                 let itemTotal = item.price * item.qty;
@@ -653,7 +766,6 @@ html[dir="rtl"] .cart-floating-btn {
             });
         }
 
-        // Update Total Price text
         cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
     }
 
@@ -691,7 +803,52 @@ html[dir="rtl"] .cart-floating-btn {
         window.open(url, '_blank');
     }
 
-    // Set default language on load
+    // --- نظام السلايدر الذكي ---
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    let sliderTimeout;
+
+    function changeSlide(direction) {
+        slides[currentSlideIndex].classList.remove('active');
+        let currentVideo = slides[currentSlideIndex].querySelector('video');
+        if (currentVideo) {
+            currentVideo.pause();
+            currentVideo.currentTime = 0;
+        }
+
+        currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+        slides[currentSlideIndex].classList.add('active');
+        handleCurrentSlide();
+    }
+
+    function showNextSlide() {
+        changeSlide(1);
+    }
+
+    function handleCurrentSlide() {
+        clearTimeout(sliderTimeout); 
+        
+        let currentSlide = slides[currentSlideIndex];
+        let video = currentSlide.querySelector('video');
+
+        if (video) {
+            video.currentTime = 0; 
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("المتصفح منع التشغيل التلقائي. يحتاج المستخدم لتشغيله يدوياً.");
+                });
+            }
+
+            video.onended = () => {
+                showNextSlide();
+            };
+        } else {
+            sliderTimeout = setTimeout(showNextSlide, 3500); 
+        }
+    }
+
+    handleCurrentSlide();
     setLanguage(currentLanguage);
 
 </script>

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahr Albustan - Nebras Alhaq</title>
+
+<style>
+:root {
+    --main-blue: #0f4c6e;
+    --main-red: #c40000;
+    --main-orange: #ff4d00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f4f6f9, #e8edf2);
+    transition: direction 0.3s ease;
+}
+
+/* Language Switcher Styles */
+.lang-switcher {
+    text-align: center;
+    padding: 10px;
+    background: #e8edf2;
+}
+.lang-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.lang-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Back Button */
+.back-nav {
+    padding: 10px 20px;
+    background: #e8edf2;
+}
+.back-btn {
+    text-decoration: none;
+    background: var(--main-red);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+.back-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Header */
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px 20px 40px;
+    animation: fadeDown 1s ease;
+}
+
+.logo {
+    width: 200px;
+    transition: 0.4s;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Agencies Section */
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--main-blue);
+    margin-bottom: 30px;
+}
+
+.agencies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    animation: fadeUp 1s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background: white;
+    cursor: zoom-in;
+}
+
+.card h3 {
+    color: var(--main-blue);
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+    flex-grow: 1;
+}
+
+.card p.price {
+    font-weight: bold;
+    color: var(--main-red);
+    font-size: 16px;
+}
+
+/* Add to Cart Button */
+.add-btn {
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: var(--main-orange);
+}
+
+/* Floating Cart Button */
+.cart-floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-orange);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+html[dir="rtl"] .cart-floating-btn {
+    right: auto;
+    left: 20px;
+}
+
+.cart-floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--main-red);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cart Modal */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    color: var(--main-blue);
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--main-red);
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--main-blue);
+}
+
+.cart-item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    background: #ddd;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-btn:hover {
+    background: #ccc;
+}
+
+.cart-footer {
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    margin-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--main-blue);
+}
+
+.checkout-btn {
+    background: #25D366; /* WhatsApp Green */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #128C7E;
+}
+
+/* Contact */
+.contact {
+    background: var(--main-blue);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.contact a {
+    display: block;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    color: var(--main-orange);
+}
+
+/* Footer */
+.footer {
+    background: #0a2f44;
+    color: #bbb;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.image-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001; /* Above cart */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-popup img {
+    max-width: 90%;
+    max-height: 90%;
+    transition: transform 0.3s;
+    cursor: zoom-in;
+}
+</style>
+</head>
+
+<body>
+
+<div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">English</button>
+    <button class="lang-btn" onclick="setLanguage('ar')">عربي</button>
+    <button class="lang-btn" onclick="setLanguage('ku')">کوردی</button>
+</div>
+
+<div class="back-nav">
+    <a href="index.html" class="back-btn" data-i18n="backBtn">⬅ Back to Home</a>
+</div>
+
+<div class="header">
+    <img src="لوكو زهرة بستان.png" class="logo" alt="ZahrAlbustan Logo">
+    <h2 style="color: var(--main-blue);" data-i18n="brandTitle">Zahr Albustan</h2>
+    <p style="color: var(--main-red);" data-i18n="brandSlogan">Food products of the best quality</p>
+</div>
+
+<div class="section">
+    <h2 data-i18n="ourProducts">Our Products</h2>
+
+    <div class="agencies">
+         <div class="card">
+            <img src=" كتشب 10غرام.jpeg " alt=" sweet tomato ketchup" onclick="openImage(this.src)">
+            <h3 data-i18n="ketchups">sweet tomato ketchup </h3>
+            <p data-i18n="ketchupsDesc">100% natural ketchup… an unparalleled delight.</p>
+            <p data-i18n="weight10g">10g</p>
+            <p class="price" data-i18n="price22750">22,750 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P1', 22750, 'tomato Ketchup', 'weight10g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="كتشب حلو 200غرام.png" alt=" sweet tomato ketchup" onclick="openImage(this.src)">
+            <h3 data-i18n="ketchups">sweet tomato ketchup </h3>
+            <p data-i18n="ketchupsDesc">100% natural ketchup… an unparalleled delight.</p>
+            <p data-i18n="weight200g">200g</p>
+            <p class="price" data-i18n="price1150">1,150 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P2', 1150, 'tomato Ketchup', 'weight200g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="كتشب حلو 200غرام.png" alt=" sweet tomato ketchup" onclick="openImage(this.src)">
+            <h3 data-i18n="ketchups">sweet tomato ketchup </h3>
+            <p data-i18n="ketchupsDesc">100% natural ketchup… an unparalleled delight.</p>
+            <p data-i18n="weight400g">400g</p>
+            <p class="price" data-i18n="price1800">1,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P3', 1800, 'tomato Ketchup', 'weight400g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="كتشب حار 200غرام.png" alt="HOT tomato ketchup" onclick="openImage(this.src)">
+            <h3 data-i18n="ketchuph">HOT tomato ketchup</h3>
+            <p data-i18n="ketchuphDesc">Spicy as much as delicious… and natural as much as it tastes.</p>
+            <p data-i18n="weight200g">200g</p>
+            <p class="price" data-i18n="price1150">1150 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P4', 1150, 'tomato Ketchup', 'weight200g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="كتشب 400غرام حار.png" alt="HOT tomato ketchup" onclick="openImage(this.src)">
+            <h3 data-i18n="ketchuph">HOT tomato ketchup</h3>
+            <p data-i18n="ketchuphDesc">Spicy as much as delicious… and natural as much as it tastes.</p>
+            <p data-i18n="weight400g">400g</p>
+            <p class="price" data-i18n="price1800">1,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P5', 1800, 'tomato Ketchup', 'weight400g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="خلطة بروستد.png" alt="Broasted Mix" onclick="openImage(this.src)">
+            <h3 data-i18n="BroastedMix">Broasted Mix</h3>
+            <p data-i18n="BroastedMixDesc">Broasted mix: the secret to crispy taste</p>
+            <p data-i18n="weight150g">150g</p>
+            <p class="price" data-i18n="price1500">1,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P6', 1500, 'Broasted Mix', 'weight150g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+         
+         <div class="card">
+            <img src="خلطة كريسبي.png" alt="Crispy mix" onclick="openImage(this.src)">
+            <h3 data-i18n="Crispymix">Crispy mix</h3>
+            <p data-i18n="CrispymixDesc">Golden crunch and a taste like no other</p>
+            <p data-i18n="weight150g">150g</p>
+            <p class="price" data-i18n="price1500">1,500 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P7', 1500, 'Crispy mix', 'weight150g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="زعتر احمر.png" alt="Red Thyme" onclick="openImage(this.src)">
+            <h3 data-i18n="zaetarr">Red Thyme</h3>
+            <p data-i18n="zaetarDesc">Thyme… the secret to a delicious breakfast.</p>
+            <p data-i18n="weight454g">454g</p>
+            <p class="price" data-i18n="price3250">3,250 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P8', 3250, 'Red Thyme', 'weight454g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+         <div class="card">
+            <img src=" زعتر اخضر.png" alt="Green Thyme" onclick="openImage(this.src)">
+            <h3 data-i18n="zaetarg">Green Thyme</h3>
+            <p data-i18n="zaetarDesc">zaetar… the secret to a delicious breakfast</p>
+            <p data-i18n="weight454g">454g</p>
+            <p class="price" data-i18n="price3250">3,250 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P9', 3250, 'Green Thyme', 'weight454g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="شراب رمان.png" alt="Concentrated pomegranate syrup" onclick="openImage(this.src)">
+            <h3 data-i18n="pomegranatesyrup">Concentrated pomegranate syrup</h3>
+            <p data-i18n="pomegranatesyrupDesc">Concentrated pomegranate… a natural taste with a focus on luxury.</p>
+            <p data-i18n="weight800g">800g</p>
+            <p class="price" data-i18n="price4800">4,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P10', 4800, 'Concentrated pomegranate syrup', 'weight800g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src=" شراب تمر الهندي.png" alt="Concentrated tamarind syrup" onclick="openImage(this.src)">
+            <h3 data-i18n="tamarindsyrup">Concentrated tamarind syrup</h3>
+            <p data-i18n="tamarindsyrupDesc">Tamarind concentrate… an irresistible refreshment.</p>
+            <p data-i18n="weight800g">800g</p>
+            <p class="price" data-i18n="price4800">4,800 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P11', 4800, 'Concentrated tamarind syrup', 'weight800g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src=" شراب الورد.png" alt="concentrated rose syrup" onclick="openImage(this.src)">
+            <h3 data-i18n="rosesyrup">concentrated rose syrup</h3>
+            <p data-i18n="rosesyrupDesc">Concentrated rose syrup… fragrance and taste in every drop</p>
+            <p data-i18n="weight800g">800g</p>
+            <p class="price" data-i18n="price5150">5,150 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P12', 5150, 'concentrated rose syrup', 'weight800g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        
+        <div class="card">
+            <img src="مكدوس 600غرام.png" alt="Stuffed Eggplant" onclick="openImage(this.src)">
+            <h3 data-i18n="StuffedEggplant">Stuffed Eggplant</h3>
+            <p data-i18n="StuffedEggplantDesc">Authentic homemade taste… Stuffed eggplant full of irresistible flavor.</p>
+            <p data-i18n="weight600g">600g</p>
+            <p class="price" data-i18n="price5700">5,700 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P13', 5700, 'Stuffed Eggplant', 'weight600g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+         <div class="card">
+            <img src=" مكدوس 1200غرام.png" alt="Stuffed Eggplant" onclick="openImage(this.src)">
+            <h3 data-i18n="StuffedEggplant">Stuffed Eggplant</h3>
+            <p data-i18n="StuffedEggplantDesc">Authentic homemade taste… Stuffed eggplant full of irresistible flavor.</p>
+            <p data-i18n="weight1200g">1200g</p>
+            <p class="price" data-i18n="price11000">11,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P14', 11000, 'Stuffed Eggplant', 'weight1200g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="محمرة حار 370غرام.png" alt="Hot Pepper Paste" onclick="openImage(this.src)">
+            <h3 data-i18n="HotPepperPaste">Hot Pepper Paste</h3>
+            <p data-i18n="HotPepperPasteDesc">Authentic spicy flavor… hot pepper paste that adds heat and taste to every meal</p>
+            <p data-i18n="weight370g">370g</p>
+            <p class="price" data-i18n="price3000">3,000 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P15', 3000, 'Hot Pepper Paste', 'weight370g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="دبس رمان 130غرام.png" alt="pomegranate Molasses" onclick="openImage(this.src)">
+            <h3 data-i18n="pomegranateMolasses">pomegranate Molasses</h3>
+            <p data-i18n="pomegranateMolassesDesc">Pomegranate molasses… natural sweetness with a tangy twist that makes every dish unforgettable.</p>
+            <p data-i18n="weight130g">130g</p>
+            <p class="price" data-i18n="price900">900 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P16', 900, 'pomegranate Molasses', 'weight130g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+        
+        <div class="card">
+            <img src="صلصة حار احمر.png" alt="Hot Sauce" onclick="openImage(this.src)">
+            <h3 data-i18n="HotSauce">Hot Sauce</h3>
+            <p data-i18n="HotSauceDesc">Bold hot sauce… real fire that transforms every meal.</p>
+            <p data-i18n="weight90ml">90ml</p>
+            <p class="price" data-i18n="price600">600 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P17', 600, 'Hot Sauce', 'weight90ml')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="صلصة حار اخضر.png" alt="Hot Sauce" onclick="openImage(this.src)">
+            <h3 data-i18n="HotSauce">Hot Sauce</h3>
+            <p data-i18n="HotSauceDesc">Bold hot sauce… real fire that transforms every meal.</p>
+            <p data-i18n="weight90ml">90ml</p>
+            <p class="price" data-i18n="price600">600 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P18', 600, 'Hot Sauce', 'weight90ml')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+ <div class="card">
+            <img src="  دبس عنب.png" alt="Liquid Grape Molasses" onclick="openImage(this.src)">
+            <h3 data-i18n="LiquidGrapeMolasses">Liquid Grape Molasses</h3>
+            <p data-i18n="LiquidGrapeMolassesDesc">Liquid grape molasses… rich natural sweetness that gives every bite an authentic, premium taste.</p>
+            <p data-i18n="weight650g">650g</p>
+            <p class="price" data-i18n="price4350">4350 I.D</p>
+            <button class="add-btn" onclick="addToCart('ZahrAlbustan_P19', 4350, 'Liquid Grape Molasses', 'weight650g')" data-i18n="addToCartBtn">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-floating-btn" onclick="openCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3 data-i18n="cartTitle">Your Cart</h3>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="totalPrice">Total:</span>
+                <span id="cartTotalValue">0 I.D</span>
+            </div>
+            <button class="checkout-btn" onclick="sendOrderToWhatsApp()">
+                <span data-i18n="sendWhatsApp">Send Order via WhatsApp</span> 💬
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+    <h2 data-i18n="contactUs">Contact us</h2>
+    <a href="https://wa.me/9647511224225" target="_blank"><span data-i18n="whatsapp">💬 WhatsApp</span> 07511224225</a>
+    <a href="mailto:nabrasalhaq42@gmail.com" data-i18n="email">✉ Contact us</a>
+    <a href="https://www.instagram.com/nabras_alhaq/?__pwa=1#" target="_blank" data-i18n="instagram">📷 Instagram</a>
+    <a href="https://facebook.com/Nabras Alhaq-نبراس الحق" target="_blank" data-i18n="facebook">📘 Facebook</a>
+    
+    <a href="https://maps.app.goo.gl/nPYvvkZ9TchVWVZd7" 
+       target="_blank"
+       style="display:inline-block; background:#0f4c6e; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; margin-top: 15px;"
+       data-i18n="address">
+       📍 Erbil, Mosul Road, Upper Government Warehouses
+    </a>
+</div>
+
+<div class="footer" data-i18n="footer">
+    © 2026 Nebras Alhaq - All Rights Reserved
+</div>
+
+<script>
+    const translations = {
+        en: {
+            backBtn: "⬅ Back to Home",
+            brandTitle: "Zahr Albustan",
+            brandSlogan: "Food products of the best quality",
+            ourProducts: "Our Products",
+            
+            ketchups: "sweet tomato ketchup",
+            ketchupsDesc: "100% natural ketchup… an unparalleled delight.",
+            ketchuph: "Hot tomato ketchup",
+            ketchuphDesc: "Hot as much as delicious… and natural as much as it tastes.",
+            BroastedMix: "Broasted Mix",
+            BroastedMixDesc: "Broasted mix: the secret to crispy taste",
+            Crispymix: "Crispy mix",
+            CrispymixDesc: "Golden crunch and a taste like no other.",
+            zaetarr: "Red Thyme",
+            zaetarg: "Green Thyme",
+            zaetarDesc: "Thyme… the secret to a delicious breakfast.",
+            pomegranatesyrup: "Concentrated pomegranate syrup",
+            pomegranatesyrupDesc: "Concentrated pomegranate… a natural taste with a focus on luxury.",
+             tamarindsyrup: "Concentrated tamarind syrup",
+            tamarindsyrupDesc: "Tamarind concentrate… an irresistible refreshment.",
+            rosesyrup: "Concentrated rose syrup",
+            rosesyrupDesc: "Concentrated rose syrup… fragrance and taste in every drop",
+            StuffedEggplant: "Stuffed Eggplant",
+            StuffedEggplantDesc: "Authentic homemade taste… Stuffed eggplant full of irresistible flavor",
+             HotPepperPaste: "Hot Pepper Paste",
+            HotPepperPasteDesc: "Authentic spicy flavor… hot pepper paste that adds heat and taste to every meal",
+             pomegranateMolasses: "pomegranate Molasses",
+            pomegranateMolassesDesc: "Pomegranate molasses… natural sweetness with a tangy twist that makes every dish unforgettable.",
+             HotSauce: "Hot Sauce",
+            HotSauceDesc: "Bold hot sauce… real fire that transforms every meal",
+             LiquidGrapeMolasses: "Liquid Grape MolassesDesc",
+            LiquidGrapeMolassesDesc: " Liquid grape molasses… rich natural sweetness that gives every bite an authentic, premium taste",
+            
+            
+
+
+            weight10g: "10g",
+            weight200g: "200g",
+            weight400g: "400g",
+            weight150g: "150g",
+            weight454g: "454g",
+            weight800g: "800g",
+            weight600g: "600g",
+            weight1200g: "1200g",
+            weight370g: "370g",
+            weight130g: "130g",
+            weight90ml: "90ml",
+            weight650g: "650g",
+            
+            
+            price1150: "1,150 I.D",
+            price1800: "1,800 I.D",
+            price22750: "22,750 I.D",
+            price1500: "1,500 I.D",
+            price3250: "3,250 I.D",
+            price4800: "4,800 I.D",
+            price5150: "5,150 I.D",
+            price5700: "5,700 I.D",
+            price11000: "11,000 I.D",
+            price3000: "3,000 I.D",
+            price900: "900 I.D",
+            price600: "600 I.D",
+            price4350: "4350 I.D",
+           
+
+            contactUs: "Contact us",
+            whatsapp: "💬 WhatsApp",
+            email: "✉ Contact us",
+            instagram: "📷 Instagram",
+            facebook: "📘 Facebook",
+            address: "📍Erbil, Mosul Road, Upper Government Warehouses",
+            footer: "© 2026 Nebras Alhaq - All Rights Reserved",
+
+            // Cart Translations
+            addToCartBtn: "Add to Cart",
+            cartTitle: "Your Cart",
+            totalPrice: "Total:",
+            sendWhatsApp: "Send Order via WhatsApp",
+            emptyCart: "Your cart is empty.",
+            currency: "I.D",
+            orderGreeting: "Hello, I would like to order:"
+        },
+        ar: {
+            backBtn: "⬅ العودة للرئيسية",
+            brandTitle: "زهرة البستان",
+            brandSlogan: "منتجات غذائية بأفضل جودة",
+            ourProducts: "منتجاتنا",
+            
+            ketchups: "كتشب حلو ",
+            ketchupsDesc: "كتشب طبيعي 100%… لذة ما إلها منافس",
+            ketchuph: " كتشب طماطة حار ",
+            ketchuphDesc:"حار بقدر اللذة… وطبيعي بقدر الطعم.",
+            BroastedMix: "  خلطة بروستد المقرمش ",
+            BroastedMixDesc: "  .قرمشة ما تنوصف… وطعم يخليك ترجع",
+            Crispymix: "  خلطة كريسبي مقرمش ",
+            CrispymixDesc: "قرمشة ذهبية وطعم ما يتكرر .",
+            zaetarr: "خليط زعتر أحمر (حلبي)",
+            zaetarg: "خليط زعتر أخضر(حلبي)",
+            zaetarDesc: "زعترنا… سرّ الفطور اللذيذ.",
+              pomegranatesyrup: "شراب الرمان مركز",
+            pomegranatesyrupDesc: "رمان مركز… طعم طبيعي بتركيز الفخامة",
+             tamarindsyrup: "شراب تمر الهندي مركز",
+            tamarindsyrupDesc: "تمر هندي مركز… انتعاش بطعم لا يُقاوم",
+            rosesyrup: "شراب الورد مركز",
+            rosesyrupDesc: "شراب الورد المركز… عطر وطعم في كل قطرة",
+            StuffedEggplant: "مكدوس باذنجان ",
+           StuffedEggplantDesc: " .طعم البيوت الأصيلة… باذنجان محشي بنكهة لا تُقاوم",
+           HotPepperPaste: " فليفلة حمراء حارة ",
+           HotPepperPasteDesc: " .طعم حار أصيل… معجون فلفل يضيف نكهة ونار لكل وجبة",
+           pomegranateMolasses: "   دبس رمان ",
+           pomegranateMolassesDesc: " .دبس الرمان… حلاوة طبيعية مع لمسة حامضة تعطي أي طبق طعم لا يُنسى         ",
+           HotSauce: "   صلصة حارة ",
+           HotSauceDesc: " .صلصة حارة بنكهة قوية… نار حقيقية تغيّر طعم كل وجبة",
+           LiquidGrapeMolasses: "دبس عنب سائل ",
+            LiquidGrapeMolassesDesc: " دبس العنب السائل… حلاوة طبيعية غنية تمنح كل لقمة طعم أصيل وفاخر",
+           
+
+            weight10g: "10 غرام",
+            weight200g: "200غرام",
+            weight400g: "400 غرام",
+            weight150g: "150 غرام" ,
+            weight454g: "454 غرام",
+            weight800g: "800 غرام",
+            weight1200g: "1200 غرام",
+            weight600g: "600 غرام ",
+            weight370g: "370 غرام ",
+            weight130g: "130 غرام ",
+            weight90ml: "90 ملم",
+            weight650g: "650 غرام",
+            
+            price1150: "1,150 دينار عراقي",
+            price1800: "1,800 دينار عراقي",
+            price22750: "22,750 دينار عراقي",
+            price1500: "1,500 دينار عراقي",
+            price3250: "3,250 دينار عراقي",
+            price4800: "4,800 دينار عراقي",
+            price5150: "5,150 دينار عراقي ",
+            price5700: "5,700 دينار عراقي",
+            price11000: "11,000 دينار عراقي",
+            price3000: "3,000 دينار عراقي",
+            price900: "900 دينار عراقي",
+            price4350: "4350 دينار عراقي",
+            
+
+
+            contactUs: "تواصل معنا",
+            whatsapp: "💬 واتساب",
+            email: "✉ راسلنا عبر الإيميل",
+            instagram: "📷 إنستغرام",
+            facebook: "📘 فيسبوك",
+            address: "📍هولير طريق موصل مخازن علوى الحكومي",
+            footer: "© 2026 نبراس الحق - جميع الحقوق محفوظة",
+
+            // Cart Translations
+            addToCartBtn: "أضف إلى السلة",
+            cartTitle: "سلة المشتريات",
+            totalPrice: "الإجمالي:",
+            sendWhatsApp: "إرسال الطلب عبر واتساب",
+            emptyCart: "السلة فارغة حالياً.",
+            currency: "دينار",
+            orderGreeting: "مرحباً، أود طلب المنتجات التالية:"
+        },
+        ku: {
+            backBtn: "⬅ گەڕانەوە بۆ سەرەتا",
+            brandTitle: "زهرة البستان",
+            brandSlogan: "بەرهەمە خۆراکییەکان بە باشترین کوالێتی",
+            ourProducts: "بەرهەمەکانمان",
+            
+            ketchups: " کەچاپی تەماتەی شیرین",
+            ketchupsDesc: "100% کەچاپی سروشتی... خۆشییەکی بێهاوتایە.",
+            ketchuph: "کەچاپی تەماتەی بەهارات",
+             ketchuphDesc: "بەهارات بەقەد بە تام... و سروشتی بەقەد تامی.",
+            BroastedMix: " کریسپی برۆستد میکس",
+            BroastedMixDesc: "کرانچێکی وەسف نەکراو... و تامێک کە وات لێدەکات حەز بکەیت بگەڕێیتەوە.",
+            Crispymix: "  کریسپی کرانچ میکس",
+            CrispymixDesc: "کرانچێکی زێڕین و تامێک کە جارێکی تر نایەت.",
+           zaetarr:" زه عترى سوور (حەلەب) تێکەڵە",
+           zaetarg:" زه عترى سەوز (حەلەب) تێکەڵە",
+            zaetarDesc: "زه عتر كمان ... نهێنی نانی بەیانییەکی بە تام..",
+           pomegranatesyrup: "  چڕکراوی شەربەتی هەنار",
+            pomegranatesyrupDesc: "هەناری چڕ... تامێکی سروشتی لەگەڵ گرنگیدان بە لوکس",
+             tamarindsyrup: "چڕکراوی شەربەتی ته مه رهندى",
+            tamarindsyrupDesc: "چڕبوونەوەی ته مه رهندى... تازەگەرییەکی بەرگە نەگیراو",
+            rosesyrup: "چڕکراوی شەربەتی گوڵ",
+            rosesyrupDesc: "شەربەتێکی گوڵی چڕ... بۆن و تام لە هەر دڵۆپێکدا",
+            StuffedEggplant: "بادمجان پڕکراو ",
+            StuffedEggplantDesc: "تامێکی خۆش و ماڵی… بادمجان پڕکراو بە تامی نەگۆڕ.",
+            HotPepperPaste: " پەیستی فلفل ",
+           HotPepperPasteDesc: " .تامێکی گەرم و ڕەسەن… پەیستی فلفل کە تام و گەرمی زیاد دەکات بۆ هەر خواردنێک",
+            pomegranateMolasses: "  دبسێی هەنار ",
+           pomegranateMolassesDesc: " .دبسێی هەنار… شیرینی سروشتی لەگەڵ ترشییەکی تایبەت کە تامی هەر خواردنێک ناوازە دەکات ",
+            HotSauce: "  سۆسێکی گەرم ",
+           HotSauceDesc: " . سۆسێکی گەرم بە تامێکی توند… ئاگری ڕاستەقینە کە تامی هەر خواردنێک دەگۆڕێت     ",
+           LiquidGrapeMolasses: "  دبسێی گوێز (انگور)ی ئاوی",
+            LiquidGrapeMolassesDesc: " دبسێی گوێز (انگور)ی ئاوی… شیرینی سروشتی کە تامی ڕەسەن و لوکس دەبەخشێت بە هەر لقەیەک",
+           
+            weight10g: "10 گرام ",
+            weight200g: "200 گرام ",
+            weight400g: "400 گرام ",
+            weight150g: "150 گرام ",
+            weight454g: "454 گرام ",
+            weight800g: "800 گرام ",
+            weight430g: "430 گرام",
+            weight1200g: "1200 گرام",
+            weight370g: "370 گرام",
+            weight130g: "130 گرام",
+            weight90ml: "90 مل",
+            weight650g: "650 گرام",
+            
+            price1150: "1,150 دیناری عێراقی",
+            price1800: "1,800 دیناری عێراقی",
+            price22750: "22,750 دیناری عێراقی",
+            price1500: "1,500 دیناری عێراقی",
+            price3250: "3,250 دیناری عێراقی",
+            price4800: "4,800 دیناری عێراقی",
+            price5150: "5,150 دیناری عێراقی",
+            price5700: "5,700 دیناری عێراقي",
+            price11000: "11,000 دیناری عێراقي",
+            price3000: "3,000 دیناری عێراقي",
+            price900: "900 دیناری عێراقي",
+            price600: "600 دیناری عێراقي",
+            price4350: "4350 دیناری عێراقي",
+            
+            
+
+            contactUs: "پەیوەندیمان پێوە بکە",
+            whatsapp: "💬 وەتسئاپ",
+            email: "✉ ئیمەیڵمان بۆ بنێرە",
+            instagram: "📷 ئینستاگرام",
+            facebook: "📘 فەیسبووک",
+            address: "📍 هەولێر، جادەی موسڵ، کۆگاکانی حکومەتی سەرەوە",
+            footer: "© 2026 نبراس الحق - هەموو مافەکان پارێزراون",
+
+            // Cart Translations
+            addToCartBtn: "زیادکردن بۆ سەبەتە",
+            cartTitle: "سەبەتەکەت",
+            totalPrice: "کۆی گشتی:",
+            sendWhatsApp: "ناردنی داواکاری لەڕێگەی وەتسئاپ",
+            emptyCart: "سەبەتەکەت بەتاڵە.",
+            currency: "دینار",
+            orderGreeting: "سڵاو، دەمەوێت ئەم بەرهەمانە داوا بکەم:"
+        }
+    };
+
+    let currentLanguage = localStorage.getItem('siteLang') || 'en';
+    // التعديل الأول: ربط الصفحة بالسلة الموحدة nebrasCart
+    let cart = JSON.parse(localStorage.getItem('nebrasCart')) || [];
+
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        // Change text based on dictionary
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Change Direction
+        if (lang === 'ar' || lang === 'ku') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', lang);
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', 'en');
+        }
+
+        // Save Language choice
+        localStorage.setItem('siteLang', lang);
+        
+        // Refresh cart text language
+        updateCartUI();
+    }
+
+    // --- Cart System ---
+    
+    function addToCart(id, price, nameKey, weightKey) {
+        // البحث عن الزر الذي تم الضغط عليه لسحب الصورة من نفس الكارت
+        let btn = document.querySelector(`button[onclick*="'${id}'"]`);
+        let imageUrl = "";
+        
+        if (btn) {
+            let card = btn.closest('.card');
+            if (card) {
+                let imgElement = card.querySelector('img');
+                if (imgElement) imageUrl = imgElement.src;
+            }
+        }
+
+        let existingItem = cart.find(item => item.id === id);
+        if(existingItem) {
+            existingItem.qty += 1;
+        } else {
+            // إضافة الصورة إلى السلة
+            cart.push({ id, price, nameKey, weightKey, qty: 1, image: imageUrl });
+        }
+        
+        saveCart();
+        updateCartUI();
+        
+       // حركة الزر الذكية (بدون رسالة مزعجة)
+        if (btn) {
+            let originalText = btn.innerText; // نحفظ نص الزر الأصلي
+            btn.innerText = '✓'; // نغير النص لعلامة صح
+            btn.style.backgroundColor = '#25D366'; // نغير لون الزر للأخضر
+            btn.style.color = 'white';
+            
+            // نرجع الزر لحالته الطبيعية بعد ثانية واحدة (1000 ملي ثانية)
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = ''; 
+            }, 1000);
+        }
+    
+       
+    }
+
+    function changeQty(id, delta) {
+        let item = cart.find(item => item.id === id);
+        if(item) {
+            item.qty += delta;
+            if(item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        // التعديل الثاني: الحفظ في السلة الموحدة
+        localStorage.setItem('nebrasCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalValue = document.getElementById('cartTotalValue');
+        
+        // Update total items count bubble
+        let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartCountEl.innerText = totalItems;
+
+        // Render Cart Items
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<p style="text-align:center; margin-top: 20px;">${translations[currentLanguage]['emptyCart']}</p>`;
+        } else {
+            cart.forEach(item => {
+                // التعديل الثالث: التأكد من قراءة الأسماء بشكل صحيح حتى لو كانت من صفحة أخرى
+                let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+                let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+                let itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+
+               // سحب الصورة أو تركها فارغة لتجنب الأخطاء
+                let imgSrc = item.image ? item.image : ''; 
+
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${imgSrc}" alt="${name}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 5px; margin-inline-end: 10px; background: white; border: 1px solid #ddd;">
+                        
+                        <div class="cart-item-info" style="flex-grow: 1;">
+                            <h4>${name} (${weight})</h4>
+                            <p>${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="changeQty('${item.id}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Update Total Price text
+        cartTotalValue.innerText = `${totalPrice.toLocaleString()} ${translations[currentLanguage]['currency']}`;
+    }
+
+    function openCart() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function closeCart() {
+        document.getElementById('cartModal').style.display = 'none';
+    }
+
+    function sendOrderToWhatsApp() {
+        if(cart.length === 0) {
+            alert(translations[currentLanguage]['emptyCart']);
+            return;
+        }
+
+        let message = translations[currentLanguage]['orderGreeting'] + "\n\n";
+        let total = 0;
+
+        cart.forEach(item => {
+            let name = translations[currentLanguage][item.nameKey] || item.nameKey;
+            let weight = translations[currentLanguage][item.weightKey] || item.weightKey;
+            let itemTotal = item.price * item.qty;
+            total += itemTotal;
+
+            message += `▪️ ${item.qty}x ${name} (${weight}) - ${itemTotal.toLocaleString()} ${translations[currentLanguage]['currency']}\n`;
+        });
+
+        message += `\n*${translations[currentLanguage]['totalPrice']} ${total.toLocaleString()} ${translations[currentLanguage]['currency']}*`;
+
+        const waNumber = "9647511224225";
+        const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(url, '_blank');
+    }
+
+    // Read language choice from memory on load
+    setLanguage(currentLanguage);
+
+</script>
+
+<script>
+let zoom = 1;
+
+function openImage(src){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+
+    popup.style.display = "flex";
+    img.src = src;
+    zoom = 1;
+    img.style.transform = "scale(1)";
+
+    // Add zoom listener here
+    img.addEventListener("wheel", zoomImage, { passive: false });
+}
+
+function closeImage(){
+    const popup = document.getElementById("imagePopup");
+    const img = document.getElementById("popupImg");
+    
+    popup.style.display = "none";
+    img.removeEventListener("wheel", zoomImage); // Remove listener to avoid duplicates
+}
+
+function zoomImage(e){
+    e.preventDefault();
+    if(e.deltaY < 0){
+        zoom += 0.2;
+    }else{
+        zoom -= 0.2;
+    }
+
+    if(zoom < 1) zoom = 1;
+    if(zoom > 3) zoom = 3;
+
+    const img = document.getElementById("popupImg");
+    img.style.transform = "scale(" + zoom + ")";
+}
+</script>
+
+<div class="image-popup" id="imagePopup" onclick="closeImage()">
+    <img id="popupImg">
+</div>
+
+</body>
+</html>
